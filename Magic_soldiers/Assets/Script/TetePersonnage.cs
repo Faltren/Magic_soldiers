@@ -7,6 +7,8 @@ public class TetePersonnage : MonoBehaviour {
     #region Attributes
 
     private int sensibility = Personnage.sensibility;
+    private float limiteHaut = Personnage.limitMoveUp;
+    private float limiteBas = Personnage.limitMoveDown;
 
     #endregion
 
@@ -30,18 +32,19 @@ public class TetePersonnage : MonoBehaviour {
 
     #region otherMethods
 
+
+
+
     private void Moves()
     {
-        float limiteHaut = 300f;
-        float limiteBas = 240f;
-
         if (transform.rotation.eulerAngles.z < limiteHaut && transform.rotation.eulerAngles.z > limiteBas)
             transform.Rotate(0, 0, Input.GetAxisRaw("Mouse Y") * sensibility);
-        else if (transform.rotation.eulerAngles.z > limiteHaut)
-            transform.Rotate(0, 0, 19f);
-        else
-            transform.Rotate(0, 0, -29f); //bug ici
-    }
+        else if (transform.rotation.eulerAngles.z >= limiteHaut)
+            transform.Rotate(0, 0, -0.3f);
+        else if (transform.rotation.eulerAngles.z <= limiteBas)
+            transform.Rotate(0, 0, 0.3f);
+    } 
+
 
     #endregion
 
