@@ -6,8 +6,8 @@ public class Personnage : MonoBehaviour {
 
     #region Attributes
 
-
-
+    public int personnageSpeed = 5;
+    private int gravity = 10;
 
     //mouvement de tete : limite vers le haut et limite vers le bas et sensi
     public static int sensibility = 5;
@@ -15,7 +15,8 @@ public class Personnage : MonoBehaviour {
     public static float limitMoveDown = 250f;
 
     private Vector3 directionMove = Vector3.zero;
-    
+    private CharacterController player;
+
     #endregion
 
 
@@ -23,7 +24,7 @@ public class Personnage : MonoBehaviour {
     #region Unity methods
     // Use this for initialization
     void Start () {
-             		
+        player = GetComponent<CharacterController>();
 	}
 	
 	// Update is called once per frame
@@ -46,41 +47,17 @@ public class Personnage : MonoBehaviour {
 
     private void Moves()
     {
-        /*directionMove.z = Input.GetAxis("Vertical"); //avant / arriere
+        directionMove.z = Input.GetAxis("Vertical"); //avant / arriere
         directionMove.x = Input.GetAxis("Horizontal"); //gauche / droite
 
         //deplacement
         directionMove = transform.TransformDirection(directionMove.x * personnageSpeed , directionMove.y, directionMove.z * personnageSpeed);
+        directionMove *= Time.deltaTime;
 
-        //saut
-        directionMove *= jumpSpeed;
-        if (Input.GetButton("Jump") && player.isGrounded)
-        {
-            directionMove.y = jump;
-        }
+        if (!player.isGrounded)
+            directionMove.y -= gravity * Time.deltaTime;
 
-        directionMove.y -= gravity * Time.deltaTime;
         player.Move(directionMove);
-
-        directionMove = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        directionMove = transform.TransformDirection(directionMove);
-        directionMove *= personnageSpeed;
-
-        if (Input.GetButton("Jump") && directionMove.y < 10)
-        {
-            nbJump++;
-            directionMove.y = jumpSpeed;
-        }
-
-        if (player.isGrounded && nbJump > 0)
-            nbJump = 0;
-
-        directionMove.y -= gravity * Time.deltaTime;
-        player.Move(directionMove * Time.deltaTime);*/
-
-
-
-
 
         //deplacement de la vue
         transform.Rotate(0, Input.GetAxisRaw("Mouse X") * sensibility, 0);
