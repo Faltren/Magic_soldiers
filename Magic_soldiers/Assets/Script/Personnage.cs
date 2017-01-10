@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Personnage : MonoBehaviour {
 
@@ -16,6 +17,7 @@ public class Personnage : MonoBehaviour {
 
     private Vector3 directionMove = Vector3.zero;
     private CharacterController player;
+    private ModelImporter assetImporter;
 
     #endregion
 
@@ -23,7 +25,18 @@ public class Personnage : MonoBehaviour {
 
     #region Unity methods
     // Use this for initialization
-    void Start () {
+
+
+
+    void OnPreprocessModel()
+    {
+            // (assetImporter as ModelImporter).globalScale = 1.0f;
+            (assetImporter as ModelImporter).animationType = ModelImporterAnimationType.Legacy;
+            (assetImporter as ModelImporter).materialName = ModelImporterMaterialName.BasedOnMaterialName;
+   }
+    
+
+        void Start () {
         player = GetComponent<CharacterController>();
 	}
 	
