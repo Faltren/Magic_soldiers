@@ -17,7 +17,7 @@ public class Personnage : MonoBehaviour {
 
     private Vector3 directionMove = Vector3.zero;
     private CharacterController player;
-    private ModelImporter assetImporter;
+    private Animation anim;
 
     #endregion
 
@@ -26,18 +26,9 @@ public class Personnage : MonoBehaviour {
     #region Unity methods
     // Use this for initialization
 
-
-
-    void OnPreprocessModel()
-    {
-            // (assetImporter as ModelImporter).globalScale = 1.0f;
-            (assetImporter as ModelImporter).animationType = ModelImporterAnimationType.Legacy;
-            (assetImporter as ModelImporter).materialName = ModelImporterMaterialName.BasedOnMaterialName;
-   }
-    
-
         void Start () {
         player = GetComponent<CharacterController>();
+        anim = GetComponent<Animation>();
 	}
 	
 	// Update is called once per frame
@@ -47,12 +38,10 @@ public class Personnage : MonoBehaviour {
         Cursor.visible = false;
         
         Moves();
+        AnimPerso();
 
 	}
     #endregion
-
-
-
 
 
     #region otherMethods
@@ -60,11 +49,12 @@ public class Personnage : MonoBehaviour {
 
     private void Moves()
     {
+
         directionMove.z = Input.GetAxis("Vertical"); //avant / arriere
         directionMove.x = Input.GetAxis("Horizontal"); //gauche / droite
 
         //deplacement
-        directionMove = transform.TransformDirection(directionMove.x * personnageSpeed , directionMove.y, directionMove.z * personnageSpeed);
+        directionMove = transform.TransformDirection(directionMove.x * personnageSpeed, directionMove.y, directionMove.z * personnageSpeed);
         directionMove *= Time.deltaTime;
 
         if (!player.isGrounded)
@@ -72,11 +62,19 @@ public class Personnage : MonoBehaviour {
 
         player.Move(directionMove);
 
+
         //deplacement de la vue
         transform.Rotate(0, Input.GetAxisRaw("Mouse X") * sensibility, 0);
 
     }
 
+    private void AnimPerso()
+    {
+        if (Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal")!= 0)
+            anim.Play("assault_combat_run");
+        else
+            anim.Play("assault_combat_idle");
+    }
 
 
     #endregion
