@@ -91,10 +91,6 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &422340102 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 400000, guid: c6acf3f29c109e4439950c8f6a85cb2b, type: 3}
-  m_PrefabInternal: {fileID: 975695491}
 --- !u!1 &482090222
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +154,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &832955012 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100048, guid: c6acf3f29c109e4439950c8f6a85cb2b, type: 3}
+  m_PrefabInternal: {fileID: 975695491}
+--- !u!4 &832955013 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400048, guid: c6acf3f29c109e4439950c8f6a85cb2b, type: 3}
+  m_PrefabInternal: {fileID: 975695491}
+--- !u!114 &832955014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 832955012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e727fe6618523048b13f6e4ee638b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &899918079
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +319,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: c6acf3f29c109e4439950c8f6a85cb2b, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c6acf3f29c109e4439950c8f6a85cb2b, type: 3}
       propertyPath: m_RootOrder
@@ -350,12 +365,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1154155184}
-  m_LocalRotation: {x: 0.50000036, y: -0.49999964, z: -0.49999964, w: 0.50000036}
-  m_LocalPosition: {x: -0.065, y: 0.014, z: 1.1}
+  m_LocalRotation: {x: 0.50687224, y: -0.49303123, z: -0.50687224, w: -0.49303263}
+  m_LocalPosition: {x: -0.97, y: 0.3, z: 0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 422340102}
-  m_RootOrder: 0
+  m_Father: {fileID: 832955013}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &1154155186
 AudioListener:
@@ -514,10 +529,10 @@ Animation:
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 8632bc14172ae604f9d194e8bad443b6, type: 3}
   m_Animations:
-  - {fileID: 7400000, guid: 8632bc14172ae604f9d194e8bad443b6, type: 3}
-  - {fileID: 7400000, guid: 0c1116ef11ca49949ae2cf13c23b64db, type: 3}
-  - {fileID: 7400000, guid: fbe889cc312e18747b32e59c6792ddbd, type: 3}
-  - {fileID: 7400000, guid: 1e870252574863640bae35147029e02e, type: 3}
+  - {fileID: 7400000, guid: cfe3ebe873cec2d409c9fa559b6fe137, type: 2}
+  - {fileID: 7400000, guid: b777f8567db080c48ab3fc67128c0b25, type: 2}
+  - {fileID: 7400000, guid: ef2d34fdd8a763a4d8ff38832b9ee6c4, type: 2}
+  - {fileID: 7400000, guid: 0e95276ab40c0b248b5c554dc72173f3, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0

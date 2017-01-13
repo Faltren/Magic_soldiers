@@ -70,7 +70,7 @@ public class Personnage : MonoBehaviour {
 
     private void AnimPerso()
     {
-        if (Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal")!= 0)
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
             anim.Play("assault_combat_run");
         else
             anim.Play("assault_combat_idle");
