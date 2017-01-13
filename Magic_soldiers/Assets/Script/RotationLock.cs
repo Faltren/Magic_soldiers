@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class PersoHautBas : MonoBehaviour {
+public class RotationLock : MonoBehaviour {
 
     private int sensi = Personnage.sensibility;
 
-
 	// Use this for initialization
 	void Start () {
-		
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(0, 0, Input.GetAxisRaw("Mouse Y") * sensi);
+        transform.Rotate(Input.GetAxisRaw("Mouse Y") * sensi, Input.GetAxisRaw("Mouse Y") * sensi, Input.GetAxisRaw("Mouse Y") * -sensi);
 	}
 }

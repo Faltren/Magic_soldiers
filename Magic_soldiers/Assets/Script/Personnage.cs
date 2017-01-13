@@ -17,7 +17,7 @@ public class Personnage : MonoBehaviour {
 
     private Vector3 directionMove = Vector3.zero;
     private CharacterController player;
-    private Animation anim;
+    public static Animation anim;
 
     #endregion
 
