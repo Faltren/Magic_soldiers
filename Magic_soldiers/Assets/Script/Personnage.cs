@@ -38,7 +38,7 @@ public class Personnage : MonoBehaviour {
         Cursor.visible = false;
         
         Moves();
-        AnimPerso();
+        //AnimPerso();
 
 	}
     #endregion
@@ -66,6 +66,8 @@ public class Personnage : MonoBehaviour {
         //deplacement de la vue
         transform.Rotate(0, Input.GetAxisRaw("Mouse X") * sensibility, 0);
 
+
+
     }
 
     private void AnimPerso()
@@ -73,7 +75,7 @@ public class Personnage : MonoBehaviour {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
             anim.Play("assault_combat_run");
         else
-            anim.Play("assault_combat_idle");
+            anim.Stop();
     }
 
 

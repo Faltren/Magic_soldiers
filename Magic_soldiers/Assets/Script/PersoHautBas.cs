@@ -6,7 +6,7 @@ using UnityEngine;
 public class PersoHautBas : MonoBehaviour {
 
     private int sensi = Personnage.sensibility;
-
+    private float souris;
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +15,12 @@ public class PersoHautBas : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(0, 0, Input.GetAxisRaw("Mouse Y") * sensi);
+
+        if(Input.GetAxisRaw("Mouse Y") != 0)
+        {
+            souris = Input.GetAxisRaw("Mouse Y");
+            transform.Rotate(0, 0, souris * sensi);
+        }
+            
 	}
 }
