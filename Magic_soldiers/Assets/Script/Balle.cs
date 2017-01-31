@@ -20,4 +20,10 @@ public class Balle : MonoBehaviour {
         }
 
     }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        DestroyObject(balle);
+    }
 }
