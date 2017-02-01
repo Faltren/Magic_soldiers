@@ -5,21 +5,20 @@ using UnityEngine;
 public class Balle : MonoBehaviour {
 
     private Rigidbody balle;
-    private GameObject balleGb;
     private Object balleObj;
+
+    public static bool IsDestroyed = false;
 
     // Use this for initialization
     void Start () {
-        balle = GetComponent<Rigidbody>();
-        balleGb = GetComponent<GameObject>();
         balleObj = GetComponent<Object>();
-        balle.tag = "balle";
-	}
+        balle = GetComponent<Rigidbody>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (balle.transform.position.x > 1000 || balle.transform.position.y > 1000 || balle.transform.position.z > 1000)
+        if (balle.position.x > 1000 || balle.transform.position.y > 1000 || balle.transform.position.z > 1000 || balle.position.x < -1000 || balle.transform.position.y < -1000 || balle.transform.position.z < -1000)
         {
             Destroy((balleObj as Transform).gameObject);
         }
@@ -29,6 +28,7 @@ public class Balle : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
+        IsDestroyed = true;
         Destroy((balleObj as Transform).gameObject);
     }
 

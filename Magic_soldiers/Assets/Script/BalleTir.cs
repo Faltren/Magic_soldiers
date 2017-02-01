@@ -24,7 +24,7 @@ public class BalleTir : MonoBehaviour {
 
     private void Fire()
     {
-       
+
         nextFire = Time.time + fireRate;
 
         Rigidbody balle;
@@ -33,8 +33,17 @@ public class BalleTir : MonoBehaviour {
 
         balle = Instantiate(balleCasting, transform.position, Quaternion.identity);
         balle.velocity = transform.TransformDirection(Vector3.right * ejectSpeed);
+        balle.isKinematic = false;
 
         balle.name = "Bullet " + i;
+
+
     }
+
+    
+        
+        
+
+
 
 }

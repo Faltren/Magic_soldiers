@@ -53,10 +53,21 @@ public class Personnage : MonoBehaviour {
         directionMove.z = Input.GetAxis("Vertical"); //avant / arriere
         directionMove.x = Input.GetAxis("Horizontal"); //gauche / droite
 
+        //Sprint
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            personnageSpeed = 10;   
+        }
+        else
+        {
+            personnageSpeed = 5;
+        }
+
+
         //deplacement
         directionMove = transform.TransformDirection(directionMove.x * personnageSpeed, directionMove.y, directionMove.z * personnageSpeed);
         directionMove *= Time.deltaTime;
-
+        
         if (!player.isGrounded)
             directionMove.y -= gravity * Time.deltaTime;
 
