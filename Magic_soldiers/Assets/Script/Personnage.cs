@@ -7,7 +7,7 @@ public class Personnage : MonoBehaviour {
 
     #region Attributes
 
-    public int personnageSpeed = 5;
+    public int personnageSpeed;
     private int gravity = 10;
 
     //mouvement de tete : limite vers le haut et limite vers le bas et sensi
@@ -56,11 +56,11 @@ public class Personnage : MonoBehaviour {
         //Sprint
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            personnageSpeed = 10;   
+            personnageSpeed = 14;   
         }
         else
         {
-            personnageSpeed = 5;
+            personnageSpeed = 7;
         }
 
 

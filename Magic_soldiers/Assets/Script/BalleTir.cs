@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BalleTir : MonoBehaviour {
 
-    public int ejectSpeed = 20;
+    public int ejectSpeed = 50; //etait a 20
     private float fireRate = 0.36f;
     public static float nextFire = 0.0f;
     private int i;

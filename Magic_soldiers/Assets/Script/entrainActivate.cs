@@ -7,6 +7,7 @@ public class entrainActivate : MonoBehaviour {
     public static bool IsActivated = true;
 
     void Start () {
+
     }
 	
 	void Update () {
