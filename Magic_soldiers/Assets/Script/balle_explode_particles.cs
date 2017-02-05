@@ -16,7 +16,7 @@ public class balle_explode_particles : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        particules.Play();
+        //particules.Play();
         
 	}
 }

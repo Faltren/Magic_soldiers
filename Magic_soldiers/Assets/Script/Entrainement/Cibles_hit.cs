@@ -12,12 +12,23 @@ public class Cibles_hit : MonoBehaviour {
 	
 	
 	void Update () {
-        if (isHit)
+
+        if (isHit && entrainActivate.IsActivated)
         {
             if (transform.eulerAngles.x > 280)
             {
                 transform.Rotate(-300 * Time.deltaTime, 0, 0);
             }
+        }
+
+        if (isHit && !entrainActivate.IsActivated)
+        {
+            transform.eulerAngles = new Vector3(
+                    359,
+                    transform.eulerAngles.y,
+                    transform.eulerAngles.z);
+
+            isHit = false;
         }
     }
 
@@ -26,5 +37,6 @@ public class Cibles_hit : MonoBehaviour {
     {
         transform.Rotate(-300 * Time.deltaTime, 0, 0);
         isHit = true;
+        entrainActivate.nbHit++;
     }
 }

@@ -97,9 +97,6 @@ public class cible_move : MonoBehaviour {
             {
                 transform.Translate(speed * Time.deltaTime, 0, 0);
             }
-
-            
-
         }
 
     }

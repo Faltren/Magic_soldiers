@@ -16,7 +16,7 @@ public class Personnage : MonoBehaviour {
     public static float limitMoveDown = 250f;
 
     private Vector3 directionMove = Vector3.zero;
-    private CharacterController player;
+    public static CharacterController player;
     public static Animation anim;
 
     #endregion
