@@ -73,6 +73,10 @@ public class Personnage : MonoBehaviour {
 
         player.Move(directionMove);
 
+        if (Input.GetKey(KeyCode.Space))
+        {
+            anim.Play("Perso_jump");
+        }
 
         //deplacement de la vue
         transform.Rotate(0, Input.GetAxisRaw("Mouse X") * sensibility, 0);
@@ -87,6 +91,8 @@ public class Personnage : MonoBehaviour {
             anim.Play("assault_combat_run");
         else
             anim.Stop();
+
+        
     }
 
 

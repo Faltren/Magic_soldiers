@@ -16,7 +16,7 @@ public class PersoHautBas : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(Input.GetAxisRaw("Mouse Y") != 0)
+       if(Input.GetAxisRaw("Mouse Y") != 0)
         {
             souris = Input.GetAxisRaw("Mouse Y");
             transform.Rotate(0, 0, souris * sensi);
