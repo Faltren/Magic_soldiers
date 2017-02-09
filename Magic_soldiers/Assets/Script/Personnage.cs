@@ -7,7 +7,7 @@ public class Personnage : MonoBehaviour {
 
     #region Attributes
 
-    public int personnageSpeed = 5;
+    public int personnageSpeed;
     private int gravity = 10;
 
     //mouvement de tete : limite vers le haut et limite vers le bas et sensi
@@ -16,7 +16,7 @@ public class Personnage : MonoBehaviour {
     public static float limitMoveDown = 250f;
 
     private Vector3 directionMove = Vector3.zero;
-    private CharacterController player;
+    public static CharacterController player;
     public static Animation anim;
 
     #endregion
@@ -53,15 +53,30 @@ public class Personnage : MonoBehaviour {
         directionMove.z = Input.GetAxis("Vertical"); //avant / arriere
         directionMove.x = Input.GetAxis("Horizontal"); //gauche / droite
 
+        //Sprint
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            personnageSpeed = 14;   
+        }
+        else
+        {
+            personnageSpeed = 7;
+        }
+
+
         //deplacement
         directionMove = transform.TransformDirection(directionMove.x * personnageSpeed, directionMove.y, directionMove.z * personnageSpeed);
         directionMove *= Time.deltaTime;
-
+        
         if (!player.isGrounded)
             directionMove.y -= gravity * Time.deltaTime;
 
         player.Move(directionMove);
 
+        if (Input.GetKey(KeyCode.Space))
+        {
+            anim.Play("Perso_jump");
+        }
 
         //deplacement de la vue
         transform.Rotate(0, Input.GetAxisRaw("Mouse X") * sensibility, 0);
@@ -76,6 +91,8 @@ public class Personnage : MonoBehaviour {
             anim.Play("assault_combat_run");
         else
             anim.Stop();
+
+        
     }
 
 
