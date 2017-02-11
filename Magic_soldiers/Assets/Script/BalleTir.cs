@@ -7,23 +7,46 @@ public class BalleTir : MonoBehaviour {
     public int ejectSpeed = 50; //etait a 20
     private float fireRate = 0.36f;
     public static float nextFire = 0.0f;
-    private int i;
+    private int i; //name Compteur
+    private int nbTirs;
+
 
     public Rigidbody balleCasting;
     private ParticleSystem shoot;
+    public ParticleSystem surchauffe;
 
     // Use this for initialization
     void Start () {
         shoot = GetComponentInChildren<ParticleSystem>();
-	}
+        nbTirs = 0;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
         if (Input.GetKey(KeyCode.Mouse0) && Time.time > nextFire)
+        {
             Fire();
-        if (Input.GetKey(KeyCode.Mouse1) && Time.time > nextFire)
-            Burst_Fire();
+            nbTirs = 0;
+        }    
+        else if (Input.GetKey(KeyCode.Mouse1) && Time.time > nextFire)
+        {
+            if (nbTirs < 20)
+            {
+                Burst_Fire();
+            }
+            else
+            {
+                surchauffe.Play();
+                nbTirs = 0;
+                nextFire += Time.time + 1;
+                fireRate = 0.36f;
+            }
+        }
+                    
+        
+            
     }
 
     private void Fire()
@@ -50,6 +73,8 @@ public class BalleTir : MonoBehaviour {
     private void Burst_Fire()
     {
         fireRate = 0.1f;
+
+        nbTirs++;
 
         nextFire = Time.time + fireRate;
 
