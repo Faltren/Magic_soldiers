@@ -8,7 +8,10 @@ public class Personnage : MonoBehaviour {
     #region Attributes
 
     public int personnageSpeed;
-    private int gravity = 10;
+    public int jumpSpeed;
+    private bool isGrounded;
+
+    //private int gravity = 10;
 
     //mouvement de tete : limite vers le haut et limite vers le bas et sensi
     public static int sensibility = 5;
@@ -16,8 +19,10 @@ public class Personnage : MonoBehaviour {
     public static float limitMoveDown = 250f;
 
     private Vector3 directionMove = Vector3.zero;
-    public static CharacterController player;
+    //public static CharacterController player;
+    public static Rigidbody player;
     public static Animation anim;
+
 
     #endregion
 
@@ -27,15 +32,22 @@ public class Personnage : MonoBehaviour {
     // Use this for initialization
 
         void Start () {
-        player = GetComponent<CharacterController>();
+        //player = GetComponent<CharacterController>();
+        player = GetComponent<Rigidbody>();
         anim = GetComponent<Animation>();
-	}
+
+        isGrounded = false;
+        player.freezeRotation = true;
+        //directionMove.x = transform.position.x;
+        //directionMove.z = transform.position.z;
+
+    }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.visible = false;
         
         Moves();
         //AnimPerso();
@@ -50,9 +62,16 @@ public class Personnage : MonoBehaviour {
     private void Moves()
     {
 
-        directionMove.z = Input.GetAxis("Vertical"); //avant / arriere
-        directionMove.x = Input.GetAxis("Horizontal"); //gauche / droite
-
+        //Deplacement
+        transform.Translate(Input.GetAxis("Horizontal") * personnageSpeed * Time.deltaTime , 0, Input.GetAxis("Vertical") * personnageSpeed * Time.deltaTime);
+        
+        //Jump
+        if (Input.GetAxis("Jump") != 0f && isGrounded)
+        {
+            player.AddForce(0, jumpSpeed, 0);
+            isGrounded = false;
+        }
+       
         //Sprint
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -61,27 +80,13 @@ public class Personnage : MonoBehaviour {
         else
         {
             personnageSpeed = 7;
-        }
-
-
-        //deplacement
-        directionMove = transform.TransformDirection(directionMove.x * personnageSpeed, directionMove.y, directionMove.z * personnageSpeed);
-        directionMove *= Time.deltaTime;
-        
-        if (!player.isGrounded)
-            directionMove.y -= gravity * Time.deltaTime;
-
-        player.Move(directionMove);
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            anim.Play("Perso_jump");
-        }
+        }        
 
         //deplacement de la vue
         transform.Rotate(0, Input.GetAxisRaw("Mouse X") * sensibility, 0);
 
-
+        //debug des forces
+        player.velocity = new Vector3(0, player.velocity.y, 0);
 
     }
 
@@ -96,7 +101,31 @@ public class Personnage : MonoBehaviour {
     }
 
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        isGrounded = true;
+        player.velocity = new Vector3(0, 0, 0);
+    }
+
     #endregion
 
 
 }
+
+
+
+
+
+//directionMove.z = directionMove.z + Input.GetAxis("Vertical") * personnageSpeed * Time.deltaTime; //avant / arriere
+//directionMove.x = directionMove.x + Input.GetAxis("Horizontal") * personnageSpeed * Time.deltaTime; //gauche / droite
+
+
+//deplacement
+//directionMove = transform.TransformDirection(directionMove.x * personnageSpeed, directionMove.y, directionMove.z * personnageSpeed);
+//directionMove *= Time.deltaTime;
+
+/*if (!player.isGrounded)
+    directionMove.y -= gravity * Time.deltaTime;*/
+
+//player.Move(directionMove);

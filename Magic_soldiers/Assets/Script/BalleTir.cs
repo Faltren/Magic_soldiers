@@ -40,7 +40,9 @@ public class BalleTir : MonoBehaviour {
             {
                 surchauffe.Play();
                 nbTirs = 0;
-                nextFire += Time.time + 1;
+                nextFire = Time.time + 2.5f;
+                print("Time : " + Time.time);
+                print("Next fire : " + nextFire);
                 fireRate = 0.36f;
             }
         }
