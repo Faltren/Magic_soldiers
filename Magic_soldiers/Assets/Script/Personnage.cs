@@ -32,25 +32,22 @@ public class Personnage : MonoBehaviour {
     // Use this for initialization
 
         void Start () {
-        //player = GetComponent<CharacterController>();
         player = GetComponent<Rigidbody>();
         anim = GetComponent<Animation>();
 
         isGrounded = false;
         player.freezeRotation = true;
-        //directionMove.x = transform.position.x;
-        //directionMove.z = transform.position.z;
-
+        
     }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 
         Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.visible = false;
         
         Moves();
-        //AnimPerso();
+        AnimPerso();
 
 	}
     #endregion
@@ -92,10 +89,16 @@ public class Personnage : MonoBehaviour {
 
     private void AnimPerso()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
+
+        if (BalleTir.isSurchauffe)
+        {
+            anim["surchauffe"].speed = 0.7f;
+            anim.Play("surchauffe");
+        }
+        /*if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
             anim.Play("assault_combat_run");
         else
-            anim.Stop();
+            anim.Stop();*/
 
         
     }

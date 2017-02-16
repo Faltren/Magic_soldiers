@@ -10,6 +10,8 @@ public class BalleTir : MonoBehaviour {
     private int i; //name Compteur
     private int nbTirs;
 
+    public static bool isSurchauffe;
+
 
     public Rigidbody balleCasting;
     private ParticleSystem shoot;
@@ -17,6 +19,7 @@ public class BalleTir : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        isSurchauffe = false;
         shoot = GetComponentInChildren<ParticleSystem>();
         nbTirs = 0;
 
@@ -25,29 +28,36 @@ public class BalleTir : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKey(KeyCode.Mouse0) && Time.time > nextFire)
+        if (Time.time > nextFire)
         {
-            Fire();
-            nbTirs = 0;
-        }    
-        else if (Input.GetKey(KeyCode.Mouse1) && Time.time > nextFire)
-        {
-            if (nbTirs < 20)
+            isSurchauffe = false;
+
+            if (Input.GetKey(KeyCode.Mouse0))
             {
-                Burst_Fire();
-            }
-            else
-            {
-                surchauffe.Play();
+                Fire();
                 nbTirs = 0;
-                nextFire = Time.time + 2.5f;
-                print("Time : " + Time.time);
-                print("Next fire : " + nextFire);
-                fireRate = 0.36f;
             }
+            else if (Input.GetKey(KeyCode.Mouse1))
+            {
+                if (nbTirs < 20)
+                {
+                    Burst_Fire();
+                }
+                else
+                {
+                    isSurchauffe = true;
+                    surchauffe.Play();
+                    nbTirs = 0;
+                    nextFire = Time.time + 2.5f;
+                    print("Time : " + Time.time);
+                    print("Next fire : " + nextFire);
+                    fireRate = 0.36f;
+                }
+            }
+
         }
-                    
-        
+
+         
             
     }
 
