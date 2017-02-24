@@ -10,6 +10,8 @@ public class BalleTir : MonoBehaviour {
     private int i; //name Compteur
     private int nbTirs;
 
+    private Vector3 trans;
+
     public static bool isSurchauffe;
 
 
@@ -22,7 +24,6 @@ public class BalleTir : MonoBehaviour {
         isSurchauffe = false;
         shoot = GetComponentInChildren<ParticleSystem>();
         nbTirs = 0;
-
     }
 	
 	// Update is called once per frame
@@ -69,11 +70,10 @@ public class BalleTir : MonoBehaviour {
 
         i++;
 
-        Vector3 trans = transform.position;
-        trans.x += 1; //deplacement de la balle a cause du mesh collider
+        Quaternion qua = new Quaternion(0, 0, 0, GetComponentInParent<Rigidbody>().transform.rotation.x);
 
-        balle = Instantiate(balleCasting, trans, Quaternion.identity);
-        balle.velocity = transform.TransformDirection(Vector3.right * ejectSpeed);
+        balle = Instantiate(balleCasting, transform.position, qua);
+        balle.velocity = transform.TransformDirection(Vector3.right) * ejectSpeed;
         balle.isKinematic = false;
 
         balle.name = "Bullet " + i;
@@ -94,7 +94,7 @@ public class BalleTir : MonoBehaviour {
         Rigidbody balle;
 
         i++;
-        
+
         balle = Instantiate(balleCasting, transform.position, Quaternion.identity);
         balle.velocity = transform.TransformDirection(Vector3.right * ejectSpeed);
         balle.isKinematic = false;

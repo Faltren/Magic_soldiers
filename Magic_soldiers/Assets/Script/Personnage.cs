@@ -11,15 +11,10 @@ public class Personnage : MonoBehaviour {
     public int jumpSpeed;
     private bool isGrounded;
 
-    //private int gravity = 10;
-
-    //mouvement de tete : limite vers le haut et limite vers le bas et sensi
+    //mouvement de tete : sensi
     public static int sensibility = 5;
-    public static float limitMoveUp = 310f;
-    public static float limitMoveDown = 250f;
 
-    private Vector3 directionMove = Vector3.zero;
-    //public static CharacterController player;
+    
     public static Rigidbody player;
     public static Animation anim;
 
@@ -36,8 +31,7 @@ public class Personnage : MonoBehaviour {
         anim = GetComponent<Animation>();
 
         isGrounded = false;
-        player.freezeRotation = true;
-        
+               
     }
 	
 	// Update is called once per frame
@@ -118,7 +112,7 @@ public class Personnage : MonoBehaviour {
 
 
 
-
+//private Vector3 directionMove = Vector3.zero;
 
 //directionMove.z = directionMove.z + Input.GetAxis("Vertical") * personnageSpeed * Time.deltaTime; //avant / arriere
 //directionMove.x = directionMove.x + Input.GetAxis("Horizontal") * personnageSpeed * Time.deltaTime; //gauche / droite
