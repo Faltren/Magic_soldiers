@@ -49,8 +49,6 @@ public class BalleTir : MonoBehaviour {
                     surchauffe.Play();
                     nbTirs = 0;
                     nextFire = Time.time + 2.5f;
-                    print("Time : " + Time.time);
-                    print("Next fire : " + nextFire);
                     fireRate = 0.36f;
                 }
             }
@@ -70,8 +68,11 @@ public class BalleTir : MonoBehaviour {
         Rigidbody balle;
 
         i++;
-        
-        balle = Instantiate(balleCasting, transform.position, Quaternion.identity);
+
+        Vector3 trans = transform.position;
+        trans.x += 1; //deplacement de la balle a cause du mesh collider
+
+        balle = Instantiate(balleCasting, trans, Quaternion.identity);
         balle.velocity = transform.TransformDirection(Vector3.right * ejectSpeed);
         balle.isKinematic = false;
 

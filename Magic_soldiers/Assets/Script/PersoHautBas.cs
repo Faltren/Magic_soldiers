@@ -21,6 +21,27 @@ public class PersoHautBas : MonoBehaviour {
             souris = Input.GetAxisRaw("Mouse Y");
             transform.Rotate(0, 0, souris * sensi);
         }
-            
-	}
+
+        if (transform.eulerAngles.z  > 330)
+        {
+            transform.eulerAngles = new Vector3(
+                   transform.eulerAngles.x,
+                   transform.eulerAngles.y,
+                   330);
+        }
+
+        if (transform.eulerAngles.z < 200)
+        { 
+            transform.eulerAngles = new Vector3(
+                   transform.eulerAngles.x,
+                   transform.eulerAngles.y,
+                   200);
+        }
+
+
+    }
+
+
+
+
 }

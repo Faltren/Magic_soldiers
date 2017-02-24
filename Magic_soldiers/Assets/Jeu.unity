@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -35237,8 +35237,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 7
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1.63
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -35259,7 +35259,7 @@ Light:
     m_Bits: 4294967295
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &482090224
@@ -35268,13 +35268,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 482090222}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.80609024, y: 0.074628495, z: -0.055239797, w: 0.5844636}
+  m_LocalPosition: {x: 0, y: 25.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 108.10199, y: 0.33599854, z: -10.334991}
 --- !u!1 &484629124 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: b96fc74c65fd9db40bfde7740f7a9d17, type: 3}
@@ -41387,7 +41387,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 379991345
+  randomSeed: -282830822
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -61352,7 +61352,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400050, guid: c6acf3f29c109e4439950c8f6a85cb2b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.06
+      value: -0.068
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: c6acf3f29c109e4439950c8f6a85cb2b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -61436,7 +61436,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400050, guid: c6acf3f29c109e4439950c8f6a85cb2b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.6954957
+      value: 0.5836126
       objectReference: {fileID: 0}
     - target: {fileID: 400050, guid: c6acf3f29c109e4439950c8f6a85cb2b, type: 3}
       propertyPath: m_LocalScale.y
@@ -65772,7 +65772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ef2fae3edf03645ba06e90f4b1a728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ejectSpeed: 100
+  ejectSpeed: 300
   balleCasting: {fileID: 555978655}
   surchauffe: {fileID: 526311837}
 --- !u!1001 &1079949590
@@ -95853,7 +95853,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1241384767
+  randomSeed: 1891149147
   InitialModule:
     serializedVersion: 3
     enabled: 1
