@@ -7,7 +7,9 @@ public class Personnage : MonoBehaviour {
 
     #region Attributes
 
-    public int personnageSpeed;
+    public int personnageSpeedWalk;
+    public int personnageSpeedRun;
+    private int personnageSpeed;
     public int jumpSpeed;
     private bool isGrounded;
 
@@ -64,11 +66,11 @@ public class Personnage : MonoBehaviour {
         //Sprint
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            personnageSpeed = 14;   
+            personnageSpeed = personnageSpeedRun;   
         }
         else
         {
-            personnageSpeed = 7;
+            personnageSpeed = personnageSpeedWalk;
         }        
 
         //deplacement de la vue

@@ -5,7 +5,6 @@ using UnityEngine;
 public class PNJ_move : MonoBehaviour {
 
     private Animation anim;
-    private CharacterController PNJ;
 
     public float speed;
     public float speedAnim;
@@ -27,7 +26,6 @@ public class PNJ_move : MonoBehaviour {
 
     void Start () {
         anim = GetComponent<Animation>();
-        PNJ = GetComponent<CharacterController>();
         one = true;
         two = false;
         three = false;

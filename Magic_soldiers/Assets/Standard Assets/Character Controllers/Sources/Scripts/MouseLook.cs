@@ -57,11 +57,7 @@ public class MouseLook : MonoBehaviour {
 	void Start ()
 	{
 		// Make the rigid body not change rotation
-		/*if (rigidbody)
-			rigidbody.freezeRotation = true;
-            
-        on l'utilise pas mais ca fait planter le projet ... MERCI UNITY 
-           
-         */
+		if (GetComponent<Rigidbody>())
+			GetComponent<Rigidbody>().freezeRotation = true;
 	}
 }

@@ -6,8 +6,11 @@ using UnityEditor.SceneManagement;
 
 public class Canvas_UI : MonoBehaviour {
 
-    private Canvas can;
+    private float currentTime;
+    private float next_msg;
+
     private Text text;
+    private Text text_msg;
 
     private string original;
 
@@ -17,16 +20,24 @@ public class Canvas_UI : MonoBehaviour {
     public int nbObjectifsSecondaires;
     private bool[] objectifsSecondaires;
 
+    private bool[] isMsgSaid;
+
     private int compteur;
 
     private bool Tuto6;
 
     void Start()
     {
-        can = GetComponent<Canvas>();
-        text = GetComponentInChildren<Text>();
+        text = GameObject.Find("Objectifs").GetComponent<Text>();
+        text_msg = GameObject.Find("Messages").GetComponent<Text>();
 
-        original = text.text;
+        
+        isMsgSaid = new bool[6];
+
+        for (int k1 = 0; k1 < isMsgSaid.Length; k1++)
+        {
+            isMsgSaid[k1] = false;
+        }
 
         objectifs = new bool[nbObjectifs];
         for (int i = 0; i < nbObjectifs; i++)
@@ -41,6 +52,8 @@ public class Canvas_UI : MonoBehaviour {
         }
 
         compteur = 0;
+        original = text.text;
+        next_msg = 3;
 
         Tuto6 = false;
     }
@@ -49,11 +62,194 @@ public class Canvas_UI : MonoBehaviour {
 	void Update () {
 
         Objectifs();
-
+        Radio();
         
 
 
 	}
+
+
+
+    private void Messages(int nbMsg)
+    {
+        if (EditorSceneManager.GetActiveScene().name == "Tuto")
+        {
+
+            switch (nbMsg)
+            {
+                case 0:
+                    if (currentTime + next_msg * 4 < Time.time)
+                    {
+                        text_msg.text = "";
+                    }
+                    else if (currentTime + next_msg * 3 < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Radio</b> : <i>Salut le nouveau ! Je suis chargé de t'aider durant toute cette journée ! Alors tu vas suivre mes ordres et tout se passera bien.</i></color>\n<b>Radio</b> : <i>Tu vois les cibles dehors ? Tire leur dessus !</i>";
+                        
+                    }
+                    else if (currentTime + next_msg * 2 <= Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Vous</b> : <i>Euh bonjour...</i></color>\n<b>Radio</b> : <i>Salut le nouveau ! Je suis chargé de t'aider durant toute cette journée ! Alors tu vas suivre mes ordres et tout se passera bien.</i>";
+                    }
+                    else if (currentTime + next_msg <= Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Radio</b> : <i>Merde ... comment ça marche ce machin ?! Tu m'entends ?</i></color>\n<b>Vous</b> : <i>Euh bonjour...</i>";
+                    }
+                    else if(currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>Radio</b> : <i>Merde ... comment ça marche ce machin ?! Tu m'entends ?</i>";
+                    }                     
+                    break;
+
+                case 1:
+                    if (currentTime + next_msg < Time.time)
+                    {
+                        text_msg.text = "";
+                    }
+                    else if (currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>Radio</b> : <i>Bien. Essaye de tirer en rafale maintenant !</i>";
+                    }
+                    break;
+
+                case 2:
+                    if (currentTime + next_msg * 2 < Time.time)
+                    {
+                        text_msg.text = "";
+                    }
+                    else if (currentTime + next_msg < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Radio</b> : <i>Evite de garder trop longtemps ton burst sinon tu vas encore te brûler la main...</i></color>\n<b>Radio</b> : <i>J'ai toujours pas de nouvelle de nos ouvriers dans la mine. Va voir ce qu'il se passe là bas.</i>";
+                    }
+                    else if (currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>Radio</b> : <i>Evite de garder trop longtemps ton burst sinon tu vas encore te brûler la main...</i>";
+                    }
+                    break;
+
+
+                case 3:
+                    if (currentTime + next_msg * 2 < Time.time)
+                    {
+                        text_msg.text = "";
+                    }
+                    else if (currentTime + next_msg < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Radio</b> : <i>Parfait, tout va bien.</i></color>\n<b>Radio</b> : <i>On va voir ce que tu vaux le bleu. Va au champ de tir et montre moi de quoi tu es capable.</i>";
+                    }
+                    else if (currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>Radio</b> : <i>Parfait, tout va bien.</i>";
+                    }
+                    break;
+
+                case 4:
+                    if (currentTime + next_msg * 2 + 2 < Time.time)
+                    {
+                        text_msg.text = "";
+                    }
+                    else if (currentTime + next_msg + 2 < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Radio</b> : <i>Pas mal le nouveau ! Tu m'as presque impressionné ...</i></color>\n<b>Radio</b> : <i>J'ai une première vraie mission pour toi ! On a perdu le contact avec pas mal d'hommes à l'extérieur en ce moment. Va faire une ronde là bas.</i>";
+                    }
+                    else if (currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>Radio</b> : <i>Pas mal le nouveau ! Tu m'as presque impressionné ...</i>";
+                    }
+                    break;
+
+                case 5:
+                    if (currentTime + next_msg * 3 < Time.time)
+                    {
+                        text_msg.text = "";
+                    }
+                    else if (currentTime + next_msg * 2 < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Vous</b> : <i>Calmez-vous, j'arrive !</i></color>\n<b>Radio</b> : <i>Ne reviens pas ici ils sont beaucoup trop ! Cours chercher de l'aide à la base principale ! On va essayer de le tenir ici !</i>";
+                    }
+                    else if (currentTime + next_msg < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Radio</b> : <i>Merde ! On est attaqué à la base ! Ils sont beaucoup trop nombreux !</i></color>\n<b>Vous</b> : <i>Calmez-vous, j'arrive !</i>";
+                    }
+                    else if (currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>Radio</b> : <i>Merde ! On est attaqué à la base ! Ils sont beaucoup trop nombreux !</i>";
+                    }
+                    break;
+
+                default:
+                    text_msg.text = "";
+                    break;
+            }
+        }
+    }
+
+
+    private void Radio()
+    {
+        if (EditorSceneManager.GetActiveScene().name == "Tuto")
+        {
+            switch (compteur)
+            {
+                case 3:
+
+                    if (!isMsgSaid[0])
+                    {
+                        currentTime = Time.time;
+                        isMsgSaid[0] = true;
+                    }                    
+                    Messages(0);
+                    break;
+
+                case 4:
+                    if (!isMsgSaid[1])
+                    {
+                        currentTime = Time.time;
+                        isMsgSaid[1] = true;
+                    }
+                    Messages(1);
+                    break;
+
+                case 5:
+                    if (!isMsgSaid[2])
+                    {
+                        currentTime = Time.time;
+                        isMsgSaid[2] = true;
+                    }
+                    Messages(2);
+                    break;
+
+                case 6:
+                    if (!isMsgSaid[3])
+                    {
+                        currentTime = Time.time;
+                        isMsgSaid[3] = true;
+                    }
+                    Messages(3);
+                    break;
+
+                case 7:
+                    if (!isMsgSaid[4])
+                    {
+                        currentTime = Time.time;
+                        isMsgSaid[4] = true;
+                    }
+                    Messages(4);
+                    break;
+
+                case 8:
+                    if (!isMsgSaid[5])
+                    {
+                        currentTime = Time.time;
+                        isMsgSaid[5] = true;
+                    }
+                    Messages(5);
+                    break;
+
+            }
+        }
+
+    }
 
 
     private void Objectifs()
