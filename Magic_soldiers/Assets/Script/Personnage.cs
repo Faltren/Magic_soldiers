@@ -24,7 +24,6 @@ public class Personnage : MonoBehaviour {
 
 
     #region Unity methods
-    // Use this for initialization
 
         void Start () {
         player = GetComponent<Rigidbody>();
@@ -34,7 +33,6 @@ public class Personnage : MonoBehaviour {
                
     }
 	
-	// Update is called once per frame
 	void FixedUpdate () {
 
         Cursor.lockState = CursorLockMode.Locked;

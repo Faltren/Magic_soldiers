@@ -19,14 +19,12 @@ public class BalleTir : MonoBehaviour {
     private ParticleSystem shoot;
     public ParticleSystem surchauffe;
 
-    // Use this for initialization
     void Start () {
         isSurchauffe = false;
         shoot = GetComponentInChildren<ParticleSystem>();
         nbTirs = 0;
     }
 	
-	// Update is called once per frame
 	void Update () {
 
         if (Time.time > nextFire)

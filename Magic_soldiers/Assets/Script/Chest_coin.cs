@@ -12,7 +12,6 @@ public class Chest_coin : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
 	void Update () {
         if (Chest.open)
         {
