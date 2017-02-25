@@ -37,9 +37,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4865719450525086}
-  - component: {fileID: 198946663072626386}
   - component: {fileID: 199110832363957170}
-  - component: {fileID: 114524077495806960}
+  - component: {fileID: 198946663072626386}
   m_Layer: 0
   m_Name: Bullet_explode
   m_TagString: Untagged
@@ -145,17 +144,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1946871964745884}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114524077495806960
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1525251473401924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661682a8819de8546a1ff17e56b14af0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114527718307161664
 MonoBehaviour:
   m_ObjectHideFlags: 1

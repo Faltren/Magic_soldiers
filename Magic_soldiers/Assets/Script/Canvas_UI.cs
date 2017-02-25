@@ -11,8 +11,10 @@ public class Canvas_UI : MonoBehaviour {
 
     private Text text;
     private Text text_msg;
+    private Text text_sec;
 
     private string original;
+    private string originalSec;
 
     public int nbObjectifs;
     private bool[] objectifs;
@@ -21,6 +23,7 @@ public class Canvas_UI : MonoBehaviour {
     private bool[] objectifsSecondaires;
 
     private bool[] isMsgSaid;
+    private bool[] Timer;
 
     private int compteur;
 
@@ -30,13 +33,16 @@ public class Canvas_UI : MonoBehaviour {
     {
         text = GameObject.Find("Objectifs").GetComponent<Text>();
         text_msg = GameObject.Find("Messages").GetComponent<Text>();
+        text_sec = GameObject.Find("Secondaires").GetComponent<Text>();
 
-        
-        isMsgSaid = new bool[6];
 
+
+        Timer = new bool[8];
+        isMsgSaid = new bool[8];
         for (int k1 = 0; k1 < isMsgSaid.Length; k1++)
         {
             isMsgSaid[k1] = false;
+            Timer[k1] = false;
         }
 
         objectifs = new bool[nbObjectifs];
@@ -53,6 +59,7 @@ public class Canvas_UI : MonoBehaviour {
 
         compteur = 0;
         original = text.text;
+        originalSec = text_sec.text;
         next_msg = 3;
 
         Tuto6 = false;
@@ -62,9 +69,8 @@ public class Canvas_UI : MonoBehaviour {
 	void Update () {
 
         Objectifs();
-        Radio();
-        
-
+        ObjectifsSecondaires();
+        Radio(compteur);        
 
 	}
 
@@ -74,13 +80,14 @@ public class Canvas_UI : MonoBehaviour {
     {
         if (EditorSceneManager.GetActiveScene().name == "Tuto")
         {
-
+            
             switch (nbMsg)
             {
                 case 0:
                     if (currentTime + next_msg * 4 < Time.time)
                     {
                         text_msg.text = "";
+                        isMsgSaid[0] = true;
                     }
                     else if (currentTime + next_msg * 3 < Time.time)
                     {
@@ -105,6 +112,7 @@ public class Canvas_UI : MonoBehaviour {
                     if (currentTime + next_msg < Time.time)
                     {
                         text_msg.text = "";
+                        isMsgSaid[1] = true;
                     }
                     else if (currentTime < Time.time)
                     {
@@ -116,6 +124,7 @@ public class Canvas_UI : MonoBehaviour {
                     if (currentTime + next_msg * 2 < Time.time)
                     {
                         text_msg.text = "";
+                        isMsgSaid[2] = true;
                     }
                     else if (currentTime + next_msg < Time.time)
                     {
@@ -132,6 +141,7 @@ public class Canvas_UI : MonoBehaviour {
                     if (currentTime + next_msg * 2 < Time.time)
                     {
                         text_msg.text = "";
+                        isMsgSaid[3] = true;
                     }
                     else if (currentTime + next_msg < Time.time)
                     {
@@ -147,6 +157,7 @@ public class Canvas_UI : MonoBehaviour {
                     if (currentTime + next_msg * 2 + 2 < Time.time)
                     {
                         text_msg.text = "";
+                        isMsgSaid[4] = true;
                     }
                     else if (currentTime + next_msg + 2 < Time.time)
                     {
@@ -162,6 +173,7 @@ public class Canvas_UI : MonoBehaviour {
                     if (currentTime + next_msg * 3 < Time.time)
                     {
                         text_msg.text = "";
+                        isMsgSaid[5] = true;
                     }
                     else if (currentTime + next_msg * 2 < Time.time)
                     {
@@ -177,6 +189,51 @@ public class Canvas_UI : MonoBehaviour {
                     }
                     break;
 
+
+                case 101:
+                    if (currentTime + next_msg * 2 < Time.time)
+                    {
+                        text_msg.text = "";
+                        objectifsSecondaires[0] = true;
+                        isMsgSaid[6] = true;
+                        objectifsSecondaires[0] = true;
+                    }
+                    else if (currentTime + next_msg < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Vous</b> : <i>Je vois des traces de pneus sur le sol.</i></color>\n<b>Radio</b> : <i>Bien reçu. Suis les et dis moi où ça te mène.</i>";
+                    }
+                    else if (currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>Vous</b> : <i>Je vois des traces de pneus sur le sol.</i>";
+                    }
+                    break;
+
+                case 102:
+                    if (currentTime + next_msg * 4 < Time.time)
+                    {
+                        text_msg.text = "";
+                        objectifsSecondaires[1] = true;
+                        isMsgSaid[7] = true;
+                        objectifsSecondaires[1] = true;
+                    }
+                    else if (currentTime + next_msg * 3 < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Vous</b> : <i>Ils sont morts...</i></color>\n<b>Radio</b> : <i>Ils seront vengés ... Je préviens le commandant. Continue ta mission.</i>";
+                    }
+                    else if (currentTime + next_msg * 2 < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Radio</b> : <i>Parfait, dis leur de revenir au plus vite !</i></color>\n<b>Vous</b> : <i>Ils sont morts...</i>";
+                    }
+                    else if (currentTime + next_msg < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Vous</b> : <i>Mince ... Je crois que j'ai retrouvé le groupe</i></color>\n<b>Radio</b> : <i>Parfait, dis leur de revenir au plus vite !</i>";
+                    }
+                    else if (currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>Vous</b> : <i>Mince ... Je crois que j'ai retrouvé le groupe</i>";
+                    }
+                    break;
+
                 default:
                     text_msg.text = "";
                     break;
@@ -185,67 +242,109 @@ public class Canvas_UI : MonoBehaviour {
     }
 
 
-    private void Radio()
+    private void Radio(int nb)
     {
         if (EditorSceneManager.GetActiveScene().name == "Tuto")
         {
-            switch (compteur)
+            switch (nb)
             {
                 case 3:
 
                     if (!isMsgSaid[0])
                     {
-                        currentTime = Time.time;
-                        isMsgSaid[0] = true;
-                    }                    
-                    Messages(0);
+                        if(!Timer[0])
+                        {
+                            currentTime = Time.time;
+                            Timer[0] = true;
+                        }
+                        Messages(0);
+                    }
                     break;
 
                 case 4:
                     if (!isMsgSaid[1])
                     {
-                        currentTime = Time.time;
-                        isMsgSaid[1] = true;
+                        if (!Timer[1])
+                        {
+                            currentTime = Time.time;
+                            Timer[1] = true;
+                        }
+                        Messages(1);
                     }
-                    Messages(1);
                     break;
 
                 case 5:
                     if (!isMsgSaid[2])
                     {
-                        currentTime = Time.time;
-                        isMsgSaid[2] = true;
+                        if (!Timer[2])
+                        {
+                            currentTime = Time.time;
+                            Timer[2] = true;
+                        }
+                        Messages(2);
                     }
-                    Messages(2);
                     break;
 
                 case 6:
                     if (!isMsgSaid[3])
                     {
-                        currentTime = Time.time;
-                        isMsgSaid[3] = true;
+                        if (!Timer[3])
+                        {
+                            currentTime = Time.time;
+                            Timer[3] = true;
+                        }
+                        Messages(3);
                     }
-                    Messages(3);
                     break;
 
                 case 7:
                     if (!isMsgSaid[4])
                     {
-                        currentTime = Time.time;
-                        isMsgSaid[4] = true;
+                        if (!Timer[4])
+                        {
+                            currentTime = Time.time;
+                            Timer[4] = true;
+                        }
+                        Messages(4);
                     }
-                    Messages(4);
                     break;
 
                 case 8:
                     if (!isMsgSaid[5])
                     {
-                        currentTime = Time.time;
-                        isMsgSaid[5] = true;
-                    }
-                    Messages(5);
+                        if (!Timer[5])
+                        {
+                            currentTime = Time.time;
+                            Timer[5] = true;
+                        }
+                        Messages(5);
+                    }   
                     break;
 
+                case 101: //100... secondaire
+                    if (!isMsgSaid[6])
+                    {
+                        if (!Timer[6])
+                        {
+                            currentTime = Time.time;
+                            Timer[6] = true;
+                        }
+                        Messages(101);
+                    }
+                    
+                    break;
+
+                case 102:
+                    if (!isMsgSaid[7])
+                    {
+                        if (!Timer[7])
+                        {
+                            currentTime = Time.time;
+                            Timer[7] = true;
+                        }
+                        Messages(102);
+                    }
+                    break;
             }
         }
 
@@ -351,14 +450,88 @@ public class Canvas_UI : MonoBehaviour {
 
 
             }
-
-
-
         }
     }
 
 
 
+    private void ObjectifsSecondaires()
+    {
+        if (EditorSceneManager.GetActiveScene().name == "Tuto")
+        {
+            if (compteur >= 7)
+            {
+                if (Personnage.player.transform.position.z > -200 && Personnage.player.transform.position.z < -160)
+                {
+                    if (Personnage.player.transform.position.x < 156 && Personnage.player.transform.position.x > 130)
+                    {
+                        if (!objectifsSecondaires[0])
+                        {
+                            Radio(101);
+                            text_sec.text = originalSec + "<size=10><color=white>\n\n- Suivre les traces de pneus\n- Trouver le deuxième coffre secret</color></size>";
+                        }
+                    }
+                }
+
+                else if (Personnage.player.transform.position.z > -153 && Personnage.player.transform.position.z < -108)
+                {
+                    if (Personnage.player.transform.position.x > -445 && Personnage.player.transform.position.x < -368)
+                    {
+                        if (!objectifsSecondaires[1])
+                        {
+                            Radio(102);
+                            text_sec.text = originalSec + "<size=10><color=red>\n\n- Trouver les soldats perdus</color>\n- <color=white>Trouver le deuxième coffre secret</color></size>";
+                        }
+                    }
+                }
+
+                else if (Personnage.player.transform.position.z > 91 && Personnage.player.transform.position.z < 98)
+                {
+                    if (Personnage.player.transform.position.x > -1063 && Personnage.player.transform.position.x < -1055)
+                    {
+                        if (Input.GetKey(KeyCode.E))
+                        {
+                            objectifsSecondaires[2] = true;
+                        }
+                        if (objectifsSecondaires[2])
+                        {
+                            text_sec.text = originalSec + "<size=10><color=red>\n\n- Trouver les soldats perdus\n- Trouver le deuxième coffre secret</color></size>";
+                        }
+                        else
+                        {
+                            text_sec.text = originalSec + "<size=10><color=red>\n\n- Suivre les traces de pneus</color>\n- Trouver le deuxième coffre secret</size>";
+                        }  
+                    }
+                }
+                else
+                {
+                    if (!objectifsSecondaires[0])
+                    {
+                        text_sec.text = originalSec + "<size=10><color=white>\n\n- Trouver les soldats perdus\n- Trouver le deuxième coffre secret</color></size>";
+                    }
+                    else if (!objectifsSecondaires[1])
+                    {
+                        text_sec.text = originalSec + "<size=10><color=white>\n\n- Suivre les traces de pneus\n- Trouver le deuxième coffre secret</color></size>";
+                    }
+                    else if (!objectifsSecondaires[2])
+                    {
+                        text_sec.text = originalSec + "<size=10><color=red>\n\n- Suivre les traces de pneus</color>\n-<color=white> Trouver le deuxième coffre secret</color></size>";
+                    }
+                    else
+                    {
+                        text_sec.text = originalSec + "<size=10><color=red>\n\n- Suivre les traces de pneus\n- Trouver le deuxième coffre secret</color></size>";
+                    }
+
+                }
+                                   
+            }
+            else
+            {
+                text_sec.text = "";
+            }
+        }
+
+    }
 
 
 

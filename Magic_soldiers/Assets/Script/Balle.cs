@@ -7,6 +7,8 @@ public class Balle : MonoBehaviour {
     private Rigidbody balle;
     private Object balleObj;
 
+    private int max = 1500;
+
     public static bool IsDestroyed = false;
 
     void Start () {
@@ -16,7 +18,7 @@ public class Balle : MonoBehaviour {
 	
 	void Update () {
 
-        if (balle.position.x > 1000 || balle.transform.position.y > 1000 || balle.transform.position.z > 1000 || balle.position.x < -1000 || balle.transform.position.y < -1000 || balle.transform.position.z < -1000)
+        if (balle.position.x > max || balle.transform.position.y > max || balle.transform.position.z > max || balle.position.x < -max || balle.transform.position.y < -max || balle.transform.position.z < -max)
         {
             Destroy((balleObj as Transform).gameObject);
         }
