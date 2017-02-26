@@ -4,28 +4,51 @@ using UnityEngine;
 
 public class IAtest : MonoBehaviour {
     private bool pattern;
+
     private float posZ0;
     private float posX0;
     private float posZ;
     private float posX;
     private int pos;
+
+    public int life;
+
+    private int rotX = 0;
+
     public float speed;
+    public float modif1;
+    public float modif2;
+
+    Animator animator;
+    bool isWalking = true;
+    bool isAttacking = false;
 
     private float xPlayer;
     private float zPlayer;
     private int DetectRadius;
-	// Use this for initialization
-	void Start () {
+
+    private UnityEngine.UI.Text lifeBar;
+
+    private void Awake()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    // Use this for initialization
+    void Start () {
         pattern = true;
         posX0 = transform.position.x;
         posZ0 = transform.position.z;
         posZ = 0;
         posX = -10;
         pos = 0;
-        
 
-        xPlayer = GameObject.Find("PlayerDummy").transform.position.x;
-        zPlayer = GameObject.Find("PlayerDummy").transform.position.z;
+        lifeBar = transform.FindChild("Life_Bar").gameObject.GetComponent<UnityEngine.UI.Text>();
+
+        LifeDisplay();
+
+        xPlayer = GameObject.Find("Perso").transform.position.x;
+        zPlayer = GameObject.Find("Perso").transform.position.z;
         DetectRadius = 25;
 
     }
@@ -33,58 +56,90 @@ public class IAtest : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        DetectPlayer();
 
-        if (pattern)
+        if (life > 0)
         {
-            Pattern();
+            transform.FindChild("Life_Bar").LookAt(GameObject.Find("Perso").transform);
+            DetectPlayer();
+
+            if (pattern)
+            {
+                Pattern();
+            }
+            else
+            {
+                Attack();
+            }
+
+            if ((isWalking) && (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")))
+            {
+                animator.SetTrigger("Walk");
+            }
+
+            transform.position = new Vector3(posX0 + posX, 0, posZ0 + posZ);
         }
         else
         {
-            Attack();
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Dying"))
+            {
+                animator.SetTrigger("Death");
+            }
+
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Dying"))
+            {
+                Destroy(this.gameObject);
+            }
         }
-        transform.position = new Vector3(posX0 + posX, 0, posZ0 + posZ);
     }
 
     private void Pattern()
     {
+
         if (pos == 0)
         {
-            if (posX < 10)
+
+            if (posX < modif1)
             {
                 posX += Time.deltaTime*speed;
             }
             else
             {
                 pos++;
+                transform.Rotate(0, -90, 0);
             }
         }
 
         if (pos == 1)
         {
-            if (posZ < 10)
+
+
+            if (posZ < modif2)
             {
                 posZ += Time.deltaTime * speed;
             }
             else
             {
                 pos++;
+                transform.Rotate(0, -90, 0);
             }
         }
 
         if (pos == 2)
         {
-            if (posX > -10)
+
+            if (posX > -modif1)
             {
                 posX -= Time.deltaTime * speed;
             }
             else
             {
                 pos++;
+                transform.Rotate(0, -90, 0);
             }
         }
         if (pos == 3)
         {
+
             if (posZ > 0)
             {
                 posZ -= Time.deltaTime * speed;
@@ -92,37 +147,91 @@ public class IAtest : MonoBehaviour {
             else
             {
                 pos = 0;
+                transform.Rotate(0, -90, 0);
             }
         }
     }
 
     private void Attack()
     {
-        if(GameObject.Find("PlayerDummy").transform.position.x - 2 <= posX0 + posX)
+
+        transform.LookAt(GameObject.Find("Perso").transform);
+
+        xPlayer = GameObject.Find("Perso").transform.position.x;
+        zPlayer = GameObject.Find("Perso").transform.position.z;
+
+
+        if ((!isAttacking) && (animator.GetCurrentAnimatorStateInfo(0).IsName("Walk")))
         {
-            posX -= Time.deltaTime * speed*2;
+
+            if (xPlayer - 1.6F <= posX0 + posX)
+            {
+                posX -= Time.deltaTime * speed * 2;
+            }
+            if (xPlayer + 1.6F >= posX0 + posX)
+            {
+                posX += Time.deltaTime * speed * 2;
+            }
+            if (zPlayer - 1.6F <= posZ0 + posZ)
+            {
+                posZ -= Time.deltaTime * speed * 2;
+            }
+            if (zPlayer + 1.6F >= posZ0 + posZ)
+            {
+                posZ += Time.deltaTime * speed * 2;
+            }
         }
-        if(GameObject.Find("PlayerDummy").transform.position.x + 2 >= posX0 + posX)
+
+        if((xPlayer - (posX0 + posX)) * (xPlayer - (posX0 + posX)) + (zPlayer - (posZ0 + posZ)) * (zPlayer - (posZ0 + posZ)) <= 10)
         {
-            posX += Time.deltaTime * speed*2;
+            isAttacking = true;
+            isWalking = false;
+            animator.SetTrigger("Attack");
         }
-        if(GameObject.Find("PlayerDummy").transform.position.z - 2 <= posZ0 + posZ)
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
-            posZ -= Time.deltaTime * speed*2;
+            isAttacking = false;
+            isWalking = true;
         }
-        if (GameObject.Find("PlayerDummy").transform.position.z + 2 >= posZ0 + posZ)
-        {
-            posZ += Time.deltaTime * speed*2;
-        }
+        
     }
 
     private void DetectPlayer()
     {
-        xPlayer = GameObject.Find("PlayerDummy").transform.position.x;
-        zPlayer = GameObject.Find("PlayerDummy").transform.position.z;
-        pattern = !((xPlayer - (posX0 + posX)) * (xPlayer - (posX0 + posX)) + (zPlayer - (posZ0 + posZ)) * (zPlayer - (posZ0 + posZ)) <= DetectRadius * DetectRadius);
+        xPlayer = GameObject.Find("Perso").transform.position.x;
+        zPlayer = GameObject.Find("Perso").transform.position.z;
+        if (pattern == true)
+        {
+            pattern = !((xPlayer - (posX0 + posX)) * (xPlayer - (posX0 + posX)) + (zPlayer - (posZ0 + posZ)) * (zPlayer - (posZ0 + posZ)) <= DetectRadius * DetectRadius);
+        }
     }
 
+    private void LifeDisplay()
+    {
+        lifeBar.text = "";
+        for (int i = 0; i < life; i++)
+        {  
+            lifeBar.text += '-';
+        }
+    }
 
+    private void OnCollisionEnter(Collision col)
+    {
+        string s = "";
+        string name = col.gameObject.name;
+        int i = 0;
 
+        while ((i < name.Length) && (s != "Bullet"))
+        {
+            s += name[i];
+            i++;
+        }
+
+        if(s == "Bullet")
+        {
+            life -= 1;
+            LifeDisplay();
+            Destroy(col.gameObject);
+        }
+    }
 }
