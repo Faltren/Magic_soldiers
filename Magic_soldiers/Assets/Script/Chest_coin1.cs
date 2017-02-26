@@ -20,7 +20,7 @@ public class Chest_coin1 : MonoBehaviour {
             if (transform.position.y < posY + 0.5f)
                 transform.Translate(new Vector3(0, 0.5f * Time.deltaTime, 0));
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyUp(KeyCode.E))
                 Destroy((piece as Transform).gameObject);
 
 
