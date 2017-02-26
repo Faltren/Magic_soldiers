@@ -16,29 +16,31 @@ public class PersoHautBas : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-       if(Input.GetAxisRaw("Mouse Y") != 0)
+        if (!Canvas_UI.isPaused)
         {
-            souris = Input.GetAxisRaw("Mouse Y");
-            transform.Rotate(0, 0, souris * sensi);
+            if (Input.GetAxisRaw("Mouse Y") != 0)
+            {
+                souris = Input.GetAxisRaw("Mouse Y");
+                transform.Rotate(0, 0, souris * sensi);
+            }
+
+            if (transform.eulerAngles.z > 330)
+            {
+                transform.eulerAngles = new Vector3(
+                       transform.eulerAngles.x,
+                       transform.eulerAngles.y,
+                       330);
+            }
+
+            if (transform.eulerAngles.z < 200)
+            {
+                transform.eulerAngles = new Vector3(
+                       transform.eulerAngles.x,
+                       transform.eulerAngles.y,
+                       200);
+            }
         }
-
-        if (transform.eulerAngles.z  > 330)
-        {
-            transform.eulerAngles = new Vector3(
-                   transform.eulerAngles.x,
-                   transform.eulerAngles.y,
-                   330);
-        }
-
-        if (transform.eulerAngles.z < 200)
-        { 
-            transform.eulerAngles = new Vector3(
-                   transform.eulerAngles.x,
-                   transform.eulerAngles.y,
-                   200);
-        }
-
-
+       
     }
 
 

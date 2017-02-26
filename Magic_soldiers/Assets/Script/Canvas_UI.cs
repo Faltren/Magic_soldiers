@@ -13,6 +13,7 @@ public class Canvas_UI : MonoBehaviour {
     private Text text_msg;
     private Text text_sec;
     private Text text_infos;
+    private Text text_pause;
 
     private string original;
     private string originalSec;
@@ -29,6 +30,7 @@ public class Canvas_UI : MonoBehaviour {
     public static int compteur;
 
     private bool Tuto6;
+    public static bool isPaused;
 
     void Start()
     {
@@ -36,7 +38,7 @@ public class Canvas_UI : MonoBehaviour {
         text_msg = GameObject.Find("Messages").GetComponent<Text>();
         text_sec = GameObject.Find("Secondaires").GetComponent<Text>();
         text_infos = GameObject.Find("Infos").GetComponent<Text>();
-
+        text_pause = GameObject.Find("Pause").GetComponent<Text>();
 
         Timer = new bool[8];
         isMsgSaid = new bool[8];
@@ -64,10 +66,28 @@ public class Canvas_UI : MonoBehaviour {
         next_msg = 3;
 
         Tuto6 = false;
+        isPaused = false;
     }
 	
 	
 	void Update () {
+
+        //pause
+        if (Input.GetKeyDown(KeyCode.Escape) && !isPaused)
+        {
+            text_pause.text = "<b>PAUSE</b>";
+            isPaused = true;
+            Time.timeScale = 0f;            
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && isPaused)
+        {
+            GUI.backgroundColor = Color.clear;
+            text_pause.text = "";
+            isPaused = false;
+            Time.timeScale = 1f;
+        }
+
+
 
         Objectifs();
         ObjectifsSecondaires();
@@ -474,7 +494,7 @@ public class Canvas_UI : MonoBehaviour {
             switch (compteur)
             {
                 case 0:
-                    text_infos.text = "<b><i>Appuyez sur W A S D pour vous déplacer</i></b>";
+                    text_infos.text = "<b><i>Appuyez sur W A S D pour vous déplacer et sur Tab pour afficher les objectifs</i></b>";
                     if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
                         objectifs[compteur] = true;
                     break;

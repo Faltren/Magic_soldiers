@@ -56,7 +56,7 @@ public class PNJ_texte : MonoBehaviour {
                 }
                 else
                 {
-                    PNJtext.text = "Interagissez avec cette personne en appuyant sur E";
+                    PNJtext.text = "Appuyez sur E pour interagir";
                 }
                     
             }
