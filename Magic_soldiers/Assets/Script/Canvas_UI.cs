@@ -15,6 +15,9 @@ public class Canvas_UI : MonoBehaviour {
     private Text text_infos;
     private Text text_pause;
 
+    private RawImage healthBar;
+    private RawImage shieldBar;
+
     private string original;
     private string originalSec;
 
@@ -39,6 +42,9 @@ public class Canvas_UI : MonoBehaviour {
         text_sec = GameObject.Find("Secondaires").GetComponent<Text>();
         text_infos = GameObject.Find("Infos").GetComponent<Text>();
         text_pause = GameObject.Find("Pause").GetComponent<Text>();
+
+        healthBar = GameObject.Find("Vie").GetComponent<RawImage>();
+        shieldBar = GameObject.Find("Shield").GetComponent<RawImage>();
 
         Timer = new bool[8];
         isMsgSaid = new bool[8];
@@ -71,6 +77,27 @@ public class Canvas_UI : MonoBehaviour {
 	
 	
 	void Update () {
+
+        /*Placement des barres de vie/bouclier*/
+        healthBar.rectTransform.sizeDelta = new Vector2(Personnage.life * 2.25f, 30); //225 = 100 => 1 = 2.25
+        shieldBar.rectTransform.sizeDelta = new Vector2(Personnage.shield * 2.25f, 30);
+
+        healthBar.rectTransform.transform.position = new Vector2(Personnage.life * 2.25f / 2 + 37,healthBar.rectTransform.transform.position.y);
+        shieldBar.rectTransform.transform.position = new Vector2(Personnage.shield * 2.25f / 2 + 37, healthBar.rectTransform.transform.position.y - 55);
+
+        /* /!\ uniquement pour soutenance 1 !*/
+        if (Personnage.player.transform.position.x > 560 && Personnage.player.transform.position.x < 570)
+        {
+            if (Personnage.player.transform.position.z > -625 && Personnage.player.transform.position.z < -563)
+            {
+                text_pause.fontSize = 26;
+                text_pause.text = "Merci d'avoir joué !";
+                Time.timeScale = 0f;
+            }
+        }
+        /* /!\ uniquement pour soutenance 1 !*/
+
+
 
         //pause
         if (Input.GetKeyDown(KeyCode.Escape) && !isPaused)

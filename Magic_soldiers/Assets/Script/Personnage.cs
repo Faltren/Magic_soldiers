@@ -17,9 +17,9 @@ public class Personnage : MonoBehaviour {
     public static int sensibility = 5;
 
     //life/attack/shield
-    public int life;
+    public static int life;
     public static int attack;
-    public int shield;
+    public static int shield;
     
     public static Rigidbody player;
     public static Animation anim;
@@ -32,6 +32,11 @@ public class Personnage : MonoBehaviour {
     #region Unity methods
 
         void Start () {
+
+        life = 100;
+        shield = 100;
+        attack = 5;
+
         player = GetComponent<Rigidbody>();
         anim = GetComponent<Animation>();
 

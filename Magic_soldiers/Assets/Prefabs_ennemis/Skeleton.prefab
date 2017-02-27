@@ -1008,7 +1008,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!64 &64029003896243594
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -1088,6 +1088,8 @@ MonoBehaviour:
   speed: 1
   modif1: 5
   modif2: 5
+  hasPattern: 0
+  DetectRadius: 0
 --- !u!114 &114269888219606644
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -10,7 +10,6 @@ public class IAtest : MonoBehaviour {
     private float posZ;
     private float posX;
     private int pos;
-    
 
     public int life;
 
