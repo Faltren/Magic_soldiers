@@ -16,6 +16,10 @@ public class Personnage : MonoBehaviour {
     //mouvement de tete : sensi
     public static int sensibility = 5;
 
+    //life/attack/shield
+    public int life;
+    public static int attack;
+    public int shield;
     
     public static Rigidbody player;
     public static Animation anim;
@@ -32,7 +36,7 @@ public class Personnage : MonoBehaviour {
         anim = GetComponent<Animation>();
 
         isGrounded = false;
-               
+        attack = 5;
     }
 	
 	void FixedUpdate () {

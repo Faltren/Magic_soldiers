@@ -25,7 +25,7 @@ public class IAtest : MonoBehaviour {
 
     private float xPlayer;
     private float zPlayer;
-    private int DetectRadius;
+    public int DetectRadius;
 
     private UnityEngine.UI.Text lifeBar;
 
@@ -49,7 +49,7 @@ public class IAtest : MonoBehaviour {
 
         xPlayer = GameObject.Find("Perso").transform.position.x;
         zPlayer = GameObject.Find("Perso").transform.position.z;
-        DetectRadius = 25;
+        //DetectRadius = 25;
 
     }
 
@@ -229,7 +229,7 @@ public class IAtest : MonoBehaviour {
 
         if(s == "Bullet")
         {
-            life -= 1;
+            life -= Personnage.attack;
             LifeDisplay();
             Destroy(col.gameObject);
         }
