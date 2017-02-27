@@ -6,11 +6,13 @@ using UnityEditor.SceneManagement;
 public class Event_tuto_explosions : MonoBehaviour {
 
 	private ParticleSystem particules;
+    public AudioClip fire_sound;
+    private AudioSource sound;
 
 	void Start () {
 
         particules = GetComponent<ParticleSystem>();
-
+        sound = GetComponent<AudioSource>();
 	}
 	
 	
@@ -29,6 +31,7 @@ public class Event_tuto_explosions : MonoBehaviour {
             else if (Canvas_UI.compteur >= 8)
             {
                 particules.Play();
+                sound.PlayOneShot(fire_sound);
             }
             else
             {

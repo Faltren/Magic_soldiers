@@ -1,0 +1,23 @@
+ground helico >> AudioSource JetEngine
+PlayONAWAKE
+LOOP
+3D Max distance : 50
+Linear Rolloff
+
+sky helico >> AudioSource PropellerEngine
+PlayONAWAKE
+LOOP
+3D Max distance : 300
+Linear Rolloff
+
+ground helico >> AudioSource Footstep02
+PlayONAWAKE
+LOOP
+3D Max distance : 20
+Linear Rolloff
+
+fire >> fire
+PlayONAWAKE
+LOOP
+3D Max distance : 30
+Custom Rolloff

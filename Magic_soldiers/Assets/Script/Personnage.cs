@@ -12,7 +12,11 @@ public class Personnage : MonoBehaviour {
     private int personnageSpeed;
     public int jumpSpeed;
     private bool isGrounded;
-
+    
+    public AudioClip jump;
+    public AudioClip land;
+    public AudioSource sound;
+    
     //mouvement de tete : sensi
     public static int sensibility = 5;
 
@@ -39,6 +43,7 @@ public class Personnage : MonoBehaviour {
 
         player = GetComponent<Rigidbody>();
         anim = GetComponent<Animation>();
+        sound = GetComponent<AudioSource>();
 
         isGrounded = false;
         attack = 5;
@@ -48,7 +53,7 @@ public class Personnage : MonoBehaviour {
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
+
         Moves();
         AnimPerso();
 
@@ -69,9 +74,10 @@ public class Personnage : MonoBehaviour {
         if (Input.GetAxis("Jump") != 0f && isGrounded)
         {
             player.AddForce(0, jumpSpeed, 0);
+            sound.PlayOneShot(jump);
             isGrounded = false;
         }
-       
+        
         //Sprint
         if (Input.GetKey(KeyCode.LeftShift))
         {

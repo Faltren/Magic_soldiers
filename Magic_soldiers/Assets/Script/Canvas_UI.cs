@@ -6,6 +6,7 @@ using UnityEditor.SceneManagement;
 
 public class Canvas_UI : MonoBehaviour {
 
+    private int volume;
     private float currentTime;
     private float next_msg;
 
@@ -37,6 +38,7 @@ public class Canvas_UI : MonoBehaviour {
 
     void Start()
     {
+        volume = 1;
         text = GameObject.Find("Objectifs").GetComponent<Text>();
         text_msg = GameObject.Find("Messages").GetComponent<Text>();
         text_sec = GameObject.Find("Secondaires").GetComponent<Text>();
@@ -104,7 +106,8 @@ public class Canvas_UI : MonoBehaviour {
         {
             text_pause.text = "<b>PAUSE</b>";
             isPaused = true;
-            Time.timeScale = 0f;            
+            Time.timeScale = 0f;
+            AudioListener.volume = 0;          
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && isPaused)
         {
@@ -112,6 +115,7 @@ public class Canvas_UI : MonoBehaviour {
             text_pause.text = "";
             isPaused = false;
             Time.timeScale = 1f;
+            AudioListener.volume = volume;
         }
 
 
