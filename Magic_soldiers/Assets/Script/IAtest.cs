@@ -10,6 +10,7 @@ public class IAtest : MonoBehaviour {
     private float posZ;
     private float posX;
     private int pos;
+    
 
     public int life;
 
@@ -18,9 +19,10 @@ public class IAtest : MonoBehaviour {
     public float speed;
     public float modif1;
     public float modif2;
+    public bool hasPattern;
 
     Animator animator;
-    bool isWalking = true;
+    bool isWalking;
     bool isAttacking = false;
 
     private float xPlayer;
@@ -29,6 +31,12 @@ public class IAtest : MonoBehaviour {
 
     private UnityEngine.UI.Text lifeBar;
 
+    private Rigidbody enemy;
+
+    private float currentTime;
+
+    private bool isDead;
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -36,12 +44,15 @@ public class IAtest : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
         pattern = true;
         posX0 = transform.position.x;
         posZ0 = transform.position.z;
         posZ = 0;
         posX = -10;
         pos = 0;
+
+        isWalking = hasPattern;
 
         lifeBar = transform.FindChild("Life_Bar").gameObject.GetComponent<UnityEngine.UI.Text>();
 
@@ -51,6 +62,9 @@ public class IAtest : MonoBehaviour {
         zPlayer = GameObject.Find("Perso").transform.position.z;
         //DetectRadius = 25;
 
+        enemy = this.GetComponent<Rigidbody>();
+
+        isDead = false;
     }
 
     // Update is called once per frame
@@ -64,7 +78,11 @@ public class IAtest : MonoBehaviour {
 
             if (pattern)
             {
-                Pattern();
+                if (hasPattern)
+                {
+                    Pattern();
+                    transform.position = new Vector3(posX0 + posX, 0, posZ0 + posZ);
+                }
             }
             else
             {
@@ -76,17 +94,26 @@ public class IAtest : MonoBehaviour {
                 animator.SetTrigger("Walk");
             }
 
-            transform.position = new Vector3(posX0 + posX, 0, posZ0 + posZ);
         }
         else
         {
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Dying"))
+            if (!isDead)
             {
-                animator.SetTrigger("Death");
+                currentTime = Time.time;
             }
 
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Dying"))
+            isDead = true;
+
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Dying"))
             {
+                animator.StopPlayback();
+                animator.SetTrigger("Death");
+                enemy.isKinematic = true;
+            }
+
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Dying") && (currentTime + 5 < Time.time))
+            {
+                animator.Stop();
                 Destroy(this.gameObject);
             }
         }
@@ -155,43 +182,36 @@ public class IAtest : MonoBehaviour {
     private void Attack()
     {
 
-        transform.LookAt(GameObject.Find("Perso").transform);
-
-        xPlayer = GameObject.Find("Perso").transform.position.x;
-        zPlayer = GameObject.Find("Perso").transform.position.z;
-
 
         if ((!isAttacking) && (animator.GetCurrentAnimatorStateInfo(0).IsName("Walk")))
         {
-
-            if (xPlayer - 1.6F <= posX0 + posX)
-            {
-                posX -= Time.deltaTime * speed * 2;
-            }
-            if (xPlayer + 1.6F >= posX0 + posX)
-            {
-                posX += Time.deltaTime * speed * 2;
-            }
-            if (zPlayer - 1.6F <= posZ0 + posZ)
-            {
-                posZ -= Time.deltaTime * speed * 2;
-            }
-            if (zPlayer + 1.6F >= posZ0 + posZ)
-            {
-                posZ += Time.deltaTime * speed * 2;
-            }
+            transform.Translate(0,0,Time.deltaTime * speed * 2);
+            posX = transform.position.x - posX0;
+            posZ = transform.position.z - posZ0;
         }
 
         if((xPlayer - (posX0 + posX)) * (xPlayer - (posX0 + posX)) + (zPlayer - (posZ0 + posZ)) * (zPlayer - (posZ0 + posZ)) <= 10)
         {
             isAttacking = true;
             isWalking = false;
-            animator.SetTrigger("Attack");
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            {
+                animator.SetTrigger("Attack");
+            }
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             isAttacking = false;
             isWalking = true;
+        }
+        else
+        {
+            Vector3 playerPos = new Vector3(xPlayer, 0, zPlayer);
+            transform.LookAt(playerPos);
+            transform.Translate(Vector3.forward * Time.deltaTime * speed);
+
+            xPlayer = GameObject.Find("Perso").transform.position.x;
+            zPlayer = GameObject.Find("Perso").transform.position.z;
         }
         
     }
@@ -217,17 +237,19 @@ public class IAtest : MonoBehaviour {
 
     private void OnCollisionEnter(Collision col)
     {
+        enemy.velocity = new Vector3(0,0,0);
+
         string s = "";
         string name = col.gameObject.name;
         int i = 0;
 
-        while ((i < name.Length) && (s != "Bullet"))
+        while ((i < name.Length) && (s != "Bullet "))
         {
             s += name[i];
             i++;
         }
 
-        if(s == "Bullet")
+        if(s == "Bullet ")
         {
             life -= Personnage.attack;
             LifeDisplay();
