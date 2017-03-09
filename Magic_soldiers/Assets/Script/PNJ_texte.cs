@@ -41,7 +41,7 @@ public class PNJ_texte : MonoBehaviour {
         if (DetectPlayer())
         {
 
-            target = new Vector3(Personnage.player.transform.position.x, this.transform.position.y, Personnage.player.transform.position.z);
+            target = new Vector3(Personnage_offline.player.transform.position.x, this.transform.position.y, Personnage_offline.player.transform.position.z);
             can.transform.LookAt(target);
 
             if (!needInteract)

@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+using UnityEngine.Networking;
 
-public class Personnage : MonoBehaviour {
+public class Personnage : NetworkBehaviour {
 
     #region Attributes
 
@@ -44,6 +44,7 @@ public class Personnage : MonoBehaviour {
         player = GetComponent<Rigidbody>();
         anim = GetComponent<Animation>();
         sound = GetComponent<AudioSource>();
+        
 
         isGrounded = false;
         attack = 5;
@@ -51,11 +52,15 @@ public class Personnage : MonoBehaviour {
 	
 	void FixedUpdate () {
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
 
-        Moves();
-        AnimPerso();
+        if (isLocalPlayer)
+        {
+            Moves();
+            AnimPerso();
+        }
+        
 
 	}
     #endregion

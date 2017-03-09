@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-
-public class PersoHautBas : MonoBehaviour {
+public class PersoHautBas : NetworkBehaviour
+{
 
     private int sensi = Personnage.sensibility;
     private float souris;
@@ -16,30 +17,34 @@ public class PersoHautBas : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (!Canvas_UI.isPaused)
+        if (isLocalPlayer)
         {
-            if (Input.GetAxisRaw("Mouse Y") != 0)
+            if (!Canvas_UI.isPaused)
             {
-                souris = Input.GetAxisRaw("Mouse Y");
-                transform.Rotate(0, 0, souris * sensi);
-            }
+                if (Input.GetAxisRaw("Mouse Y") != 0)
+                {
+                    souris = Input.GetAxisRaw("Mouse Y");
+                    transform.Rotate(0, 0, souris * sensi);
+                }
 
-            if (transform.eulerAngles.z > 330)
-            {
-                transform.eulerAngles = new Vector3(
-                       transform.eulerAngles.x,
-                       transform.eulerAngles.y,
-                       330);
-            }
+                if (transform.eulerAngles.z > 330)
+                {
+                    transform.eulerAngles = new Vector3(
+                           transform.eulerAngles.x,
+                           transform.eulerAngles.y,
+                           330);
+                }
 
-            if (transform.eulerAngles.z < 200)
-            {
-                transform.eulerAngles = new Vector3(
-                       transform.eulerAngles.x,
-                       transform.eulerAngles.y,
-                       200);
+                if (transform.eulerAngles.z < 200)
+                {
+                    transform.eulerAngles = new Vector3(
+                           transform.eulerAngles.x,
+                           transform.eulerAngles.y,
+                           200);
+                }
             }
         }
+        
        
     }
 
