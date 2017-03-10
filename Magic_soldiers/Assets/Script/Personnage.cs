@@ -26,6 +26,7 @@ public class Personnage : NetworkBehaviour {
     public static int shield;
     
     public static Rigidbody player;
+    public static GameObject Spine;
     public static Animation anim;
 
 
@@ -42,6 +43,7 @@ public class Personnage : NetworkBehaviour {
         attack = 5;
 
         player = GetComponent<Rigidbody>();
+        Spine = GameObject.Find("Bip001 Spine");
         anim = GetComponent<Animation>();
         sound = GetComponent<AudioSource>();
         
@@ -95,6 +97,28 @@ public class Personnage : NetworkBehaviour {
 
         //deplacement de la vue
         transform.Rotate(0, Input.GetAxisRaw("Mouse X") * sensibility, 0);
+
+        
+        if (Input.GetAxisRaw("Mouse Y") != 0)
+        {
+            Spine.transform.Rotate(0, 0, Input.GetAxisRaw("Mouse Y") * sensibility);
+        }
+
+        if (Spine.transform.eulerAngles.z > 330)
+        {
+            Spine.transform.eulerAngles = new Vector3(
+                  Spine.transform.eulerAngles.x,
+                   Spine.transform.eulerAngles.y,
+                   330);
+        }
+
+        if (Spine.transform.eulerAngles.z < 200)
+        {
+            Spine.transform.eulerAngles = new Vector3(
+                   Spine.transform.eulerAngles.x,
+                   Spine.transform.eulerAngles.y,
+                   200);
+        }
 
         //debug des forces
         player.velocity = new Vector3(0, player.velocity.y, 0);

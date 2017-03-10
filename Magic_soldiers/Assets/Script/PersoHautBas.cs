@@ -17,7 +17,7 @@ public class PersoHautBas : NetworkBehaviour
 	// Update is called once per frame
 	void Update () {
 
-        if (isLocalPlayer)
+        /*if (isLocalPlayer)
         {
             if (!Canvas_UI.isPaused)
             {
@@ -43,9 +43,9 @@ public class PersoHautBas : NetworkBehaviour
                            200);
                 }
             }
-        }
-        
-       
+        }*/
+
+
     }
 
 
