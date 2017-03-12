@@ -57,8 +57,8 @@ public class IAtest : MonoBehaviour {
 
         LifeDisplay();
 
-        xPlayer = GameObject.Find("Perso").transform.position.x;
-        zPlayer = GameObject.Find("Perso").transform.position.z;
+        xPlayer = GameObject.Find("Perso(Clone)").transform.position.x;
+        zPlayer = GameObject.Find("Perso(Clone)").transform.position.z;
         //DetectRadius = 25;
 
         enemy = this.GetComponent<Rigidbody>();
@@ -72,7 +72,7 @@ public class IAtest : MonoBehaviour {
 
         if (life > 0)
         {
-            transform.FindChild("Life_Bar").LookAt(GameObject.Find("Perso").transform);
+            transform.FindChild("Life_Bar").LookAt(GameObject.Find("Perso(Clone)").transform);
             DetectPlayer();
 
             if (pattern)
@@ -209,16 +209,16 @@ public class IAtest : MonoBehaviour {
             transform.LookAt(playerPos);
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
 
-            xPlayer = GameObject.Find("Perso").transform.position.x;
-            zPlayer = GameObject.Find("Perso").transform.position.z;
+            xPlayer = GameObject.Find("Perso(Clone)").transform.position.x;
+            zPlayer = GameObject.Find("Perso(Clone)").transform.position.z;
         }
         
     }
 
     private void DetectPlayer()
     {
-        xPlayer = GameObject.Find("Perso").transform.position.x;
-        zPlayer = GameObject.Find("Perso").transform.position.z;
+        xPlayer = GameObject.Find("Perso(Clone)").transform.position.x;
+        zPlayer = GameObject.Find("Perso(Clone)").transform.position.z;
         if (pattern == true)
         {
             pattern = !((xPlayer - (posX0 + posX)) * (xPlayer - (posX0 + posX)) + (zPlayer - (posZ0 + posZ)) * (zPlayer - (posZ0 + posZ)) <= DetectRadius * DetectRadius);

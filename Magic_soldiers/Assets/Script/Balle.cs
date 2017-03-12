@@ -18,7 +18,7 @@ public class Balle : MonoBehaviour {
 	
 	void Update () {
 
-        if (balle.position.x > max || balle.transform.position.y > max || balle.transform.position.z > max || balle.position.x < -max || balle.transform.position.y < -max || balle.transform.position.z < -max)
+        if ((balle.position.x > max || balle.transform.position.y > max || balle.transform.position.z > max || balle.position.x < -max || balle.transform.position.y < -max || balle.transform.position.z < -max) && balle.velocity != new Vector3(0,0,0))
         {
             Destroy((balleObj as Transform).gameObject);
         }

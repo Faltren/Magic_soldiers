@@ -24,11 +24,10 @@ public class Personnage : NetworkBehaviour {
     public static int life;
     public static int attack;
     public static int shield;
-    
-    public static Rigidbody player;
-    public static GameObject Spine;
-    public static Animation anim;
 
+    private Rigidbody player;
+    public GameObject Spine;
+    public static Animation anim;
 
     #endregion
 
@@ -43,10 +42,8 @@ public class Personnage : NetworkBehaviour {
         attack = 5;
 
         player = GetComponent<Rigidbody>();
-        Spine = GameObject.Find("Bip001 Spine");
         anim = GetComponent<Animation>();
         sound = GetComponent<AudioSource>();
-        
 
         isGrounded = false;
         attack = 5;
@@ -73,7 +70,6 @@ public class Personnage : NetworkBehaviour {
 
     private void Moves()
     {
-
         //Deplacement
         transform.Translate(Input.GetAxis("Horizontal") * personnageSpeed * Time.deltaTime , 0, Input.GetAxis("Vertical") * personnageSpeed * Time.deltaTime);
         
