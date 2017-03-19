@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 114455424870528002}
   - component: {fileID: 114397800324437968}
   - component: {fileID: 114812874387207180}
+  - component: {fileID: 114827560591945902}
   m_Layer: 0
   m_Name: Perso
   m_TagString: Player
@@ -599,7 +600,6 @@ GameObject:
   - component: {fileID: 124730091091011520}
   - component: {fileID: 92818185766448888}
   - component: {fileID: 81482622215480050}
-  - component: {fileID: 148963409411256200}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -1173,7 +1173,7 @@ Camera:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1824349532666930}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -1289,7 +1289,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1824349532666930}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!82 &82693277676795574
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1749,6 +1749,25 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114827560591945902
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388103958966990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 4678456746602634}
+  m_ChildIndex: 0
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_MovementThreshold: 0.001
+  m_InterpolateRotation: 0.5
+  m_InterpolateMovement: 0.5
 --- !u!114 &114885154337091142
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1911,18 +1930,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.07294822, y: 0.11620551, z: -0.56022096}
     m_Extent: {x: 1.2963526, y: 0.51070595, z: 1.9743903}
   m_DirtyAABB: 0
---- !u!148 &148963409411256200
-NetworkView:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1824349532666930}
-  m_Enabled: 1
-  m_StateSynchronization: 1
-  m_Observed: {fileID: 4864628482400748}
-  m_ViewID:
-    m_ID: 0
-    m_Type: 0
 --- !u!198 &198288328115306748
 ParticleSystem:
   m_ObjectHideFlags: 1

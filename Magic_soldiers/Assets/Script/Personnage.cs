@@ -29,6 +29,9 @@ public class Personnage : NetworkBehaviour {
     public GameObject Spine;
     public static Animation anim;
 
+    private Camera cam;
+    private AudioListener al;
+
     #endregion
 
 
@@ -45,6 +48,11 @@ public class Personnage : NetworkBehaviour {
         anim = GetComponent<Animation>();
         sound = GetComponent<AudioSource>();
 
+        cam = GetComponentInChildren<Camera>();
+        al = GetComponentInChildren<AudioListener>();
+
+        cam.transform.SetParent(Spine.transform);
+
         isGrounded = false;
         attack = 5;
     }
@@ -53,6 +61,17 @@ public class Personnage : NetworkBehaviour {
 
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
+
+        if (isLocalPlayer)
+        {
+            if (!cam.enabled)
+                cam.enabled = true;
+            if (!al.enabled)
+                al.enabled = true;
+        }
+
+
+
 
         if (isLocalPlayer)
         {
