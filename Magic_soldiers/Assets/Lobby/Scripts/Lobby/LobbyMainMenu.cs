@@ -13,7 +13,7 @@ namespace Prototype.NetworkLobby
         public RectTransform lobbyPanel;
 
         public InputField ipInput;
-        public InputField matchNameInput;
+       // public InputField matchNameInput;
 
         public void OnEnable()
         {
@@ -22,13 +22,19 @@ namespace Prototype.NetworkLobby
             ipInput.onEndEdit.RemoveAllListeners();
             ipInput.onEndEdit.AddListener(onEndEditIP);
 
-            matchNameInput.onEndEdit.RemoveAllListeners();
-            matchNameInput.onEndEdit.AddListener(onEndEditGameName);
+           // matchNameInput.onEndEdit.RemoveAllListeners();
+           // matchNameInput.onEndEdit.AddListener(onEndEditGameName);
         }
 
         public void OnClickHost()
         {
-            lobbyManager.StartHost();
+            if (lobbyManager.StartHost() == null)
+            {
+                lobbyManager.networkAddress = "localhost";
+                lobbyManager.serverBindAddress = "localhost";
+                lobbyManager.StartHost();
+            } 
+
         }
 
         public void OnClickJoin()
@@ -44,7 +50,7 @@ namespace Prototype.NetworkLobby
             lobbyManager.SetServerInfo("Connecting...", lobbyManager.networkAddress);
         }
 
-        public void OnClickDedicated()
+       /* public void OnClickDedicated()
         {
             lobbyManager.ChangeTo(null);
             lobbyManager.StartServer();
@@ -52,9 +58,9 @@ namespace Prototype.NetworkLobby
             lobbyManager.backDelegate = lobbyManager.StopServerClbk;
 
             lobbyManager.SetServerInfo("Dedicated Server", lobbyManager.networkAddress);
-        }
+        }*/
 
-        public void OnClickCreateMatchmakingGame()
+       /* public void OnClickCreateMatchmakingGame()
         {
             lobbyManager.StartMatchMaker();
             lobbyManager.matchMaker.CreateMatch(
@@ -70,13 +76,13 @@ namespace Prototype.NetworkLobby
 
             lobbyManager.SetServerInfo("Matchmaker Host", lobbyManager.matchHost);
         }
-
-        public void OnClickOpenServerList()
+        */
+       /* public void OnClickOpenServerList()
         {
             lobbyManager.StartMatchMaker();
             lobbyManager.backDelegate = lobbyManager.SimpleBackClbk;
             lobbyManager.ChangeTo(lobbyServerList);
-        }
+        }*/
 
         void onEndEditIP(string text)
         {
@@ -86,13 +92,13 @@ namespace Prototype.NetworkLobby
             }
         }
 
-        void onEndEditGameName(string text)
+       /* void onEndEditGameName(string text)
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 OnClickCreateMatchmakingGame();
             }
-        }
+        }*/
 
     }
 }

@@ -53,6 +53,8 @@ namespace Prototype.NetworkLobby
 
         protected LobbyHook _lobbyHooks;
 
+        private string address;
+
         void Start()
         {
             s_Singleton = this;
@@ -65,6 +67,8 @@ namespace Prototype.NetworkLobby
             DontDestroyOnLoad(gameObject);
 
             SetServerInfo("Offline", "None");
+
+            address = networkAddress;
         }
 
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)
@@ -158,10 +162,13 @@ namespace Prototype.NetworkLobby
 
         public delegate void BackButtonDelegate();
         public BackButtonDelegate backDelegate;
+
         public void GoBackButton()
         {
             backDelegate();
 			topPanel.isInGame = false;
+            networkAddress = address;
+            serverBindAddress = address;
         }
 
         // ----------------- Server management
@@ -223,7 +230,6 @@ namespace Prototype.NetworkLobby
 
 
 
-
         public void KickedMessageHandler(NetworkMessage netMsg)
         {
             infoPanel.Display("Kicked by Server", "Close", null);
@@ -238,7 +244,8 @@ namespace Prototype.NetworkLobby
 
             ChangeTo(lobbyPanel);
             backDelegate = StopHostClbk;
-            SetServerInfo("Hosting", networkAddress);
+
+            SetServerInfo("Hosting", networkAddress);            
         }
 
 		public override void OnMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)
