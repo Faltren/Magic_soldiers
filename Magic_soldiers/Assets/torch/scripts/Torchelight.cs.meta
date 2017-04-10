@@ -1,8 +1,15 @@
 fileFormatVersion: 2
 guid: 14e1ccb9bc5e66e46b9ebc20caf6db2d
+timeCreated: 1491833144
+licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - TorchLight: {instanceID: 0}
+  - MainFlame: {instanceID: 0}
+  - BaseFlame: {instanceID: 0}
+  - Etincelles: {instanceID: 0}
+  - Fumee: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
