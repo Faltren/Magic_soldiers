@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class BalleTir : MonoBehaviour {
+public class BalleTir : MonoBehaviour
+{
 
     public int ejectSpeed = 50; //etait a 20
     private float fireRate = 0.36f;
@@ -24,41 +26,53 @@ public class BalleTir : MonoBehaviour {
         shoot = GetComponentInChildren<ParticleSystem>();
         nbTirs = 0;
     }
-	
-	void Update () {
 
-        if (Time.time > nextFire)
-        {
-            isSurchauffe = false;
-
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                Fire();
-                nbTirs = 0;
-            }
-            else if (Input.GetKey(KeyCode.Mouse1))
-            {
-                if (nbTirs < 20)
-                {
-                    Burst_Fire();
-                }
-                else
-                {
-                    isSurchauffe = true;
-                    surchauffe.Play();
-                    nbTirs = 0;
-                    nextFire = Time.time + 2.5f;
-                    fireRate = 0.36f;
-                }
-            }
-
-        }
-
-         
-            
+    public BalleTir()
+    {
+        
     }
 
-    private void Fire()
+	void Update () {
+
+        if (GetComponentInParent<NetworkIdentity>().isLocalPlayer)
+        {
+            if (Time.time > nextFire)
+            {
+                isSurchauffe = false;
+
+                if (Input.GetKey(KeyCode.Mouse0))
+                {
+                    Fire();
+                    nbTirs = 0;
+                }
+                else if (Input.GetKey(KeyCode.Mouse1))
+                {
+                    if (nbTirs < 20)
+                    {
+                        Burst_Fire();
+                    }
+                    else
+                    {
+                        isSurchauffe = true;
+                        surchauffe.Play();
+                        nbTirs = 0;
+                        nextFire = Time.time + 2.5f;
+                        fireRate = 0.36f;
+                    }
+                }
+
+            }
+        }
+            
+
+
+
+
+
+
+    }
+
+    public void Fire()
     {
         fireRate = 0.36f;
 
@@ -68,7 +82,7 @@ public class BalleTir : MonoBehaviour {
 
         i++;
 
-        Quaternion qua = new Quaternion(0, 0, 0, GetComponentInParent<Rigidbody>().transform.rotation.x);
+        Quaternion qua = new Quaternion(0, 0, 0, 0); //GetComponentInParent<Rigidbody>().transform.rotation.x
 
         balle = Instantiate(balleCasting, transform.position, qua);
         balle.velocity = transform.TransformDirection(Vector3.right) * ejectSpeed;
@@ -81,7 +95,7 @@ public class BalleTir : MonoBehaviour {
     }
 
 
-    private void Burst_Fire()
+    public void Burst_Fire()
     {
         fireRate = 0.1f;
 

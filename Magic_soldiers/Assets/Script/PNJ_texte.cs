@@ -71,8 +71,8 @@ public class PNJ_texte : MonoBehaviour {
 
     private bool DetectPlayer()
     {
-        xPlayer = GameObject.Find("Perso").transform.position.x;
-        zPlayer = GameObject.Find("Perso").transform.position.z;
+        xPlayer = GameObject.Find("Perso(Clone)").transform.position.x;
+        zPlayer = GameObject.Find("Perso(Clone)").transform.position.z;
         find = ((xPlayer - posX) * (xPlayer - posX) + (zPlayer - posZ) * (zPlayer - posZ) <= DetectRadius * DetectRadius);
 
         return find;

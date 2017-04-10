@@ -100,7 +100,7 @@ public class Personnage_offline : MonoBehaviour {
     private void AnimPerso()
     {
 
-        if (BalleTir.isSurchauffe)
+        if (BalleTir_offline.isSurchauffe)
         {
             anim["surchauffe"].speed = 0.7f;
             anim.Play("surchauffe");

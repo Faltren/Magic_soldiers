@@ -32,13 +32,31 @@ public class Personnage : NetworkBehaviour {
     private Camera cam;
     private AudioListener al;
 
+    //Tir
+
+    public int ejectSpeed = 50; //etait a 20
+    private float fireRate = 0.36f;
+    public static float nextFire = 0.0f;
+    private int i; //name Compteur
+    private int nbTirs;
+
+    private Vector3 trans;
+
+    public static bool isSurchauffe;
+    BalleTir blabla;
+    public Rigidbody balleCasting;
+    private ParticleSystem shoot;
+    public ParticleSystem surchauffe;
+    public GameObject BulletPos;
     #endregion
 
 
 
     #region Unity methods
 
-        void Start () {
+    void Start () {
+
+        blabla = new BalleTir();
 
         life = 100;
         shield = 100;
@@ -55,12 +73,16 @@ public class Personnage : NetworkBehaviour {
 
         isGrounded = false;
         attack = 5;
+
+        isSurchauffe = false;
+        shoot = GetComponentInChildren<ParticleSystem>();
+        nbTirs = 0;
     }
 	
 	void FixedUpdate () {
 
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         if (isLocalPlayer)
         {
@@ -69,14 +91,39 @@ public class Personnage : NetworkBehaviour {
             if (!al.enabled)
                 al.enabled = true;
         }
-
-
+        
 
 
         if (isLocalPlayer)
         {
             Moves();
             AnimPerso();
+            /*if (Time.time > nextFire)
+            {
+                isSurchauffe = false;
+
+                if (Input.GetKey(KeyCode.Mouse0))
+                {
+                    Fire();
+                    nbTirs = 0;
+                }
+                else if (Input.GetKey(KeyCode.Mouse1))
+                {
+                    if (nbTirs < 20)
+                    {
+                        Burst_Fire();
+                    }
+                    else
+                    {
+                        isSurchauffe = true;
+                        surchauffe.Play();
+                        nbTirs = 0;
+                        nextFire = Time.time + 2.5f;
+                        fireRate = 0.36f;
+                    }
+                }
+
+            }*/
         }
         
 
@@ -164,8 +211,51 @@ public class Personnage : NetworkBehaviour {
         player.velocity = new Vector3(0, 0, 0);
     }
 
-    #endregion
+    private void Fire()
+    {
+        fireRate = 0.36f;
 
+        nextFire = Time.time + fireRate;
+
+        Rigidbody balle;
+
+        i++;
+
+        //Quaternion qua = new Quaternion(0, 0, 0, 0);
+
+        balle = Instantiate(balleCasting, BulletPos.transform.position, Quaternion.identity);
+        balle.velocity = transform.TransformDirection(Vector3.forward) * ejectSpeed;
+        balle.isKinematic = false;
+
+        balle.name = "Bullet " + i;
+
+        shoot.Play();
+    }
+
+
+    private void Burst_Fire()
+    {
+        fireRate = 0.1f;
+
+        nbTirs++;
+
+        nextFire = Time.time + fireRate;
+
+        Rigidbody balle;
+
+        i++;
+
+        balle = Instantiate(balleCasting, BulletPos.transform.position, Quaternion.identity);
+        balle.velocity = transform.TransformDirection(Vector3.forward * ejectSpeed);
+        balle.isKinematic = false;
+
+        balle.name = "Bullet " + i;
+
+        
+
+        shoot.Play();
+    }
+    #endregion
 
 }
 

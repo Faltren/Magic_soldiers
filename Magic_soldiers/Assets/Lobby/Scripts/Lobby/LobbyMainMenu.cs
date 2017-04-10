@@ -30,8 +30,8 @@ namespace Prototype.NetworkLobby
         {
             if (lobbyManager.StartHost() == null)
             {
-                lobbyManager.networkAddress = "localhost";
-                lobbyManager.serverBindAddress = "localhost";
+                lobbyManager.networkAddress = "127.0.0.1";
+                lobbyManager.serverBindAddress = "127.0.0.1";
                 lobbyManager.StartHost();
             } 
 
