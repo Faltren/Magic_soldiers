@@ -106,9 +106,6 @@ public class Personnage : NetworkBehaviour {
             Moves();
             AnimPerso();
 
-            print("Next : " + nextFire);
-            print("Time : " + Time.time);
-
             if (Time.time > nextFire)
             {
                 isSurchauffe = false;
@@ -124,7 +121,10 @@ public class Personnage : NetworkBehaviour {
                 {
                     if (nbTirs < 20)
                     {
-                        blabla.Burst_Fire();
+                        fireRate = 0.1f;
+                        nbTirs++;
+                        nextFire = Time.time + fireRate;
+                        CmdBurst_Fire();
                     }
                     else
                     {
@@ -243,6 +243,24 @@ public class Personnage : NetworkBehaviour {
 
         balle.name = "Bullet " + i;
 
+
+        shoot.Play();
+    }
+
+    [Command]
+    public void CmdBurst_Fire()
+    {
+
+        GameObject balle;
+
+        i++;
+        balle = Instantiate(balleCasting.gameObject, BulletPos.transform.position, new Quaternion(BulletPos.transform.rotation.x,transform.rotation.y,BulletPos.transform.rotation.z,BulletPos.transform.rotation.w));
+        balle.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward) * ejectSpeed;
+        balle.GetComponent<Rigidbody>().isKinematic = false;
+
+        NetworkServer.Spawn(balle);
+
+        balle.name = "Bullet " + i;
 
         shoot.Play();
     }
