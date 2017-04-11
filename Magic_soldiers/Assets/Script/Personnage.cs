@@ -44,10 +44,12 @@ public class Personnage : NetworkBehaviour {
 
     public static bool isSurchauffe;
     BalleTir blabla;
-    public Rigidbody balleCasting;
+    public GameObject balleCasting;
     private ParticleSystem shoot;
     public ParticleSystem surchauffe;
-    public GameObject BulletPos;
+    public Transform BulletPos;
+
+    public GameObject weapon;
     #endregion
 
 
@@ -91,27 +93,38 @@ public class Personnage : NetworkBehaviour {
             if (!al.enabled)
                 al.enabled = true;
         }
-        
-
 
         if (isLocalPlayer)
         {
+
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+
             Moves();
             AnimPerso();
-            /*if (Time.time > nextFire)
+
+            print("Next : " + nextFire);
+            print("Time : " + Time.time);
+
+            if (Time.time > nextFire)
             {
                 isSurchauffe = false;
 
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
-                    Fire();
+                    fireRate = 0.36f;
+                    nextFire = Time.time + fireRate;
+                    CmdFire();
                     nbTirs = 0;
                 }
                 else if (Input.GetKey(KeyCode.Mouse1))
                 {
                     if (nbTirs < 20)
                     {
-                        Burst_Fire();
+                        blabla.Burst_Fire();
                     }
                     else
                     {
@@ -123,7 +136,7 @@ public class Personnage : NetworkBehaviour {
                     }
                 }
 
-            }*/
+            }
         }
         
 
@@ -132,7 +145,7 @@ public class Personnage : NetworkBehaviour {
 
 
     #region otherMethods
-
+   
 
     private void Moves()
     {
@@ -211,50 +224,29 @@ public class Personnage : NetworkBehaviour {
         player.velocity = new Vector3(0, 0, 0);
     }
 
-    private void Fire()
+    [Command]
+    public void CmdFire()
     {
-        fireRate = 0.36f;
 
-        nextFire = Time.time + fireRate;
-
-        Rigidbody balle;
+        GameObject balle;
 
         i++;
 
-        //Quaternion qua = new Quaternion(0, 0, 0, 0);
+        Quaternion qua = new Quaternion(0, 0, 0, 0); //GetComponentInParent<Rigidbody>().transform.rotation.x
 
-        balle = Instantiate(balleCasting, BulletPos.transform.position, Quaternion.identity);
-        balle.velocity = transform.TransformDirection(Vector3.forward) * ejectSpeed;
-        balle.isKinematic = false;
+        balle = Instantiate(balleCasting.gameObject, BulletPos.transform.position, qua);
+
+        balle.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward) * ejectSpeed;
+        balle.GetComponent<Rigidbody>().isKinematic = false;
+
+        NetworkServer.Spawn(balle);            
 
         balle.name = "Bullet " + i;
+
 
         shoot.Play();
     }
 
-
-    private void Burst_Fire()
-    {
-        fireRate = 0.1f;
-
-        nbTirs++;
-
-        nextFire = Time.time + fireRate;
-
-        Rigidbody balle;
-
-        i++;
-
-        balle = Instantiate(balleCasting, BulletPos.transform.position, Quaternion.identity);
-        balle.velocity = transform.TransformDirection(Vector3.forward * ejectSpeed);
-        balle.isKinematic = false;
-
-        balle.name = "Bullet " + i;
-
-        
-
-        shoot.Play();
-    }
     #endregion
 
 }

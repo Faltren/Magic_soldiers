@@ -16,10 +16,11 @@ public class BalleTir : MonoBehaviour
 
     public static bool isSurchauffe;
 
-
     public Rigidbody balleCasting;
     private ParticleSystem shoot;
     public ParticleSystem surchauffe;
+
+    public NetworkIdentity playerId;
 
     void Start () {
         isSurchauffe = false;
@@ -27,14 +28,9 @@ public class BalleTir : MonoBehaviour
         nbTirs = 0;
     }
 
-    public BalleTir()
-    {
-        
-    }
-
 	void Update () {
 
-        if (GetComponentInParent<NetworkIdentity>().isLocalPlayer)
+        /*if (playerId.isLocalPlayer)
         {
             if (Time.time > nextFire)
             {
@@ -42,7 +38,7 @@ public class BalleTir : MonoBehaviour
 
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
-                    Fire();
+                    CmdFire();
                     nbTirs = 0;
                 }
                 else if (Input.GetKey(KeyCode.Mouse1))
@@ -62,35 +58,33 @@ public class BalleTir : MonoBehaviour
                 }
 
             }
-        }
+        }*/
             
-
-
-
-
-
-
     }
 
-    public void Fire()
+    public void CmdFire()
     {
+        
         fireRate = 0.36f;
 
         nextFire = Time.time + fireRate;
 
-        Rigidbody balle;
+        GameObject balle;
 
         i++;
 
         Quaternion qua = new Quaternion(0, 0, 0, 0); //GetComponentInParent<Rigidbody>().transform.rotation.x
 
-        balle = Instantiate(balleCasting, transform.position, qua);
-        balle.velocity = transform.TransformDirection(Vector3.right) * ejectSpeed;
-        balle.isKinematic = false;
+        balle = Instantiate(balleCasting.gameObject, transform.position, qua);
 
-        balle.name = "Bullet " + i;
+        balle.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.right) * ejectSpeed;
+        balle.GetComponent<Rigidbody>().isKinematic = false;
 
-        
+        NetworkServer.Spawn(balle);
+
+        balle.name = "Bullet " + i;     
+                   
+
         shoot.Play();
     }
 
