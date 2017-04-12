@@ -16,7 +16,7 @@ public class BalleTir : MonoBehaviour
 
     public static bool isSurchauffe;
 
-    public Rigidbody balleCasting;
+    public GameObject balleCasting;
     private ParticleSystem shoot;
     public ParticleSystem surchauffe;
 
@@ -62,58 +62,41 @@ public class BalleTir : MonoBehaviour
             
     }
 
-    public void CmdFire()
+    public GameObject CmdFire(GameObject balleCasting, Vector3 position, GameObject weapon)
     {
         
-        fireRate = 0.36f;
-
-        nextFire = Time.time + fireRate;
-
         GameObject balle;
-
-        i++;
 
         Quaternion qua = new Quaternion(0, 0, 0, 0); //GetComponentInParent<Rigidbody>().transform.rotation.x
 
-        balle = Instantiate(balleCasting.gameObject, transform.position, qua);
+        balle = Instantiate(balleCasting, position, qua);
 
-        balle.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.right) * ejectSpeed;
+        balle.GetComponent<Rigidbody>().velocity = weapon.transform.TransformDirection(Vector3.right) * 50;
         balle.GetComponent<Rigidbody>().isKinematic = false;
 
-        NetworkServer.Spawn(balle);
-
-        balle.name = "Bullet " + i;     
-                   
-
-        shoot.Play();
+        return balle;
     }
 
 
-    public void Burst_Fire()
+    public GameObject CmdBurst_Fire(GameObject balleCasting, Vector3 position, GameObject weapon)
     {
-        fireRate = 0.1f;
+        GameObject balle;
 
-        nbTirs++;
+        Quaternion qua = new Quaternion(0, 0, 0, 0); //GetComponentInParent<Rigidbody>().transform.rotation.x
 
-        nextFire = Time.time + fireRate;
+        balle = Instantiate(balleCasting, position, qua);
 
-        Rigidbody balle;
+        balle.GetComponent<Rigidbody>().velocity = weapon.transform.TransformDirection(Vector3.right) * 50;
+        balle.GetComponent<Rigidbody>().isKinematic = false;
 
-        i++;
-
-        balle = Instantiate(balleCasting, transform.position, Quaternion.identity);
-        balle.velocity = transform.TransformDirection(Vector3.right * ejectSpeed);
-        balle.isKinematic = false;
-
-        balle.name = "Bullet " + i;
-
-        shoot.Play();
+        return balle;
     }
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+

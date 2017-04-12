@@ -50,6 +50,8 @@ public class Personnage : NetworkBehaviour {
     public Transform BulletPos;
 
     public GameObject weapon;
+
+    private Vector3 Shoot;
     #endregion
 
 
@@ -79,6 +81,8 @@ public class Personnage : NetworkBehaviour {
         isSurchauffe = false;
         shoot = GetComponentInChildren<ParticleSystem>();
         nbTirs = 0;
+
+        Shoot = new Vector3(0, 0, 1);
     }
 	
 	void FixedUpdate () {
@@ -177,10 +181,12 @@ public class Personnage : NetworkBehaviour {
         if (Input.GetAxisRaw("Mouse Y") != 0)
         {
             Spine.transform.Rotate(0, 0, Input.GetAxisRaw("Mouse Y") * sensibility);
+            Shoot.y = Input.GetAxisRaw("Mouse Y") * sensibility;
         }
 
         if (Spine.transform.eulerAngles.z > 330)
         {
+
             Spine.transform.eulerAngles = new Vector3(
                   Spine.transform.eulerAngles.x,
                    Spine.transform.eulerAngles.y,
@@ -228,7 +234,7 @@ public class Personnage : NetworkBehaviour {
     public void CmdFire()
     {
 
-        GameObject balle;
+        /*GameObject balle;
 
         i++;
 
@@ -236,8 +242,10 @@ public class Personnage : NetworkBehaviour {
 
         balle = Instantiate(balleCasting.gameObject, BulletPos.transform.position, qua);
 
-        balle.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward) * ejectSpeed;
-        balle.GetComponent<Rigidbody>().isKinematic = false;
+        balle.GetComponent<Rigidbody>().velocity = transform.TransformDirection( Shoot ) * ejectSpeed;
+        balle.GetComponent<Rigidbody>().isKinematic = false;*/
+
+        GameObject balle = blabla.CmdFire(balleCasting, BulletPos.transform.position, weapon);
 
         NetworkServer.Spawn(balle);            
 
@@ -251,12 +259,14 @@ public class Personnage : NetworkBehaviour {
     public void CmdBurst_Fire()
     {
 
-        GameObject balle;
 
-        i++;
+
+        /*i++;
         balle = Instantiate(balleCasting.gameObject, BulletPos.transform.position, new Quaternion(BulletPos.transform.rotation.x,transform.rotation.y,BulletPos.transform.rotation.z,BulletPos.transform.rotation.w));
         balle.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward) * ejectSpeed;
-        balle.GetComponent<Rigidbody>().isKinematic = false;
+        balle.GetComponent<Rigidbody>().isKinematic = false;*/
+
+        GameObject balle = blabla.CmdBurst_Fire(balleCasting, BulletPos.transform.position, weapon);
 
         NetworkServer.Spawn(balle);
 
