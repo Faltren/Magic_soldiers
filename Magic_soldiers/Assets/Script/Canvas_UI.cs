@@ -92,9 +92,7 @@ public class Canvas_UI : MonoBehaviour {
         {
             if (Personnage_offline.player.transform.position.z > -625 && Personnage_offline.player.transform.position.z < -563)
             {
-                text_pause.fontSize = 26;
-                text_pause.text = "Merci d'avoir joué !";
-                Time.timeScale = 0f;
+                Application.LoadLevel("Menu");
             }
         }
         /* /!\ uniquement pour soutenance 1 !*/
@@ -563,7 +561,7 @@ public class Canvas_UI : MonoBehaviour {
                         text_infos.text = "";
                     else
                         text_infos.text = "<b><i>Faites un Clique Droit pour tirer en rafale</i></b>";
-                    if (BalleTir.isSurchauffe)
+                    if (BalleTir_offline.isSurchauffe)
                         objectifs[compteur] = true;
                     break;
 

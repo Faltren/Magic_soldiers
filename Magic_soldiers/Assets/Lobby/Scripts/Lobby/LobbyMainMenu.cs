@@ -92,13 +92,18 @@ namespace Prototype.NetworkLobby
             }
         }
 
-       /* void onEndEditGameName(string text)
+        public void OnClickBackToMenu()
         {
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                OnClickCreateMatchmakingGame();
-            }
-        }*/
+            Destroy(GameObject.Find("LobbyManager"));
+            Application.LoadLevel("Menu");
+        }
+        /* void onEndEditGameName(string text)
+         {
+             if (Input.GetKeyDown(KeyCode.Return))
+             {
+                 OnClickCreateMatchmakingGame();
+             }
+         }*/
 
     }
 }
