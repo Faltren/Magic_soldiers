@@ -55,8 +55,12 @@ namespace Prototype.NetworkLobby
 
         private string address;
 
+        private bool hosting;
+
         void Start()
         {
+            hosting = false;
+
             s_Singleton = this;
             _lobbyHooks = GetComponent<Prototype.NetworkLobby.LobbyHook>();
             currentPanel = mainMenuPanel;
@@ -166,7 +170,8 @@ namespace Prototype.NetworkLobby
         public void GoBackButton()
         {
             backDelegate();
-			topPanel.isInGame = false;
+            topPanel.isInGame = false;
+
             networkAddress = address;
             serverBindAddress = address;
         }
@@ -245,7 +250,9 @@ namespace Prototype.NetworkLobby
             ChangeTo(lobbyPanel);
             backDelegate = StopHostClbk;
 
-            SetServerInfo("Hosting", networkAddress);            
+            SetServerInfo("Hosting", networkAddress);
+
+            hosting = true;     
         }
 
 		public override void OnMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)

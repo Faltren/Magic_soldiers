@@ -385,6 +385,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInGame: 0
+  BackButton: {fileID: 151252330}
+  Menu: {fileID: 1142019518}
 --- !u!1 &205972111
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,6 +908,7 @@ RectTransform:
   - {fileID: 205972112}
   - {fileID: 507417344}
   - {fileID: 1844375701}
+  - {fileID: 1142019517}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2703,12 +2706,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 25755941}
-  m_Father: {fileID: 1993404801}
-  m_RootOrder: 1
+  m_Father: {fileID: 341756959}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -318, y: -277}
+  m_AnchoredPosition: {x: -318, y: -38}
   m_SizeDelta: {x: 176, y: 52}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1142019518
@@ -3779,7 +3782,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1572777475}
-  - {fileID: 1142019517}
   m_Father: {fileID: 341756959}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

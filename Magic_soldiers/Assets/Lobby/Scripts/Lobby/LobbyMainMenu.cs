@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace Prototype.NetworkLobby
@@ -95,7 +96,7 @@ namespace Prototype.NetworkLobby
         public void OnClickBackToMenu()
         {
             Destroy(GameObject.Find("LobbyManager"));
-            Application.LoadLevel("Menu");
+            SceneManager.LoadScene("Menu");
         }
         /* void onEndEditGameName(string text)
          {

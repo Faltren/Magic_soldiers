@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {
 
@@ -9,14 +11,32 @@ public class Menu : MonoBehaviour {
     private bool Up;
     private bool Down;
 
+    public static bool options;
+
     GameObject Buttons;
+    public static GameObject Options;
+
+    private Scrollbar bar;
+    private Text bar_text;
+    public static int sensi;
 	
 	void Start () {
 
         Up = false;
         Down = false;
 
+        options = false;
+
         Buttons = GameObject.Find("Boutons");
+        Options = GameObject.Find("Options_label");
+
+        bar = GetComponentInChildren<Scrollbar>();
+        bar_text = GameObject.Find("Nb_sensi").GetComponent<Text>();
+
+        sensi = 5;
+
+        Options.SetActive(false);
+
         compteur = 0;
 	}
 	
@@ -25,13 +45,28 @@ public class Menu : MonoBehaviour {
 
         Moves();
 
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        if (!Cursor.visible)
+        {
+            Cursor.visible = true;
+        }          
+        
+        if (options)
+        {
+            bar_text.text =  (bar.value * 10).ToString();
+            sensi = (int)(bar.value * 10);
+        }
+
         if (Input.GetKeyDown(KeyCode.Return))
         {
             switch (compteur)
             {
                 case 0: //Tuto
-                    Application.LoadLevel("Tuto");
-                    
+                    SceneManager.LoadScene("Tuto");
+                    //Application.LoadLevel("Tuto");
                     break;
 
                 case 1: //Jouer
@@ -39,6 +74,8 @@ public class Menu : MonoBehaviour {
                     break;
 
                 case 2: //Options
+                    options = true;
+                    Options.SetActive(true);
                     break;
 
                 case 3: //Quitter
@@ -53,17 +90,20 @@ public class Menu : MonoBehaviour {
         
     }
 
+
     #region mouvements
 
     private void Moves()
     {
         if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Up = true;
+            if(!options)
+                Up = true;
         }
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            Down = true;
+            if(!options)
+                Down = true;
         }
 
         if (compteur < 4)

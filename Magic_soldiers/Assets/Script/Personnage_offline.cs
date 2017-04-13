@@ -17,7 +17,7 @@ public class Personnage_offline : MonoBehaviour {
     public AudioSource sound;
     
     //mouvement de tete : sensi
-    public static int sensibility = 5;
+    public static int sensibility;
 
     //life/attack/shield
     public static int life;
@@ -35,6 +35,11 @@ public class Personnage_offline : MonoBehaviour {
     #region Unity methods
 
         void Start () {
+
+        if (sensibility == 0)
+        {
+            sensibility = 5;
+        }
 
         life = 100;
         shield = 100;

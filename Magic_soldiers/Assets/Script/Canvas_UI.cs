@@ -19,6 +19,8 @@ public class Canvas_UI : MonoBehaviour {
     private RawImage healthBar;
     private RawImage shieldBar;
 
+    private GameObject quit;
+
     private string original;
     private string originalSec;
 
@@ -48,6 +50,8 @@ public class Canvas_UI : MonoBehaviour {
         healthBar = GameObject.Find("Vie").GetComponent<RawImage>();
         shieldBar = GameObject.Find("Shield").GetComponent<RawImage>();
 
+        quit = GameObject.Find("Quit");
+
         Timer = new bool[8];
         isMsgSaid = new bool[8];
         for (int k1 = 0; k1 < isMsgSaid.Length; k1++)
@@ -75,6 +79,8 @@ public class Canvas_UI : MonoBehaviour {
 
         Tuto6 = false;
         isPaused = false;
+
+
     }
 	
 	
@@ -102,13 +108,20 @@ public class Canvas_UI : MonoBehaviour {
         //pause
         if (Input.GetKeyDown(KeyCode.Escape) && !isPaused)
         {
+            quit.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             text_pause.text = "<b>PAUSE</b>";
             isPaused = true;
             Time.timeScale = 0f;
-            AudioListener.volume = 0;          
+            AudioListener.volume = 0;   
+                   
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && isPaused)
         {
+            quit.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             GUI.backgroundColor = Color.clear;
             text_pause.text = "";
             isPaused = false;
@@ -117,6 +130,10 @@ public class Canvas_UI : MonoBehaviour {
         }
 
 
+        if (!isPaused && quit.active)
+        {
+            quit.SetActive(false);
+        }
 
         Objectifs();
         ObjectifsSecondaires();
