@@ -11,7 +11,9 @@ public class Personnage_offline : MonoBehaviour {
     private int personnageSpeed;
     public int jumpSpeed;
     private bool isGrounded;
-    
+
+    private bool run;
+
     public AudioClip jump;
     public AudioClip land;
     public AudioSource sound;
@@ -35,6 +37,8 @@ public class Personnage_offline : MonoBehaviour {
     #region Unity methods
 
         void Start () {
+
+        run = false;
 
         if (sensibility == 0)
         {
@@ -87,10 +91,12 @@ public class Personnage_offline : MonoBehaviour {
         //Sprint
         if (Input.GetKey(KeyCode.LeftShift))
         {
+            run = true;
             personnageSpeed = personnageSpeedRun;   
         }
         else
         {
+            run = false;
             personnageSpeed = personnageSpeedWalk;
         }        
 
@@ -110,10 +116,20 @@ public class Personnage_offline : MonoBehaviour {
             anim["surchauffe"].speed = 0.7f;
             anim.Play("surchauffe");
         }
-        /*if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
-            anim.Play("assault_combat_run");
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
+        {
+            if (run)
+            {
+                anim["Walk"].speed = 4f;
+            }
+            else
+            {
+                anim["Walk"].speed = 2f;
+            }
+            anim.Play("Walk");
+        }   
         else
-            anim.Stop();*/
+            anim.Play("Idle");
 
         
     }
