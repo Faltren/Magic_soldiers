@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class BalleTir : MonoBehaviour {
+public class BalleTir : MonoBehaviour
+{
 
     public int ejectSpeed = 50; //etait a 20
     private float fireRate = 0.36f;
@@ -14,98 +16,87 @@ public class BalleTir : MonoBehaviour {
 
     public static bool isSurchauffe;
 
-
-    public Rigidbody balleCasting;
+    public GameObject balleCasting;
     private ParticleSystem shoot;
     public ParticleSystem surchauffe;
+
+    public NetworkIdentity playerId;
 
     void Start () {
         isSurchauffe = false;
         shoot = GetComponentInChildren<ParticleSystem>();
         nbTirs = 0;
     }
-	
+
 	void Update () {
 
-        if (Time.time > nextFire)
+        /*if (playerId.isLocalPlayer)
         {
-            isSurchauffe = false;
+            if (Time.time > nextFire)
+            {
+                isSurchauffe = false;
 
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                Fire();
-                nbTirs = 0;
-            }
-            else if (Input.GetKey(KeyCode.Mouse1))
-            {
-                if (nbTirs < 20)
+                if (Input.GetKey(KeyCode.Mouse0))
                 {
-                    Burst_Fire();
-                }
-                else
-                {
-                    isSurchauffe = true;
-                    surchauffe.Play();
+                    CmdFire();
                     nbTirs = 0;
-                    nextFire = Time.time + 2.5f;
-                    fireRate = 0.36f;
                 }
+                else if (Input.GetKey(KeyCode.Mouse1))
+                {
+                    if (nbTirs < 20)
+                    {
+                        Burst_Fire();
+                    }
+                    else
+                    {
+                        isSurchauffe = true;
+                        surchauffe.Play();
+                        nbTirs = 0;
+                        nextFire = Time.time + 2.5f;
+                        fireRate = 0.36f;
+                    }
+                }
+
             }
-
-        }
-
-         
+        }*/
             
     }
 
-    private void Fire()
+    public GameObject CmdFire(GameObject balleCasting, Vector3 position, GameObject weapon)
     {
-        fireRate = 0.36f;
-
-        nextFire = Time.time + fireRate;
-
-        Rigidbody balle;
-
-        i++;
-
-        Quaternion qua = new Quaternion(0, 0, 0, GetComponentInParent<Rigidbody>().transform.rotation.x);
-
-        balle = Instantiate(balleCasting, transform.position, qua);
-        balle.velocity = transform.TransformDirection(Vector3.right) * ejectSpeed;
-        balle.isKinematic = false;
-
-        balle.name = "Bullet " + i;
-
         
-        shoot.Play();
+        GameObject balle;
+
+        Quaternion qua = new Quaternion(0, 0, 0, 0); //GetComponentInParent<Rigidbody>().transform.rotation.x
+
+        balle = Instantiate(balleCasting, position, qua);
+
+        balle.GetComponent<Rigidbody>().velocity = weapon.transform.TransformDirection(Vector3.right) * 50;
+        balle.GetComponent<Rigidbody>().isKinematic = false;
+
+        return balle;
     }
 
 
-    private void Burst_Fire()
+    public GameObject CmdBurst_Fire(GameObject balleCasting, Vector3 position, GameObject weapon)
     {
-        fireRate = 0.1f;
+        GameObject balle;
 
-        nbTirs++;
+        Quaternion qua = new Quaternion(0, 0, 0, 0); //GetComponentInParent<Rigidbody>().transform.rotation.x
 
-        nextFire = Time.time + fireRate;
+        balle = Instantiate(balleCasting, position, qua);
 
-        Rigidbody balle;
+        balle.GetComponent<Rigidbody>().velocity = weapon.transform.TransformDirection(Vector3.right) * 50;
+        balle.GetComponent<Rigidbody>().isKinematic = false;
 
-        i++;
-
-        balle = Instantiate(balleCasting, transform.position, Quaternion.identity);
-        balle.velocity = transform.TransformDirection(Vector3.right * ejectSpeed);
-        balle.isKinematic = false;
-
-        balle.name = "Bullet " + i;
-
-        shoot.Play();
+        return balle;
     }
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
