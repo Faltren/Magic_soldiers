@@ -29,6 +29,8 @@ public class Personnage_offline : MonoBehaviour {
     public static Rigidbody player;
     public static Animation anim;
 
+    //animation
+    private Animator animator;
 
     #endregion
 
@@ -36,7 +38,12 @@ public class Personnage_offline : MonoBehaviour {
 
     #region Unity methods
 
-        void Start () {
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    void Start () {
 
         run = false;
 
@@ -113,25 +120,40 @@ public class Personnage_offline : MonoBehaviour {
 
         if (BalleTir_offline.isSurchauffe)
         {
-            anim["surchauffe"].speed = 0.7f;
-            anim.Play("surchauffe");
+            animator.SetBool("isShooting", true);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isWalking", false);
+
+            //anim["surchauffe"].speed = 0.7f;
+            //anim.Play("surchauffe");
         }
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
         {
             if (run)
             {
-                anim["Walk"].speed = 4f;
+                animator.SetBool("isShooting", false);
+                animator.SetBool("isRunning", true);
+                animator.SetBool("isWalking", false);
+                //anim["Walk"].speed = 4f;
             }
             else
             {
-                anim["Walk"].speed = 2f;
+                animator.SetBool("isShooting", false);
+                animator.SetBool("isRunning", false);
+                animator.SetBool("isWalking", true);
+                //anim["Walk"].speed = 2f;
             }
-            anim.Play("Walk");
-        }   
+        }
         else
-            anim.Play("Idle");
+        {
+            animator.SetBool("isShooting", false);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isWalking", false);
+            //anim.Play("Idle");
+        }
 
-        
+
+
     }
 
 

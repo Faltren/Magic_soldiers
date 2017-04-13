@@ -10,16 +10,16 @@ public class Canvas_UI : MonoBehaviour {
     private float currentTime;
     private float next_msg;
 
-    private Text text;
-    private Text text_msg;
-    private Text text_sec;
-    private Text text_infos;
-    private Text text_pause;
+    public Text text;
+    public Text text_msg;
+    public Text text_sec;
+    public Text text_infos;
+    public Text text_pause;
 
-    private RawImage healthBar;
-    private RawImage shieldBar;
+    public RawImage healthBar;
+    public RawImage shieldBar;
 
-    private GameObject quit;
+    public GameObject quit;
 
     private string original;
     private string originalSec;
@@ -41,7 +41,8 @@ public class Canvas_UI : MonoBehaviour {
     void Start()
     {
         volume = 1;
-        text = GameObject.Find("Objectifs").GetComponent<Text>();
+
+        /*text = GameObject.Find("Objectifs").GetComponent<Text>();
         text_msg = GameObject.Find("Messages").GetComponent<Text>();
         text_sec = GameObject.Find("Secondaires").GetComponent<Text>();
         text_infos = GameObject.Find("Infos").GetComponent<Text>();
@@ -50,7 +51,7 @@ public class Canvas_UI : MonoBehaviour {
         healthBar = GameObject.Find("Vie").GetComponent<RawImage>();
         shieldBar = GameObject.Find("Shield").GetComponent<RawImage>();
 
-        quit = GameObject.Find("Quit");
+        quit = GameObject.Find("Quit");*/
 
         Timer = new bool[8];
         isMsgSaid = new bool[8];
@@ -128,7 +129,6 @@ public class Canvas_UI : MonoBehaviour {
             Time.timeScale = 1f;
             AudioListener.volume = volume;
         }
-
 
         if (!isPaused && quit.active)
         {
