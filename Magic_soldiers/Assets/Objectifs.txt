@@ -1,0 +1,4 @@
+-Trouver les batteries cassées
+-Protéger les batteries fonctionnelles
+-Trouver les coffres secrets : /4
+-Trouver les bases locales ennemies
