@@ -1,4 +1,12 @@
--Trouver les batteries cassées
--Protéger les batteries fonctionnelles
--Trouver les coffres secrets : /4
--Trouver les bases locales ennemies
+Objectifs:
+
+-Trouver les batteries cassées : /2
+-Protéger les batteries fonctionnelles : /2
+-Trouver une échapatoire
+
+Objectifs Secondaires:
+-Explorer toute cette section:
+	-Trouver la patrouille Alliée
+		-Protéger la patrouille Alliée
+	-Trouver les coffres secrets : /4
+	-Trouver la base locale ennemie : /1
