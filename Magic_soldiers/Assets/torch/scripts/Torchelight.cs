@@ -14,9 +14,9 @@ public class Torchelight : MonoBehaviour {
 
 	void Start ()
     {
-        float r = 255f;
-        float g = 150f;
-        float b = 0f;
+        float r = 0f;
+        float g = 180f;
+        float b = 255f;
         float a = 255f;
 
         TorchLight.GetComponent<Light>().color = new Color(r, g, b, a);
