@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor.SceneManagement;
+//using UnityEditor.SceneManagement;
 
 public class Canvas_UI : MonoBehaviour {
 
@@ -10,14 +10,16 @@ public class Canvas_UI : MonoBehaviour {
     private float currentTime;
     private float next_msg;
 
-    private Text text;
-    private Text text_msg;
-    private Text text_sec;
-    private Text text_infos;
-    private Text text_pause;
+    public Text text;
+    public Text text_msg;
+    public Text text_sec;
+    public Text text_infos;
+    public Text text_pause;
 
-    private RawImage healthBar;
-    private RawImage shieldBar;
+    public RawImage healthBar;
+    public RawImage shieldBar;
+
+    public GameObject quit;
 
     private string original;
     private string originalSec;
@@ -39,7 +41,8 @@ public class Canvas_UI : MonoBehaviour {
     void Start()
     {
         volume = 1;
-        text = GameObject.Find("Objectifs").GetComponent<Text>();
+
+        /*text = GameObject.Find("Objectifs").GetComponent<Text>();
         text_msg = GameObject.Find("Messages").GetComponent<Text>();
         text_sec = GameObject.Find("Secondaires").GetComponent<Text>();
         text_infos = GameObject.Find("Infos").GetComponent<Text>();
@@ -47,6 +50,8 @@ public class Canvas_UI : MonoBehaviour {
 
         healthBar = GameObject.Find("Vie").GetComponent<RawImage>();
         shieldBar = GameObject.Find("Shield").GetComponent<RawImage>();
+
+        quit = GameObject.Find("Quit");*/
 
         Timer = new bool[8];
         isMsgSaid = new bool[8];
@@ -75,26 +80,26 @@ public class Canvas_UI : MonoBehaviour {
 
         Tuto6 = false;
         isPaused = false;
+
+
     }
 	
 	
 	void Update () {
 
         /*Placement des barres de vie/bouclier*/
-        healthBar.rectTransform.sizeDelta = new Vector2(Personnage.life * 2.25f, 30); //225 = 100 => 1 = 2.25
-        shieldBar.rectTransform.sizeDelta = new Vector2(Personnage.shield * 2.25f, 30);
+        healthBar.rectTransform.sizeDelta = new Vector2(Personnage_offline.life * 2.25f, 30); //225 = 100 => 1 = 2.25
+        shieldBar.rectTransform.sizeDelta = new Vector2(Personnage_offline.shield * 2.25f, 30);
 
-        healthBar.rectTransform.transform.position = new Vector2(Personnage.life * 2.25f / 2 + 37,healthBar.rectTransform.transform.position.y);
-        shieldBar.rectTransform.transform.position = new Vector2(Personnage.shield * 2.25f / 2 + 37, healthBar.rectTransform.transform.position.y - 55);
+        healthBar.rectTransform.transform.position = new Vector2(Personnage_offline.life * 2.25f / 2 + 37,healthBar.rectTransform.transform.position.y);
+        shieldBar.rectTransform.transform.position = new Vector2(Personnage_offline.shield * 2.25f / 2 + 37, healthBar.rectTransform.transform.position.y - 55);
 
         /* /!\ uniquement pour soutenance 1 !*/
-        if (Personnage.player.transform.position.x > 560 && Personnage.player.transform.position.x < 570)
+        if (Personnage_offline.player.transform.position.x > 560 && Personnage_offline.player.transform.position.x < 570)
         {
-            if (Personnage.player.transform.position.z > -625 && Personnage.player.transform.position.z < -563)
+            if (Personnage_offline.player.transform.position.z > -625 && Personnage_offline.player.transform.position.z < -563)
             {
-                text_pause.fontSize = 26;
-                text_pause.text = "Merci d'avoir joué !";
-                Time.timeScale = 0f;
+                Application.LoadLevel("Menu");
             }
         }
         /* /!\ uniquement pour soutenance 1 !*/
@@ -104,13 +109,20 @@ public class Canvas_UI : MonoBehaviour {
         //pause
         if (Input.GetKeyDown(KeyCode.Escape) && !isPaused)
         {
+            quit.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             text_pause.text = "<b>PAUSE</b>";
             isPaused = true;
             Time.timeScale = 0f;
-            AudioListener.volume = 0;          
+            AudioListener.volume = 0;   
+                   
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && isPaused)
         {
+            quit.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             GUI.backgroundColor = Color.clear;
             text_pause.text = "";
             isPaused = false;
@@ -118,7 +130,10 @@ public class Canvas_UI : MonoBehaviour {
             AudioListener.volume = volume;
         }
 
-
+        if (!isPaused && quit.active)
+        {
+            quit.SetActive(false);
+        }
 
         Objectifs();
         ObjectifsSecondaires();
@@ -140,8 +155,8 @@ public class Canvas_UI : MonoBehaviour {
 
     private void Messages(int nbMsg)
     {
-        if (EditorSceneManager.GetActiveScene().name == "Tuto")
-        {
+        //if (EditorSceneManager.GetActiveScene().name == "Tuto")
+        //{
             
             switch (nbMsg)
             {
@@ -307,15 +322,15 @@ public class Canvas_UI : MonoBehaviour {
                 default:
                     text_msg.text = "";
                     break;
-            }
+           // }
         }
     }
 
 
     private void Radio(int nb)
     {
-        if (EditorSceneManager.GetActiveScene().name == "Tuto")
-        {
+        //if (EditorSceneManager.GetActiveScene().name == "Tuto")
+        //{
             switch (nb)
             {
                 case 3:
@@ -416,15 +431,15 @@ public class Canvas_UI : MonoBehaviour {
                     }
                     break;
             }
-        }
+        //}
 
     }
 
 
     private void Display()
     {
-        if (EditorSceneManager.GetActiveScene().name == "Tuto")
-        {
+        //if (EditorSceneManager.GetActiveScene().name == "Tuto")
+        //{
 
             switch (compteur)
             {
@@ -508,15 +523,15 @@ public class Canvas_UI : MonoBehaviour {
                 text_sec.text = "";
             }
             
-        }
+        //}
 
     }
 
 
     private void Objectifs()
     {
-        if (EditorSceneManager.GetActiveScene().name == "Tuto")
-        {
+        //if (EditorSceneManager.GetActiveScene().name == "Tuto")
+        //{
             if (objectifs[compteur])
             {
                 compteur++;
@@ -538,9 +553,9 @@ public class Canvas_UI : MonoBehaviour {
 
                 case 2:
                     text_infos.text = "<b><i>Vous pouvez interagir avec des objets et des PNJ en appuyant sur E</i></b>";
-                    if (Personnage.player.transform.position.x > -46 && Personnage.player.transform.position.x < -42)
+                    if (Personnage_offline.player.transform.position.x > -46 && Personnage_offline.player.transform.position.x < -42)
                     {
-                        if (Personnage.player.transform.position.z > 94 && Personnage.player.transform.position.z < 98)
+                        if (Personnage_offline.player.transform.position.z > 94 && Personnage_offline.player.transform.position.z < 98)
                         {
                             if (Input.GetKey(KeyCode.E))
                             {
@@ -563,7 +578,7 @@ public class Canvas_UI : MonoBehaviour {
                         text_infos.text = "";
                     else
                         text_infos.text = "<b><i>Faites un Clique Droit pour tirer en rafale</i></b>";
-                    if (BalleTir.isSurchauffe)
+                    if (BalleTir_offline.isSurchauffe)
                         objectifs[compteur] = true;
                     break;
 
@@ -573,9 +588,9 @@ public class Canvas_UI : MonoBehaviour {
                     else
                         text_infos.text = "<b><i>Appuyez sur Maj Gauche pour sprinter</i></b>";
 
-                    if (Personnage.player.transform.position.z > -19 && Personnage.player.transform.position.z < 15)
+                    if (Personnage_offline.player.transform.position.z > -19 && Personnage_offline.player.transform.position.z < 15)
                     {
-                        if (Personnage.player.transform.position.x < -111 && Personnage.player.transform.position.x > -117)
+                        if (Personnage_offline.player.transform.position.x < -111 && Personnage_offline.player.transform.position.x > -117)
                         {
                             objectifs[compteur] = true;
                         }
@@ -591,8 +606,8 @@ public class Canvas_UI : MonoBehaviour {
                     break;
 
                 case 7:
-                    if (Personnage.player.transform.position.z > -100 && Personnage.player.transform.position.z < -25)
-                        if (Personnage.player.transform.position.x > 395 && Personnage.player.transform.position.x < 427)
+                    if (Personnage_offline.player.transform.position.z > -100 && Personnage_offline.player.transform.position.z < -25)
+                        if (Personnage_offline.player.transform.position.x > 395 && Personnage_offline.player.transform.position.x < 427)
                             objectifs[compteur] = true;
                     break;
 
@@ -605,20 +620,20 @@ public class Canvas_UI : MonoBehaviour {
 
 
             }
-        }
+       // }
     }
 
 
 
     private void ObjectifsSecondaires()
     {
-        if (EditorSceneManager.GetActiveScene().name == "Tuto")
-        {
+       // if (EditorSceneManager.GetActiveScene().name == "Tuto")
+        //{
             if (compteur >= 7)
             {
-                if (Personnage.player.transform.position.z > -200 && Personnage.player.transform.position.z < -160)
+                if (Personnage_offline.player.transform.position.z > -200 && Personnage_offline.player.transform.position.z < -160)
                 {
-                    if (Personnage.player.transform.position.x < 130 && Personnage.player.transform.position.x > -106)
+                    if (Personnage_offline.player.transform.position.x < 130 && Personnage_offline.player.transform.position.x > -106)
                     {
                         if (!objectifsSecondaires[0])
                         {
@@ -627,9 +642,9 @@ public class Canvas_UI : MonoBehaviour {
                     }
                 }
 
-                else if (Personnage.player.transform.position.z > -153 && Personnage.player.transform.position.z < -108)
+                else if (Personnage_offline.player.transform.position.z > -153 && Personnage_offline.player.transform.position.z < -108)
                 {
-                    if (Personnage.player.transform.position.x > -445 && Personnage.player.transform.position.x < -368)
+                    if (Personnage_offline.player.transform.position.x > -445 && Personnage_offline.player.transform.position.x < -368)
                     {
                         if (!objectifsSecondaires[1])
                         {
@@ -638,9 +653,9 @@ public class Canvas_UI : MonoBehaviour {
                     }
                 }
 
-                else if (Personnage.player.transform.position.z > 91 && Personnage.player.transform.position.z < 98)
+                else if (Personnage_offline.player.transform.position.z > 91 && Personnage_offline.player.transform.position.z < 98)
                 {
-                    if (Personnage.player.transform.position.x > -1063 && Personnage.player.transform.position.x < -1055)
+                    if (Personnage_offline.player.transform.position.x > -1063 && Personnage_offline.player.transform.position.x < -1055)
                     {
                         if (Input.GetKey(KeyCode.E))
                         {
@@ -651,7 +666,7 @@ public class Canvas_UI : MonoBehaviour {
                 }
                                    
             }
-        }
+        //}
 
     }
 

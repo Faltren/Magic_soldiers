@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Level1.unity
+=======
+- path: Assets/Scenes/Lobby_netWork.unity
+>>>>>>> refs/remotes/origin/master
   isLoaded: 1
   isActive: 1

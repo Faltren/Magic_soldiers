@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.SceneManagement;
+//using UnityEditor.SceneManagement;
 
 public class Event_tuto_explosions : MonoBehaviour {
 
@@ -18,12 +18,12 @@ public class Event_tuto_explosions : MonoBehaviour {
 	
 	void Update () {
 
-        if (EditorSceneManager.GetActiveScene().name == "Tuto")
-        {
+        //if (EditorSceneManager.GetActiveScene().name == "Tuto")
+        //{
 
-            if (Personnage.player.transform.position.z < -528 && Personnage.player.transform.position.z > -900)
+            if (Personnage_offline.player.transform.position.z < -528 && Personnage_offline.player.transform.position.z > -900)
             {
-                if (Personnage.player.transform.position.x < 635 && Personnage.player.transform.position.z > 370)
+                if (Personnage_offline.player.transform.position.x < 635 && Personnage_offline.player.transform.position.z > 370)
                 {
                     particules.Stop();
                 }
@@ -39,7 +39,7 @@ public class Event_tuto_explosions : MonoBehaviour {
             }
 
 
-        }
+       // }
 
             
 

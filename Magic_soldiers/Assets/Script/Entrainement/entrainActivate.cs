@@ -13,9 +13,9 @@ public class entrainActivate : MonoBehaviour {
 	
 	void Update () {
 
-        if (Personnage.player.transform.position.x > -113 && Personnage.player.transform.position.x < 3.5)
+        if (Personnage_offline.player.transform.position.x > -113 && Personnage_offline.player.transform.position.x < 3.5)
         {
-            if (Personnage.player.transform.position.z > -150 && Personnage.player.transform.position.z < -81)
+            if (Personnage_offline.player.transform.position.z > -150 && Personnage_offline.player.transform.position.z < -81)
             {
                 IsActivated = true;
                 

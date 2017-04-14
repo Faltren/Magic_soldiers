@@ -41,7 +41,7 @@ public class PNJ_texte : MonoBehaviour {
         if (DetectPlayer())
         {
 
-            target = new Vector3(Personnage.player.transform.position.x, this.transform.position.y, Personnage.player.transform.position.z);
+            target = new Vector3(Personnage_offline.player.transform.position.x, this.transform.position.y, Personnage_offline.player.transform.position.z);
             can.transform.LookAt(target);
 
             if (!needInteract)
@@ -71,8 +71,8 @@ public class PNJ_texte : MonoBehaviour {
 
     private bool DetectPlayer()
     {
-        xPlayer = GameObject.Find("Perso").transform.position.x;
-        zPlayer = GameObject.Find("Perso").transform.position.z;
+        xPlayer = GameObject.Find("Perso(Clone)").transform.position.x;
+        zPlayer = GameObject.Find("Perso(Clone)").transform.position.z;
         find = ((xPlayer - posX) * (xPlayer - posX) + (zPlayer - posZ) * (zPlayer - posZ) <= DetectRadius * DetectRadius);
 
         return find;
