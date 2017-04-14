@@ -54,6 +54,11 @@ public class Personnage : NetworkBehaviour {
     public GameObject weapon;
 
     private Vector3 Shoot;
+
+    //Animation
+    private Animator animator;
+    private bool run;
+
     #endregion
 
 
@@ -61,6 +66,9 @@ public class Personnage : NetworkBehaviour {
     #region Unity methods
 
     void Start () {
+
+        animator = GetComponent<Animator>();
+        run = false;
 
         escaped = false;
 
@@ -125,10 +133,6 @@ public class Personnage : NetworkBehaviour {
                     cam.enabled = true;
                 if (!al.enabled)
                     al.enabled = true;
-            }
-
-            if (isLocalPlayer)
-            {
 
                 if (Input.GetKey(KeyCode.Escape))
                 {
@@ -196,11 +200,13 @@ public class Personnage : NetworkBehaviour {
         //Sprint
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            personnageSpeed = personnageSpeedRun;   
+            personnageSpeed = personnageSpeedRun;
+            run = true;   
         }
         else
         {
             personnageSpeed = personnageSpeedWalk;
+            run = false;
         }        
 
         //deplacement de la vue
@@ -238,17 +244,42 @@ public class Personnage : NetworkBehaviour {
     private void AnimPerso()
     {
 
-        if (BalleTir.isSurchauffe)
+        if (BalleTir_offline.isSurchauffe)
         {
-            anim["surchauffe"].speed = 0.7f;
-            anim.Play("surchauffe");
-        }
-        /*if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
-            anim.Play("assault_combat_run");
-        else
-            anim.Stop();*/
+            animator.SetBool("isShooting", true);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isWalking", false);
 
-        
+            //anim["surchauffe"].speed = 0.7f;
+            //anim.Play("surchauffe");
+        }
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
+        {
+            if (run)
+            {
+                animator.SetBool("isShooting", false);
+                animator.SetBool("isRunning", true);
+                animator.SetBool("isWalking", false);
+                //anim["Walk"].speed = 4f;
+            }
+            else
+            {
+                animator.SetBool("isShooting", false);
+                animator.SetBool("isRunning", false);
+                animator.SetBool("isWalking", true);
+                //anim["Walk"].speed = 2f;
+            }
+        }
+        else
+        {
+            animator.SetBool("isShooting", false);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isWalking", false);
+            //anim.Play("Idle");
+        }
+
+
+
     }
 
 

@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 114812874387207180}
   - component: {fileID: 114827560591945902}
   - component: {fileID: 114231594392383874}
+  - component: {fileID: 114570560439167292}
   m_Layer: 0
   m_Name: Perso
   m_TagString: Player
@@ -1296,7 +1297,7 @@ Animator:
   m_GameObject: {fileID: 1388103958966990}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3afb79d87e9743445914e37146363db7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1318,7 +1319,8 @@ Animation:
   - {fileID: 7400000, guid: b777f8567db080c48ab3fc67128c0b25, type: 2}
   - {fileID: 7400000, guid: ef2d34fdd8a763a4d8ff38832b9ee6c4, type: 2}
   - {fileID: 7400000, guid: 0e95276ab40c0b248b5c554dc72173f3, type: 2}
-  - {fileID: 0}
+  - {fileID: 7400000, guid: 85f4c264d71834548b872dfedb3315c9, type: 2}
+  - {fileID: 7400000, guid: ead049b7ce9ff984c9ae448bb911154c, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -1530,6 +1532,25 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &114570560439167292
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388103958966990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95174019386246334}
+  m_ParameterSendBits: 0
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114672525483237212
 MonoBehaviour:
   m_ObjectHideFlags: 1
