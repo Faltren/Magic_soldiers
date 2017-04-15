@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class Personnage : NetworkBehaviour {
 
@@ -59,6 +60,20 @@ public class Personnage : NetworkBehaviour {
     private Animator animator;
     private bool run;
 
+    //Canvas
+    private Canvas_UI_Online can;
+
+    public Text text;
+    public Text text_msg;
+    public Text text_sec;
+    public Text text_infos;
+    public Text text_pause;
+
+    public RawImage healthBar;
+    public RawImage shieldBar;
+
+    public GameObject quit;
+
     #endregion
 
 
@@ -66,6 +81,8 @@ public class Personnage : NetworkBehaviour {
     #region Unity methods
 
     void Start () {
+
+        can = new Canvas_UI_Online(text, text_msg, text_sec, text_infos, text_pause, healthBar, shieldBar, quit);
 
         animator = GetComponent<Animator>();
         run = false;
@@ -106,75 +123,63 @@ public class Personnage : NetworkBehaviour {
 	
 	void FixedUpdate () {
 
-        if (escaped)
+        if (isLocalPlayer && Input.GetKey(KeyCode.Escape) && !escaped)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                escaped = false;
-            }
-
+            escaped = true;
         }
-        else
+        else if (isLocalPlayer && Input.GetKey(KeyCode.Escape) && escaped)
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            escaped = false;
+        }
 
-            if (Input.GetKeyDown(KeyCode.Escape))
+        if (isLocalPlayer)
+        {
+            can.Display();
+        }
+       
+        if (!escaped && isLocalPlayer)
+        {
+
+            if (!cam.enabled)
+                cam.enabled = true;
+            if (!al.enabled)
+                al.enabled = true;
+
+            Moves();
+            AnimPerso();
+
+            if (Time.time > nextFire)
             {
-                escaped = true;
-            }
+                isSurchauffe = false;
 
-            if (isLocalPlayer)
-            {
-                if (!cam.enabled)
-                    cam.enabled = true;
-                if (!al.enabled)
-                    al.enabled = true;
-
-                if (Input.GetKey(KeyCode.Escape))
+                if (Input.GetKey(KeyCode.Mouse0))
                 {
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
+                    fireRate = 0.36f;
+                    nextFire = Time.time + fireRate;
+                    CmdFire();
+                    nbTirs = 0;
                 }
-
-                Moves();
-                AnimPerso();
-
-                if (Time.time > nextFire)
+                else if (Input.GetKey(KeyCode.Mouse1))
                 {
-                    isSurchauffe = false;
-
-                    if (Input.GetKey(KeyCode.Mouse0))
+                    if (nbTirs < 20)
                     {
-                        fireRate = 0.36f;
+                        fireRate = 0.1f;
+                        nbTirs++;
                         nextFire = Time.time + fireRate;
-                        CmdFire();
-                        nbTirs = 0;
+                        CmdBurst_Fire();
                     }
-                    else if (Input.GetKey(KeyCode.Mouse1))
+                    else
                     {
-                        if (nbTirs < 20)
-                        {
-                            fireRate = 0.1f;
-                            nbTirs++;
-                            nextFire = Time.time + fireRate;
-                            CmdBurst_Fire();
-                        }
-                        else
-                        {
-                            isSurchauffe = true;
-                            surchauffe.Play();
-                            nbTirs = 0;
-                            nextFire = Time.time + 2.5f;
-                            fireRate = 0.36f;
-                        }
+                        isSurchauffe = true;
+                        surchauffe.Play();
+                        nbTirs = 0;
+                        nextFire = Time.time + 2.5f;
+                        fireRate = 0.36f;
                     }
-
                 }
+
             }
+
         }        
 
 	}
