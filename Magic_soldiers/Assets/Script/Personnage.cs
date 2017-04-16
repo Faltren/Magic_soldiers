@@ -8,7 +8,9 @@ public class Personnage : NetworkBehaviour {
 
     #region Attributes
 
-    private bool escaped;
+    private GameObject door1;
+
+    public bool escaped;
 
     public int personnageSpeedWalk;
     public int personnageSpeedRun;
@@ -72,8 +74,6 @@ public class Personnage : NetworkBehaviour {
     public RawImage healthBar;
     public RawImage shieldBar;
 
-    public GameObject quit;
-
     #endregion
 
 
@@ -82,7 +82,9 @@ public class Personnage : NetworkBehaviour {
 
     void Start () {
 
-        can = new Canvas_UI_Online(text, text_msg, text_sec, text_infos, text_pause, healthBar, shieldBar, quit);
+        door1 = GameObject.Find("door1");
+
+        can = new Canvas_UI_Online(this, text, text_msg, text_sec, text_infos, text_pause, healthBar, shieldBar, GetComponent<Transform>(), door1);
 
         animator = GetComponent<Animator>();
         run = false;
@@ -123,20 +125,18 @@ public class Personnage : NetworkBehaviour {
 	
 	void FixedUpdate () {
 
-        if (isLocalPlayer && Input.GetKey(KeyCode.Escape) && !escaped)
-        {
-            escaped = true;
-        }
-        else if (isLocalPlayer && Input.GetKey(KeyCode.Escape) && escaped)
-        {
-            escaped = false;
-        }
-
         if (isLocalPlayer)
         {
-            can.Display();
+            can.Display(life, shield);
         }
-       
+
+
+        if (door1 == null)
+        {
+            door1 = GameObject.Find("door1");
+            can.door1 = door1;
+        }
+
         if (!escaped && isLocalPlayer)
         {
 
@@ -341,6 +341,22 @@ public class Personnage : NetworkBehaviour {
     }
 
     #endregion
+
+
+    [Command]
+    public void CmdOpen_door(GameObject door, int nbMax)
+    {
+        if (transform.position.y <= nbMax)
+        {
+            door.transform.Translate(new Vector3(0, 0, 1));
+        }
+            
+    }
+
+    public bool FonctionNulleQuiRetrouneBool(GameObject door, int nbMax)
+    {
+        return door.transform.position.y > nbMax;
+    }
 
 }
 

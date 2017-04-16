@@ -7,6 +7,7 @@ public class Canvas_UI_Manager : MonoBehaviour {
 
     public void OnClickQuit()
     {
+        print("click");
         Time.timeScale = 1f;
         AudioListener.volume = 1;
         SceneManager.LoadScene("Menu");
