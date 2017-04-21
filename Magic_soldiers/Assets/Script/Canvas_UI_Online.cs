@@ -8,6 +8,12 @@ using UnityEngine.Networking;
 public class Canvas_UI_Online : MonoBehaviour {
 
     public GameObject door1;
+    public GameObject door2;
+    public GameObject door3;
+    public GameObject door4;
+    public GameObject door5;
+    public GameObject door6;
+    public GameObject door7;
 
     private Transform player;
     private Personnage perso;
@@ -23,7 +29,6 @@ public class Canvas_UI_Online : MonoBehaviour {
 
     private bool isPaused;
 
-    private int compteur;
     private string levelName;
 
     private string objectifs;
@@ -36,26 +41,26 @@ public class Canvas_UI_Online : MonoBehaviour {
     private bool[] isSecondaryFinished;
     private bool[] isMessageSent;
 
-    public Canvas_UI_Online(Personnage perso, Text text, Text text_msg, Text text_sec, Text text_infos, Text text_pause, RawImage healthBar, RawImage shieldBar, Transform player, GameObject door1)
+    //private int isSending = 0;
+
+    public Canvas_UI_Online(Personnage perso, Text text, Text text_msg, Text text_sec, Text text_infos, Text text_pause, RawImage healthBar, RawImage shieldBar, Transform player, GameObject door1, GameObject door2, GameObject door3, GameObject door4, GameObject door5, GameObject door6, GameObject door7)
     {
         this.player = player;
         this.perso = perso;
 
         this.door1 = door1;
+        this.door1 = door2;
+        this.door1 = door3;
+        this.door1 = door4;
+        this.door1 = door5;
+        this.door1 = door6;
+        this.door1 = door7;
 
-        switch (SceneManager.GetActiveScene().name)
-        {
-            case "Level1":
-                compteur = 4;
-                levelName = "Level1";
-                isPrincipalFinished = new bool[] { false, false, false };
-                isSecondaryFinished = new bool[] { false, false };
-                isMessageSent = new bool[] { false, false, false, false, false, false, false, false, false, false}; //10
-                break;
-
-            default:
-                break;
-        }
+        //Level1
+        levelName = "Level1";
+        isPrincipalFinished = new bool[] { false, false, false, false};
+        isSecondaryFinished = new bool[] { false, false };
+        isMessageSent = new bool[] { false, false, false, false, false, false, false, false, false, false }; //10
 
         this.text = text;
         this.text_msg = text_msg;
@@ -77,7 +82,6 @@ public class Canvas_UI_Online : MonoBehaviour {
 
     public void Display(int life, int shield)
     {
-
         /*Placement des barres de vie/bouclier*/
         healthBar.rectTransform.sizeDelta = new Vector2(life * 2.25f, 30); //225 = 100 => 1 = 2.25
         shieldBar.rectTransform.sizeDelta = new Vector2(shield * 2.25f, 30);
@@ -129,7 +133,23 @@ public class Canvas_UI_Online : MonoBehaviour {
         Objectif();
         ObjectifsSecondaires();
         Message();
+        Texte_pause();
     }
+
+    #region textePause
+    private void Texte_pause()
+    {
+        if (player.transform.position.z >= 43 && player.transform.position.z <= 113 && player.transform.position.x >= 413 && player.transform.position.x <= 454)
+        {
+            levelName = "Level2";
+            text_pause.text = "Fin du Niveau 1";   
+        }
+        else
+        {
+            text_pause.text = "";
+        }
+    }
+    #endregion
 
     #region Objectifs
     private void Objectif()
@@ -138,9 +158,9 @@ public class Canvas_UI_Online : MonoBehaviour {
         {
             if (!isPrincipalFinished[0])
             {
-                if (text.text != objectifs + "<size=14>\n\n<color=white>-Allez voir les véhicules</color></size>")
+                if (text.text != objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Allez voir les véhicules</color></size>")
                 {
-                    text.text = objectifs + "<size=14>\n\n<color=white>-Allez voir les véhicules</color></size>";
+                    text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Allez voir les véhicules</color></size>";
                     text.lineSpacing = 0.8f;
                 }
 
@@ -148,7 +168,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                 {
                     if (player.transform.position.x >= 135 && player.transform.position.x <= 180)
                     {
-                        text.text = objectifs + "<size=14>\n\n<color=red>-Allez voir si il y a des survivants</color></size>" + "<size=14>\n\n<color=white>-Cherchez une sortie</color></size>";
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Allez voir si il y a des survivants</color></size>" + "<size=14>\n\n<color=white>-Cherchez une sortie</color></size>";
                         text.lineSpacing = 0.8f;
 
                         isPrincipalFinished[0] = true;
@@ -162,7 +182,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                 {
                     if (player.transform.position.x >= 367 && player.transform.position.x <= 430)
                     {
-                        text.text = objectifs + "<size=14>\n\n<color=red>-Cherchez une sortie</color></size>" + "<size=14>\n\n<color=white>-Trouvez des batteries pour ouvrir la portes</color></size>";
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Cherchez une sortie</color></size>" + "<size=14>\n\n<color=white>-Trouvez des batteries pour ouvrir la portes</color></size>";
                         text.lineSpacing = 0.8f;
 
                         isPrincipalFinished[1] = true;
@@ -176,7 +196,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                 {
                     if (player.transform.position.x >= 108 && player.transform.position.x <= 186)
                     {
-                        text.text = objectifs + "<size=14>\n\n<color=red>-Trouvez des batteries pour ouvrir la portes</color></size>" + "<size=14>\n\n<color=white>-Retournez à la porte</color></size>";
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Trouvez des batteries pour ouvrir la portes</color></size>" + "<size=14>\n\n<color=white>-Retournez à la porte</color></size>";
                         text.lineSpacing = 0.8f;
 
                         if (perso.FonctionNulleQuiRetrouneBool(door1, 10))
@@ -191,7 +211,93 @@ public class Canvas_UI_Online : MonoBehaviour {
                     }
                 }
             }
+            else if (!isPrincipalFinished[3])
+            {
+                if (player.transform.position.z >= 43 && player.transform.position.z <= 113)
+                {
+                    if (player.transform.position.x >= 413 && player.transform.position.x <= 454)
+                    {
+                        isPrincipalFinished[3] = true;
+                        levelName = "Level2";
+                        isPrincipalFinished = new bool[] { false, false, false, false, false };
+                        isSecondaryFinished = new bool[] { false };
+                        isMessageSent = new bool[] { false, false, false, false, false, false, false, false }; //8
+                        text.text = objectifs + " " + levelName + " ";
+                        text_sec.text = objectifsSecondaire;
+                    }
+                }
+            }
+
         }//fin level1
+
+        if (levelName == "Level2")
+        {
+            if (!isPrincipalFinished[0])
+            {
+                if (text.text != objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Avancez dans le donjon</color></size>")
+                {
+                    text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Avancez dans le donjon</color></size>";
+                    text.lineSpacing = 0.8f;
+                }
+
+                if (player.transform.position.z >= 368 && player.transform.position.z <= 477)
+                {
+                    if (player.transform.position.x >= 600 && player.transform.position.x <= 739)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Avancez dans le donjon</color></size>" + "<size=14>\n\n<color=white>-Tuez les squelettes</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[0] = true;
+                    }
+                }
+
+            }
+            else if (!isPrincipalFinished[1])
+            {
+                if (player.transform.position.z >= 320 && player.transform.position.z <= 352)
+                {
+                    if (player.transform.position.x >= 738 && player.transform.position.x <= 759)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Tuez les squelettes</color></size>" + "<size=14>\n\n<color=white>-Explorez la zone</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[1] = true;
+                    }
+                }
+            }
+            else if(!isPrincipalFinished[2])
+            {
+                if (player.transform.position.z >= 198 && player.transform.position.z <= 245)
+                {
+                    if (player.transform.position.x >= 1086 && player.transform.position.x <= 1129)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Explorez la zone</color></size>" + "<size=14>\n\n<color=white>-Trouvez un moyen d'ouvrir la porte</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[2] = true;
+                    }
+                }
+            }
+            else if(!isPrincipalFinished[3])
+            {
+                if (player.transform.position.z >= 78 && player.transform.position.z <= 173)
+                {
+                    if (player.transform.position.x >= 886 && player.transform.position.x <= 927)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Trouvez un moyen d'ouvrir la porte</color></size>" + "<size=14>\n\n<color=white>-Retournez à la porte</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[3] = true;
+                    }
+                }
+            }
+            else if(!isPrincipalFinished[4])
+            {
+                //fin
+            }
+
+
+        }//fin level2
 
 
 
@@ -206,6 +312,14 @@ public class Canvas_UI_Online : MonoBehaviour {
             if (!isSecondaryFinished[0])
             {
                 text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=white>-Trouver des cristaux</color></size>";
+
+                if (player.transform.position.z >= 48 && player.transform.position.z <= 112)
+                {
+                    if (player.transform.position.x >= 249 && player.transform.position.x <= 290)
+                    {
+                        isSecondaryFinished[0] = true;
+                    }
+                }
             }
             else
             {
@@ -215,34 +329,95 @@ public class Canvas_UI_Online : MonoBehaviour {
             if (!isSecondaryFinished[1])
             {
                 text_sec.text = text_sec.text + "<size=14>\n\n<color=white>-Trouver le coffre d'or</color></size>";
+
+                if (player.transform.position.z >= 350 && player.transform.position.z <= 355)
+                {
+                    if (player.transform.position.x >= 246 && player.transform.position.x <= 250)
+                    {
+                        isSecondaryFinished[1] = true;
+                    }
+                }
             }
             else
             {
                 text_sec.text = text_sec.text + "<size=14>\n\n<color=red>-Trouver le coffre d'or</color></size>";
             }
 
-            if (player.transform.position.z >= 48 && player.transform.position.z <= 112)
-            {
-                if (player.transform.position.x >= 249 && player.transform.position.x <= 290)
-                {
-                    text.text = objectifs + "<size=14>\n\n<color=red>-Trouvez des batteries pour ouvrir la portes</color></size>" + "<size=14>\n\n<color=white>-Retournez à la porte</color></size>";
-                    text.lineSpacing = 0.8f;
-
-                    isSecondaryFinished[0] = true;
-                }
-            }
-            if (player.transform.position.z >= 350 && player.transform.position.z <= 355)
-            {
-                if (player.transform.position.x >= 246 && player.transform.position.x <= 250)
-                {
-                    text.text = objectifs + "<size=14>\n\n<color=red>-Trouvez des batteries pour ouvrir la portes</color></size>" + "<size=14>\n\n<color=white>-Retournez à la porte</color></size>";
-                    text.lineSpacing = 0.8f;
-
-                    isSecondaryFinished[1] = true;
-                }
-            }
         }//fin level 1
 
+        if (levelName == "Level2")
+        {
+            if (!isSecondaryFinished[0])
+            {
+                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=white>-Trouver leurs statue</color></size>";
+
+                if (player.transform.position.z >= 262 && player.transform.position.z <= 333)
+                {
+                    if (player.transform.position.x >= 535 && player.transform.position.x <= 581)
+                    {
+                        text.text = objectifs + "<size=14>\n\n<color=red>-Trouvez des batteries pour ouvrir la portes</color></size>" + "<size=14>\n\n<color=white>-Retournez à la porte</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isSecondaryFinished[0] = true;
+                    }
+                }
+            }
+            else
+            {
+                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=red>-Trouver leurs statue</color></size>";
+            }
+
+            /*portes level2*/
+            if (player.transform.position.z >= 116 && player.transform.position.z <= 147)
+            {
+                if (player.transform.position.x >= 752 && player.transform.position.x <= 794)
+                {
+                    if (!perso.FonctionNulleQuiRetrouneBool(door2, 10))
+                    {
+                        perso.CmdOpen_door(door2, 10);
+                    }
+                    if (!perso.FonctionNulleQuiRetrouneBool(door3, 10))
+                    {
+                        perso.CmdOpen_door(door3, 10);
+                    }
+
+                }
+            }
+
+            if (player.transform.position.z >= 78 && player.transform.position.z <= 173)
+            {
+                if (player.transform.position.x >= 886 && player.transform.position.x <= 927)
+                {
+                    if (!perso.FonctionNulleQuiRetrouneBool(door5, 10))
+                    {
+                        perso.CmdOpen_door(door5, 10);
+                    }
+
+                }
+            }
+
+            if (player.transform.position.z >= 250 && player.transform.position.z <= 280)
+            {
+                if (player.transform.position.x >= 1143 && player.transform.position.x <= 1197)
+                {
+                    if (!perso.FonctionNulleQuiRetrouneBool(door4, 10))
+                    {
+                        perso.CmdOpen_door(door4, 10);
+                    }
+                    if (!perso.FonctionNulleQuiRetrouneBool(door7, 10))
+                    {
+                        perso.CmdOpen_door(door7, 10);
+                    }
+                    if (!perso.FonctionNulleQuiRetrouneBool(door6, 10))
+                    {
+                        perso.CmdOpen_door(door6, 10);
+                    }
+
+                }
+            }
+            /*fin portes level2*/
+
+        }//fin level 2
 
 
     }
@@ -593,12 +768,227 @@ public class Canvas_UI_Online : MonoBehaviour {
                     }
                 }
             }
-
-
-
         }//fin level1
 
+        if (levelName == "Level2")
+        {
+            if (!isMessageSent[0]) //mangeoire
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
 
+                if (player.transform.position.z >= 110 && player.transform.position.z <= 188)
+                {
+                    if (player.transform.position.x >= 548 && player.transform.position.x <= 625)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[0] = true;
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Vous</b> : <i>Putin de merde ... c'est quoi ce délire ?!</i></color>\n<b>Radio</b> : <i>Je crois qu'on a retrouvé une partie de nos hommes</i>";
+                        }
+                        else
+                        {
+                            text_msg.text = "<b>Vous</b> : <i>Putin de merde ... c'est quoi ce délire ?!</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[1]) //batterie 1
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 116 && player.transform.position.z <= 147)
+                {
+                    if (player.transform.position.x >= 752 && player.transform.position.x <= 794)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[1] = true;
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Vous</b> : <i>J'ai trouvé des batteries en état de marche</i></color>\n<b>Radio</b> : <i>Ok, j'essaye de les activer, essaye de voir ce qu'elles ont ouvert</i>";
+                        }
+                        else
+                        {
+                            text_msg.text = "<b>Vous</b> : <i>J'ai trouvé des batteries en état de marche</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[2]) //batteries 3
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 250 && player.transform.position.z <= 280)
+                {
+                    if (player.transform.position.x >= 1143 && player.transform.position.x <= 1197)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[2] = true;
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Vous</b> : <i>J'ai trouvé des batteries en état de marche</i></color>\n<b>Radio</b> : <i>Ok, j'essaye de les activer, essaye de voir ce qu'elles ont ouvert</i>";
+                        }
+                        else
+                        {
+                            text_msg.text = "<b>Vous</b> : <i>J'ai trouvé des batteries en état de marche</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[3]) //statue
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 262 && player.transform.position.z <= 333)
+                {
+                    if (player.transform.position.x >= 535 && player.transform.position.x <= 581)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[3] = true;
+                        }
+                        else
+                        {
+                            text_msg.text = "<b>Vous</b> : <i>J'ai encore trouvé une de leurs statue</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[4]) //squelette
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 368 && player.transform.position.z <= 477)
+                {
+                    if (player.transform.position.x >= 600 && player.transform.position.x <= 739)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[4] = true;
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Vous</b> : <i>Mince, il y a beaucoup de squelette !</i></color>\n<b>Radio</b> : <i>Bien reçu, vous devriez en tuer le plus possible pour avancer</i>";
+                        }
+                        else
+                        {
+                            text_msg.text = "<b>Vous</b> : <i>Mince, il y a beaucoup de squelette !</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[5]) //porte finale
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 198 && player.transform.position.z <= 245)
+                {
+                    if (player.transform.position.x >= 1086 && player.transform.position.x <= 1129)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[5] = true;
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Vous</b> : <i>La porte est encore fermée</i></color>\n<b>Radio</b> : <i>Essayez de trouver des batteries pour l'ouvrir</i>";
+                        }
+                        else
+                        {
+                            text_msg.text = "<b>Vous</b> : <i>La porte est encore fermée</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[6]) //batteries 2
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 74 && player.transform.position.z <= 133)
+                {
+                    if (player.transform.position.x >= 891 && player.transform.position.x <= 922)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[6] = true;
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Vous</b> : <i>Je pense que ces batteries peuvent ouvrir la porte</i></color>\n<b>Radio</b> : <i>Affirmatif, la porte est ouverte</i>";
+                        }
+                        else
+                        {
+                            text_msg.text = "<b>Vous</b> : <i>Je pense que ces batteries peuvent ouvrir la porte</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[7]) //C'est grand...
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 320 && player.transform.position.z <= 352)
+                {
+                    if (player.transform.position.x >= 738 && player.transform.position.x <= 759)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[7] = true;
+                        }
+                        else
+                        {
+                            text_msg.text = "<b>Vous</b> : <i>Wow, ces mines feraient une bonne base pour un film fantastique ...</i>";
+                        }
+                    }
+                }
+            }
+
+        }//fin level2
 
 
 
