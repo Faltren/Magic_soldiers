@@ -41,10 +41,15 @@ public class Canvas_UI_Online : MonoBehaviour {
     private bool[] isSecondaryFinished;
     private bool[] isMessageSent;
 
+    private bool isGobelinActivated;
+    private bool isGobelinQuestDone;
     //private int isSending = 0;
 
     public Canvas_UI_Online(Personnage perso, Text text, Text text_msg, Text text_sec, Text text_infos, Text text_pause, RawImage healthBar, RawImage shieldBar, Transform player, GameObject door1, GameObject door2, GameObject door3, GameObject door4, GameObject door5, GameObject door6, GameObject door7)
     {
+        isGobelinActivated = false;
+        isGobelinQuestDone = false;
+
         this.player = player;
         this.perso = perso;
 
@@ -221,9 +226,11 @@ public class Canvas_UI_Online : MonoBehaviour {
                         levelName = "Level2";
                         isPrincipalFinished = new bool[] { false, false, false, false, false };
                         isSecondaryFinished = new bool[] { false };
-                        isMessageSent = new bool[] { false, false, false, false, false, false, false, false }; //8
+                        isMessageSent = new bool[] { false, false, false, false, false, false, false, false, false, false, false }; //11
                         text.text = objectifs + " " + levelName + " ";
                         text_sec.text = objectifsSecondaire;
+                        isGobelinActivated = false;
+                        isGobelinQuestDone = false;
                     }
                 }
             }
@@ -355,9 +362,6 @@ public class Canvas_UI_Online : MonoBehaviour {
                 {
                     if (player.transform.position.x >= 535 && player.transform.position.x <= 581)
                     {
-                        text.text = objectifs + "<size=14>\n\n<color=red>-Trouvez des batteries pour ouvrir la portes</color></size>" + "<size=14>\n\n<color=white>-Retournez à la porte</color></size>";
-                        text.lineSpacing = 0.8f;
-
                         isSecondaryFinished[0] = true;
                     }
                 }
@@ -365,6 +369,18 @@ public class Canvas_UI_Online : MonoBehaviour {
             else
             {
                 text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=red>-Trouver leurs statue</color></size>";
+            }
+
+            if (isGobelinActivated)
+            {
+                if (isGobelinQuestDone && isMessageSent[10])
+                {
+                    text_sec.text = text_sec.text + "<size=14>\n\n<color=red>-Trouver du KiBrille</color></size>";
+                }
+                else
+                {
+                    text_sec.text = text_sec.text + "<size=14>\n\n<color=white>-Trouver du KiBrille</color></size>";
+                }               
             }
 
             /*portes level2*/
@@ -727,7 +743,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
-                            text_msg.text = "<b>Vous</b> : <i>C'est quoi ce trucs ?!</i>";
+                            text_msg.text = "<b>Vous</b> : <i>C'est quoi ce truc ?!</i>";
                         }
                     }
                 }
@@ -951,6 +967,8 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[6] = true;
+                            isPrincipalFinished[1] = true;
+                            isPrincipalFinished[2] = true;
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
@@ -987,6 +1005,128 @@ public class Canvas_UI_Online : MonoBehaviour {
                     }
                 }
             }
+
+            /*Gobelin*/
+            if (!isMessageSent[8])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 386 && player.transform.position.z <= 402)
+                {
+                    if (player.transform.position.x >= 1018 && player.transform.position.x <= 1038)
+                    {
+                        if (currentTime + timeForNext * 4 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[8] = true;
+                            isGobelinActivated = true;
+                        }
+                        else if (currentTime + timeForNext * 3 < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Vous</b> : <i>Vous croyez que je peux lui faire confiance ?</i></color>\n<b>Radio</b> : <i>Je ne sais pas trop, les gobelins sont connus pour leurs fourberies ... Aide le quand même, on ne sait jamais</i>";
+                        }
+                        else if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Gobelin</b> : <i>Eh toi ! Ramene moi du KiBrille et je te donnerai quelque chose en échange!</i></color>\n<b>Vous</b> : <i>Vous croyez que je peux lui faire confiance ?</i>";
+                        }
+                        else
+                        {
+                            text_msg.text = "<b>Gobelin</b> : <i>Eh toi ! Ramene moi du KiBrille et je te donnerai quelque chose en échange!</i>";
+                        }
+                    }
+                }
+            }
+
+
+            if (!isMessageSent[8])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 386 && player.transform.position.z <= 402)
+                {
+                    if (player.transform.position.x >= 1018 && player.transform.position.x <= 1038)
+                    {
+                        if (currentTime + timeForNext * 3 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[8] = true;
+                            isGobelinActivated = true;
+                        }
+                        else if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Vous</b> : <i>Vous croyez que je peux lui faire confiance ?</i></color>\n<b>Radio</b> : <i>Je ne sais pas trop, les gobelins sont connus pour leurs fourberies ... Aide le quand même, on ne sait jamais</i>";
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Gobelin</b> : <i>Eh toi ! Ramene moi du KiBrille et je te donnerai quelque chose en échange!</i></color>\n<b>Vous</b> : <i>Vous croyez que je peux lui faire confiance ?</i>";
+                        }
+                        else
+                        {
+                            text_msg.text = "<b>Gobelin</b> : <i>Eh toi ! Ramene moi du KiBrille et je te donnerai quelque chose en échange!</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[9])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 272 && player.transform.position.z <= 290)
+                {
+                    if (player.transform.position.x >= 906 && player.transform.position.x <= 922)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[9] = true;
+                            isGobelinQuestDone = true;
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Vous</b> : <i>C'est ça du KiBrille ?</i></color>\n<b>Radio</b> : <i>Je pense que oui</i>";
+                        }
+                        else
+                        {
+                            text_msg.text = "<b>Vous</b> : <i>C'est ça du KiBrille ?</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[10] && isGobelinQuestDone)
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 386 && player.transform.position.z <= 402)
+                {
+                    if (player.transform.position.x >= 1018 && player.transform.position.x <= 1038)
+                    {
+                        if (currentTime + timeForNext * 4 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[10] = true;
+                        }
+                        else
+                        {
+                            text_msg.text = "<b>Gobelin</b> : <i>Oh merci ! Tiens prends ça, tu tireras plus fort avec ça. Maintenant va-t'en et ne dis pas que je suis là !</i>";
+                        }
+                    }
+                }
+            }
+            /*Gobelin*/
 
         }//fin level2
 
