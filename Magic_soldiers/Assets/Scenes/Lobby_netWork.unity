@@ -753,8 +753,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NetworkPort: 7777
   m_ServerBindToIP: 1
-  m_ServerBindAddress: 25.58.94.184
-  m_NetworkAddress: 25.58.94.184
+  m_ServerBindAddress: 25.56.72.153
+  m_NetworkAddress: 25.56.72.153
   m_DontDestroyOnLoad: 1
   m_RunInBackground: 1
   m_ScriptCRCCheck: 1
