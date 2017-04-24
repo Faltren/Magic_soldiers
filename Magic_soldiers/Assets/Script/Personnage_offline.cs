@@ -32,6 +32,9 @@ public class Personnage_offline : MonoBehaviour {
     //animation
     private Animator animator;
 
+    //Layer (for detection)
+    private static int layer = 8;
+
     #endregion
 
 
@@ -63,6 +66,11 @@ public class Personnage_offline : MonoBehaviour {
 
         isGrounded = false;
         attack = 5;
+
+        //Layer set
+        this.gameObject.layer = layer;
+        this.GetComponentInChildren<Collider>().gameObject.layer = layer;
+
     }
 	
 	void FixedUpdate () {

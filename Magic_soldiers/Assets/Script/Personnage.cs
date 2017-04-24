@@ -36,6 +36,9 @@ public class Personnage : NetworkBehaviour {
     public static int attack;
     public static int shield;
 
+    //temps avant la regen du shield
+    private static float shieldCooldown = 0f;
+
     private Rigidbody player;
     public GameObject Spine;
     public static Animation anim;
@@ -79,6 +82,9 @@ public class Personnage : NetworkBehaviour {
 
     public RawImage healthBar;
     public RawImage shieldBar;
+
+    //Layer (pour la detection)
+    private static int layer = 8;
 
     #endregion
 
@@ -132,6 +138,9 @@ public class Personnage : NetworkBehaviour {
 
         Shoot = new Vector3(0, 0, 1);
 
+        //Layer Set
+        this.gameObject.layer = layer;
+        this.GetComponentInChildren<Collider>().gameObject.layer = layer;
 
     }
 	
@@ -154,6 +163,11 @@ public class Personnage : NetworkBehaviour {
 
             Moves();
             AnimPerso();
+
+            if(Time.time > shieldCooldown)
+            {
+                ShieldRegeneration();
+            }
 
             if (Time.time > nextFire)
             {
@@ -298,8 +312,16 @@ public class Personnage : NetworkBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        isGrounded = true;
+        if (collision.gameObject.tag == "enemy_atk")
+        {
+            Damage();
+        }
+        else
+        {
+            isGrounded = true;
+        }
         player.velocity = new Vector3(0, 0, 0);
+        
     }
 
     [Command]
@@ -403,6 +425,36 @@ public class Personnage : NetworkBehaviour {
             can.door7 = door7;
         }
     }
+
+    private void Damage()
+    {
+        shieldCooldown = Time.time + 3;
+        if(shield > 0)
+        {
+            shield -= 5;
+            if (shield < 0)
+            {
+                shield = 0;
+            }
+        }
+        else
+        {
+            life -= 5;
+            if (life < 0)
+            {
+                life = 0;
+            }
+        }
+    }
+
+    private void ShieldRegeneration()
+    {
+        if (shield < 100)
+        {
+            shield++;
+        }
+    }
+
 }
 
 

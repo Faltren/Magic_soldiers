@@ -1,14 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+using System;
 
-public class IAtest : MonoBehaviour {
+public class IAtest : NetworkBehaviour {
     private bool pattern;
 
     private float posZ0;
     private float posX0;
+    private float posY0;
+
     private float posZ;
     private float posX;
+    private float posY;
+
     private int pos;
 
     public int life;
@@ -26,7 +32,13 @@ public class IAtest : MonoBehaviour {
 
     private float xPlayer;
     private float zPlayer;
+    private float yPlayer;
+
+    private GameObject[] players;
+    private GameObject detectedPlayer;
+
     public int DetectRadius;
+    public int attackRange;
 
     private UnityEngine.UI.Text lifeBar;
 
@@ -35,6 +47,18 @@ public class IAtest : MonoBehaviour {
     private float currentTime;
 
     private bool isDead;
+
+    public bool isRanged;
+
+    //Tir pour ennemis à distance
+    BalleTir blabla;
+    public GameObject weapon;
+    public Transform BulletPos;
+    public GameObject balleCasting;
+    private ParticleSystem shoot;
+    private float shootCooldown = 0f;
+
+
 
     private void Awake()
     {
@@ -47,6 +71,8 @@ public class IAtest : MonoBehaviour {
         pattern = true;
         posX0 = transform.position.x;
         posZ0 = transform.position.z;
+        posY0 = transform.position.y;
+
         posZ = 0;
         posX = -10;
         pos = 0;
@@ -57,13 +83,20 @@ public class IAtest : MonoBehaviour {
 
         LifeDisplay();
 
-        xPlayer = GameObject.Find("Perso(Clone)").transform.position.x;
-        zPlayer = GameObject.Find("Perso(Clone)").transform.position.z;
+        /*xPlayer = GameObject.Find("Perso").transform.position.x;
+        zPlayer = GameObject.Find("Perso").transform.position.z;
+        yPlayer = GameObject.Find("Perso").transform.position.y;*/
         //DetectRadius = 25;
 
         enemy = this.GetComponent<Rigidbody>();
 
         isDead = false;
+
+        players = GameObject.FindGameObjectsWithTag("Player");
+
+        detectedPlayer = null;
+
+        blabla = new BalleTir();
     }
 
     // Update is called once per frame
@@ -72,7 +105,12 @@ public class IAtest : MonoBehaviour {
 
         if (life > 0)
         {
-            transform.FindChild("Life_Bar").LookAt(GameObject.Find("Perso(Clone)").transform);
+            
+
+            if (players.Length >= 1)
+            {
+                transform.FindChild("Life_Bar").LookAt(players[0].transform);
+            }
             DetectPlayer();
 
             if (pattern)
@@ -80,7 +118,7 @@ public class IAtest : MonoBehaviour {
                 if (hasPattern)
                 {
                     Pattern();
-                    transform.position = new Vector3(posX0 + posX, 0, posZ0 + posZ);
+                    transform.position = new Vector3(posX0 + posX, this.transform.position.y, posZ0 + posZ);
                 }
             }
             else
@@ -189,13 +227,22 @@ public class IAtest : MonoBehaviour {
             posZ = transform.position.z - posZ0;
         }
 
-        if((xPlayer - (posX0 + posX)) * (xPlayer - (posX0 + posX)) + (zPlayer - (posZ0 + posZ)) * (zPlayer - (posZ0 + posZ)) <= 10)
+        if((xPlayer - (posX0 + posX)) * (xPlayer - (posX0 + posX)) + (zPlayer - (posZ0 + posZ)) * (zPlayer - (posZ0 + posZ)) <= attackRange)
         {
             isAttacking = true;
             isWalking = false;
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
             {
                 animator.SetTrigger("Attack");
+            }
+            if (isRanged)
+            {
+                if (shootCooldown < Time.time)
+                {
+                    this.transform.LookAt(new Vector3(xPlayer, this.transform.position.y, zPlayer));
+                    shootCooldown = Time.time + 1.5f;
+                    CmdFire();
+                }
             }
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
@@ -205,23 +252,61 @@ public class IAtest : MonoBehaviour {
         }
         else
         {
-            Vector3 playerPos = new Vector3(xPlayer, 0, zPlayer);
+            Vector3 playerPos = new Vector3(xPlayer, this.transform.position.y, zPlayer);
             transform.LookAt(playerPos);
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
 
-            xPlayer = GameObject.Find("Perso(Clone)").transform.position.x;
-            zPlayer = GameObject.Find("Perso(Clone)").transform.position.z;
+            xPlayer = detectedPlayer.transform.position.x;
+            zPlayer = detectedPlayer.transform.position.z;
         }
         
     }
 
     private void DetectPlayer()
     {
-        xPlayer = GameObject.Find("Perso(Clone)").transform.position.x;
-        zPlayer = GameObject.Find("Perso(Clone)").transform.position.z;
-        if (pattern == true)
+        posY = transform.position.y;
+
+        foreach (GameObject player in players)
         {
-            pattern = !((xPlayer - (posX0 + posX)) * (xPlayer - (posX0 + posX)) + (zPlayer - (posZ0 + posZ)) * (zPlayer - (posZ0 + posZ)) <= DetectRadius * DetectRadius);
+            xPlayer = player.transform.position.x;
+            yPlayer = player.transform.position.y;
+            zPlayer = player.transform.position.z;
+
+            Vector3 playVect = new Vector3(xPlayer, yPlayer + 1, zPlayer);
+            Vector3 enemyVect = new Vector3((posX0 + posX), posY + 1, (posZ0 + posZ));
+
+            
+
+            if (pattern)
+            {
+                pattern = !((xPlayer - (posX0 + posX)) * (xPlayer - (posX0 + posX)) + (zPlayer - (posZ0 + posZ)) * (zPlayer - (posZ0 + posZ)) <= DetectRadius * DetectRadius);
+
+                if (!pattern)
+                {
+                    //Vector3 playVect = new Vector3(xPlayer, yPlayer, zPlayer);
+                    //Vector3 enemyVect = new Vector3((posX0 + posX), posY, (posZ0 + posZ));
+
+                    float distance = (float)Math.Sqrt((xPlayer - posX0 - posX) * (xPlayer - posX0 - posX) + (yPlayer - posY0 - posY) * (yPlayer - posY0 - posY) + (zPlayer - posZ0 - posZ) * (zPlayer - posZ0 - posZ));
+
+                    var layerMask = 1;
+
+                    bool h = Physics.Linecast(enemyVect, playVect, layerMask);
+
+                    pattern = h;
+
+                    Debug.DrawLine(enemyVect, playVect, Color.yellow);
+
+                    /*print(layerMask);
+                    print(h);
+                    print(distance);
+                    Debug.DrawLine(enemyVect, playVect, Color.yellow);*/
+
+                }
+                if (!pattern)
+                {
+                    detectedPlayer = player;
+                }
+            }
         }
     }
 
@@ -242,17 +327,42 @@ public class IAtest : MonoBehaviour {
         string name = col.gameObject.name;
         int i = 0;
 
-        while ((i < name.Length) && (s != "Bullet "))
+        while ((i < name.Length) && (s != "Bullet"))
         {
             s += name[i];
             i++;
         }
 
-        if(s == "Bullet ")
+        if ((s == "Bullet") && (name.Length > 7))
         {
-            life -= Personnage.attack;
+            int oldLife = life;
+            life -= Personnage_offline.attack;
+            if (life == oldLife)
+            {
+                life -= Personnage.attack;
+            }
+
             LifeDisplay();
             Destroy(col.gameObject);
         }
+    }
+
+    [Command]
+    public void CmdFire()
+    {
+        GameObject balle;
+
+        Quaternion qua = new Quaternion(0, 0, 0, 0); //GetComponentInParent<Rigidbody>().transform.rotation.x
+
+        balle = Instantiate(balleCasting, BulletPos.transform.position, qua);
+
+        balle.GetComponent<Rigidbody>().velocity = weapon.transform.TransformDirection(Vector3.forward) * 50;
+        balle.GetComponent<Rigidbody>().isKinematic = false;
+
+        NetworkServer.Spawn(balle);
+
+        balle.name = "Enemy_Bullet";
+        balle.tag = "enemy_atk";
+
     }
 }
