@@ -176,7 +176,7 @@ public class Menu : MonoBehaviour {
     {
         if (Buttons.transform.rotation.x * 100 > degre)
         {
-            Buttons.transform.Rotate(new Vector3(-1f, 0, 0));
+            Buttons.transform.Rotate(new Vector3(-2f, 0, 0));
         }
         else
         {
@@ -191,7 +191,7 @@ public class Menu : MonoBehaviour {
     {
         if (Buttons.transform.rotation.x * 100 < degre)
         {
-            Buttons.transform.Rotate(new Vector3(1f, 0, 0));
+            Buttons.transform.Rotate(new Vector3(2f, 0, 0));
         }
         else
         {

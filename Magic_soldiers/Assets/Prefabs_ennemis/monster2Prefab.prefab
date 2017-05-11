@@ -1836,7 +1836,7 @@ MonoBehaviour:
   isRanged: 1
   weapon: {fileID: 1000508230981784}
   BulletPos: {fileID: 4728229954070696}
-  balleCasting: {fileID: 1730861953860872, guid: 5d4b9cb907d0b6b408ad685a66a048e5,
+  balleCasting: {fileID: 1730861953860872, guid: 1c70543c3b588aa4eb9710cdab1c0786,
     type: 2}
 --- !u!114 &114354908857588492
 MonoBehaviour:
