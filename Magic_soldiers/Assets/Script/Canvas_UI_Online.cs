@@ -24,8 +24,12 @@ public class Canvas_UI_Online : MonoBehaviour {
     private Text text_infos;
     private Text text_pause;
 
+    private GameObject quit;
+
     private RawImage healthBar;
     private RawImage shieldBar;
+
+    private Image msg_img;
 
     private bool isPaused;
 
@@ -45,7 +49,7 @@ public class Canvas_UI_Online : MonoBehaviour {
     private bool isGobelinQuestDone;
     //private int isSending = 0;
 
-    public Canvas_UI_Online(Personnage perso, Text text, Text text_msg, Text text_sec, Text text_infos, Text text_pause, RawImage healthBar, RawImage shieldBar, Transform player, GameObject door1, GameObject door2, GameObject door3, GameObject door4, GameObject door5, GameObject door6, GameObject door7)
+    public Canvas_UI_Online(Personnage perso, GameObject quit, Text text, Text text_msg, Text text_sec, Text text_infos, Text text_pause, RawImage healthBar, RawImage shieldBar, Image msg_img, Transform player, GameObject door1, GameObject door2, GameObject door3, GameObject door4, GameObject door5, GameObject door6, GameObject door7)
     {
         isGobelinActivated = false;
         isGobelinQuestDone = false;
@@ -73,8 +77,14 @@ public class Canvas_UI_Online : MonoBehaviour {
         this.text_infos = text_infos;
         this.text_pause = text_pause;
 
+        this.quit = quit;
+        quit.SetActive(false);
+
         this.healthBar = healthBar;
         this.shieldBar = shieldBar;
+
+        this.msg_img = msg_img;
+        msg_img.gameObject.SetActive(false);
 
         isPaused = false;
 
@@ -104,6 +114,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                 Cursor.visible = true;
                 isPaused = true;
                 perso.escaped = true;
+                quit.SetActive(true);
             }
             else
             {
@@ -111,6 +122,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                 Cursor.visible = false;
                 isPaused = false;
                 perso.escaped = false;
+                quit.SetActive(false);
             }
             
         }

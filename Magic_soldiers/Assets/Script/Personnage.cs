@@ -80,8 +80,12 @@ public class Personnage : NetworkBehaviour {
     public Text text_infos;
     public Text text_pause;
 
+    public GameObject quit;
+
     public RawImage healthBar;
     public RawImage shieldBar;
+
+    public Image msg_img;
 
     //Layer (pour la detection)
     private static int layer = 8;
@@ -102,7 +106,7 @@ public class Personnage : NetworkBehaviour {
         door6 = GameObject.Find("door6");
         door7 = GameObject.Find("door7");
 
-        can = new Canvas_UI_Online(this, text, text_msg, text_sec, text_infos, text_pause, healthBar, shieldBar, GetComponent<Transform>(), door1, door2, door3, door4, door5, door6, door7);
+        can = new Canvas_UI_Online(this, quit, text, text_msg, text_sec, text_infos, text_pause, healthBar, shieldBar, msg_img, GetComponent<Transform>(), door1, door2, door3, door4, door5, door6, door7);
 
         animator = GetComponent<Animator>();
         run = false;
