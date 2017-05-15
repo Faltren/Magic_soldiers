@@ -472,6 +472,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[0] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext * 2 < Time.time)
                         {
@@ -483,7 +484,8 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
-                            text_msg.text = "<b>Radio</b> : <i>Tu m'entends ?</i>";
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Radio</b> : <i>Tu m'entends ?</i>";                            
                         }
                     }
                 }
@@ -508,6 +510,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[1] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext * 2 < Time.time)
                         {
@@ -519,6 +522,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Vous</b> : <i>C'est quoi ce délire, pourquoi il y a des véhicules ici ?!</i>";
                         }
                     }
@@ -540,6 +544,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[2] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
@@ -547,6 +552,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Vous</b> : <i>La porte est fermée</i>";
                         }
                     }
@@ -568,6 +574,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[3] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
@@ -575,6 +582,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Vous</b> : <i>J'ai trouvé les batteries</i>";
                         }
                     }
@@ -596,6 +604,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[4] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
@@ -603,6 +612,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Vous</b> : <i>C'est bon, j'y suis</i>";
                         }
                     }
@@ -626,9 +636,11 @@ public class Canvas_UI_Online : MonoBehaviour {
                             {
                                 text_msg.text = "";
                                 isMessageSent[5] = true;
+                                msg_img.gameObject.SetActive(false);
                             }
                             else
                             {
+                                msg_img.gameObject.SetActive(true);
                                 text_msg.text = "<b>Radio</b> : <i>Ces batteries sont trop endommagées, trouve en d'autres</i>";
                             }
                         }
@@ -638,9 +650,11 @@ public class Canvas_UI_Online : MonoBehaviour {
                             {
                                 text_msg.text = "";
                                 isMessageSent[5] = true;
+                                msg_img.gameObject.SetActive(false);
                             }
                             else
                             {
+                                msg_img.gameObject.SetActive(true);
                                 text_msg.text = "<b>Radio</b> : <i>Ces batteries sont très vieilles</i>";
                             }
                         }
@@ -667,9 +681,11 @@ public class Canvas_UI_Online : MonoBehaviour {
                             {
                                 text_msg.text = "";
                                 isMessageSent[6] = true;
+                                msg_img.gameObject.SetActive(false);
                             }
                             else
                             {
+                                msg_img.gameObject.SetActive(true);
                                 text_msg.text = "<b>Radio</b> : <i>Ces batteries sont trop endommagées, trouve en d'autres</i>";
                             }
                         }
@@ -679,9 +695,11 @@ public class Canvas_UI_Online : MonoBehaviour {
                             {
                                 text_msg.text = "";
                                 isMessageSent[6] = true;
+                                msg_img.gameObject.SetActive(false);
                             }
                             else
                             {
+                                msg_img.gameObject.SetActive(true);
                                 text_msg.text = "<b>Radio</b> : <i>Ces batteries sont très vieilles</i>";
                             }
                         }
@@ -707,9 +725,11 @@ public class Canvas_UI_Online : MonoBehaviour {
                             {
                                 text_msg.text = "";
                                 isMessageSent[7] = true;
+                                msg_img.gameObject.SetActive(false);
                             }
                             else
                             {
+                                msg_img.gameObject.SetActive(true);
                                 text_msg.text = "<b>Radio</b> : <i>Pas besoin de plus de batteries, va vers la sortie</i>";
                             }
                         }
@@ -719,9 +739,11 @@ public class Canvas_UI_Online : MonoBehaviour {
                             {
                                 text_msg.text = "";
                                 isMessageSent[7] = true;
+                                msg_img.gameObject.SetActive(false);
                             }
                             else
                             {
+                                msg_img.gameObject.SetActive(true);
                                 text_msg.text = "<b>Radio</b> : <i>Il n'y a pas assez de batteries, trouve en d'autres</i>";
                             }
                         }                        
@@ -744,6 +766,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[8] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext * 2 < Time.time)
                         {
@@ -755,6 +778,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Vous</b> : <i>C'est quoi ce truc ?!</i>";
                         }
                     }
@@ -776,6 +800,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[9] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext * 3 < Time.time)
                         {
@@ -791,6 +816,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Vous</b> : <i>C'est ça la base dont vous parliez ?</i>";
                         }
                     }
@@ -815,6 +841,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[0] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
@@ -822,6 +849,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Vous</b> : <i>Putin de merde ... c'est quoi ce délire ?!</i>";
                         }
                     }
@@ -843,6 +871,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[1] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
@@ -850,6 +879,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Vous</b> : <i>J'ai trouvé des batteries en état de marche</i>";
                         }
                     }
@@ -871,6 +901,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[2] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
@@ -878,6 +909,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Vous</b> : <i>J'ai trouvé des batteries en état de marche</i>";
                         }
                     }
@@ -899,9 +931,11 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[3] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Vous</b> : <i>J'ai encore trouvé une de leurs statue</i>";
                         }
                     }
@@ -923,6 +957,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[4] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
@@ -930,6 +965,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Vous</b> : <i>Mince, il y a beaucoup de squelette !</i>";
                         }
                     }
@@ -951,6 +987,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[5] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
@@ -958,6 +995,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Vous</b> : <i>La porte est encore fermée</i>";
                         }
                     }
@@ -981,6 +1019,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                             isMessageSent[6] = true;
                             isPrincipalFinished[1] = true;
                             isPrincipalFinished[2] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
@@ -988,6 +1027,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Vous</b> : <i>Je pense que ces batteries peuvent ouvrir la porte</i>";
                         }
                     }
@@ -1009,9 +1049,11 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[7] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Vous</b> : <i>Wow, ces mines feraient une bonne base pour un film fantastique ...</i>";
                         }
                     }
@@ -1035,6 +1077,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                             text_msg.text = "";
                             isMessageSent[8] = true;
                             isGobelinActivated = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext * 3 < Time.time)
                         {
@@ -1046,6 +1089,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Gobelin</b> : <i>Eh toi ! Ramene moi du KiBrille et je te donnerai quelque chose en échange!</i>";
                         }
                     }
@@ -1069,6 +1113,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                             text_msg.text = "";
                             isMessageSent[8] = true;
                             isGobelinActivated = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext * 2 < Time.time)
                         {
@@ -1080,6 +1125,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Gobelin</b> : <i>Eh toi ! Ramene moi du KiBrille et je te donnerai quelque chose en échange!</i>";
                         }
                     }
@@ -1102,6 +1148,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                             text_msg.text = "";
                             isMessageSent[9] = true;
                             isGobelinQuestDone = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
@@ -1109,6 +1156,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Vous</b> : <i>C'est ça du KiBrille ?</i>";
                         }
                     }
@@ -1130,9 +1178,11 @@ public class Canvas_UI_Online : MonoBehaviour {
                         {
                             text_msg.text = "";
                             isMessageSent[10] = true;
+                            msg_img.gameObject.SetActive(false);
                         }
                         else
                         {
+                            msg_img.gameObject.SetActive(true);
                             text_msg.text = "<b>Gobelin</b> : <i>Oh merci ! Tiens prends ça, tu tireras plus fort avec ça. Maintenant va-t'en et ne dis pas que je suis là !</i>";
                         }
                     }
