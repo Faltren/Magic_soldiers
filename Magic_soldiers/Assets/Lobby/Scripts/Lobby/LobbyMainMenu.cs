@@ -29,6 +29,9 @@ namespace Prototype.NetworkLobby
 
         public void OnClickHost()
         {
+            lobbyManager.networkAddress = ipInput.text;
+            lobbyManager.serverBindAddress = ipInput.text;
+
             if (lobbyManager.StartHost() == null)
             {
                 lobbyManager.networkAddress = "127.0.0.1";
