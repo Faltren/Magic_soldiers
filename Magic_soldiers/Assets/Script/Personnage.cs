@@ -48,6 +48,8 @@ public class Personnage : NetworkBehaviour {
 
     //Tir
 
+    public Image surchauffe_img;
+
     public int ejectSpeed = 50; //etait a 20
     private float fireRate = 0.36f;
     public static float nextFire = 0.0f;
@@ -140,6 +142,8 @@ public class Personnage : NetworkBehaviour {
         shoot = GetComponentInChildren<ParticleSystem>();
         nbTirs = 0;
 
+        surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * 9.85f, 28); //20 tirs = 197 => 1 = 9.85
+
         Shoot = new Vector3(0, 0, 1);
 
         //Layer Set
@@ -175,14 +179,29 @@ public class Personnage : NetworkBehaviour {
 
             if (Time.time > nextFire)
             {
+                if (Time.time > nextFire + 2 || isSurchauffe && Time.time > nextFire)
+                {
+                    if (nbTirs >= 0)
+                    {
+                        nbTirs--;
+                    }
+
+                    
+                    surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * 9.85f, 28); //20 tirs = 197 => 1 = 9.85
+                }
                 isSurchauffe = false;
+                
 
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
-                    fireRate = 0.36f;
-                    nextFire = Time.time + fireRate;
-                    CmdFire();
-                    nbTirs = 0;
+                    if (!isSurchauffe)
+                    {
+                        fireRate = 0.36f;
+                        nextFire = Time.time + fireRate;
+                        CmdFire();
+                    }
+                    //nbTirs = 0;
+                    //suchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * 9.85f, 28); //20 tirs = 197 => 1 = 9.85
                 }
                 else if (Input.GetKey(KeyCode.Mouse1))
                 {
@@ -190,6 +209,8 @@ public class Personnage : NetworkBehaviour {
                     {
                         fireRate = 0.1f;
                         nbTirs++;
+                        print(nbTirs);
+                        surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * 9.85f, 28); //20 tirs = 197 => 1 = 9.85
                         nextFire = Time.time + fireRate;
                         CmdBurst_Fire();
                     }
@@ -204,7 +225,6 @@ public class Personnage : NetworkBehaviour {
                 }
 
             }
-
         }        
 
 	}

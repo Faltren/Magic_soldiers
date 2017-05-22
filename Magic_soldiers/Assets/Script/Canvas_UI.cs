@@ -91,7 +91,7 @@ public class Canvas_UI : MonoBehaviour {
         healthBar.rectTransform.sizeDelta = new Vector2(Personnage_offline.life * 2.25f, 30); //225 = 100 => 1 = 2.25
         shieldBar.rectTransform.sizeDelta = new Vector2(Personnage_offline.shield * 2.25f, 30);
 
-        healthBar.rectTransform.transform.position = new Vector2(Personnage_offline.life * 2.25f / 2 + 37,healthBar.rectTransform.transform.position.y);
+        healthBar.rectTransform.transform.position = new Vector2(Personnage_offline.life * 2.25f / 2 + 37, healthBar.rectTransform.transform.position.y);
         shieldBar.rectTransform.transform.position = new Vector2(Personnage_offline.shield * 2.25f / 2 + 37, healthBar.rectTransform.transform.position.y - 55);
 
         /* /!\ uniquement pour soutenance 1 !*/
