@@ -890,7 +890,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1388103958966990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 748.7018, y: 683.06287, z: -667.77435}
+  m_LocalPosition: {x: 17.300255, y: 1.2881432, z: 20.991486}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4643106489607154}
@@ -1760,7 +1760,7 @@ MonoBehaviour:
   land: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
   sound: {fileID: 82693277676795574}
   Spine: {fileID: 1366346564879504}
-  suchauffe_img: {fileID: 114291977606048144}
+  surchauffe_img: {fileID: 114291977606048144}
   ejectSpeed: 50
   balleCasting: {fileID: 1730861953860872, guid: 5d4b9cb907d0b6b408ad685a66a048e5,
     type: 2}
