@@ -159,7 +159,15 @@ public class Canvas_UI_Online : MonoBehaviour {
         if (player.transform.position.z >= 43 && player.transform.position.z <= 113 && player.transform.position.x >= 413 && player.transform.position.x <= 454)
         {
             levelName = "Level2";
-            text_pause.text = "Fin du Niveau 1";   
+            text_pause.text = "Fin du Niveau 1";
+            isPrincipalFinished[3] = true;
+            isPrincipalFinished = new bool[] { false, false, false, false, false };
+            isSecondaryFinished = new bool[] { false };
+            isMessageSent = new bool[] { false, false, false, false, false, false, false, false, false, false, false }; //11
+            text.text = objectifs + " " + levelName + " ";
+            text_sec.text = objectifsSecondaire;
+            isGobelinActivated = false;
+            isGobelinQuestDone = false;
         }
         else
         {
