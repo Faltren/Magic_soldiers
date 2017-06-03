@@ -13,14 +13,20 @@ public class Menu : MonoBehaviour {
 
     public static bool options;
 
-    GameObject Buttons;
+    public Camera cam;
+
+    private GameObject Buttons;
     public static GameObject Options;
 
-    private Scrollbar bar;
+    public Scrollbar bar;
     private Text bar_text;
     public static int sensi;
-	
-	void Start () {
+
+    public Scrollbar bar_vol;
+    private Text bar_vol_text;
+    public static int volume;
+
+    void Start () {
 
         Up = false;
         Down = false;
@@ -30,8 +36,12 @@ public class Menu : MonoBehaviour {
         Buttons = GameObject.Find("Boutons");
         Options = GameObject.Find("Options_label");
 
-        bar = GetComponentInChildren<Scrollbar>();
         bar_text = GameObject.Find("Nb_sensi").GetComponent<Text>();
+
+        bar_vol_text = GameObject.Find("Nb_volume").GetComponent<Text>();
+
+        Vector3 camPos = cam.transform.position;
+        Buttons.transform.position = new Vector3(camPos.x - 6, camPos.y, camPos.z + 30);
 
         sensi = 5;
 
@@ -56,8 +66,11 @@ public class Menu : MonoBehaviour {
         
         if (options)
         {
-            bar_text.text =  (bar.value * 10).ToString();
+            bar_text.text = (bar.value * 10).ToString();
             sensi = (int)(bar.value * 10);
+
+            bar_vol_text.text = (bar_vol.value * 2).ToString();
+            volume = (int)(bar_vol.value * 2);
         }
 
         if (Input.GetKeyDown(KeyCode.Return))

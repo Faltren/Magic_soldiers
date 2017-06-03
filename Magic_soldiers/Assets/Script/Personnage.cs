@@ -100,6 +100,8 @@ public class Personnage : NetworkBehaviour {
 
     void Start () {
 
+        AudioListener.volume = Menu.volume;
+
         door1 = GameObject.Find("door1");
         door2 = GameObject.Find("door2");
         door3 = GameObject.Find("door3");
@@ -209,7 +211,6 @@ public class Personnage : NetworkBehaviour {
                     {
                         fireRate = 0.1f;
                         nbTirs++;
-                        print(nbTirs);
                         surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * 9.85f, 28); //20 tirs = 197 => 1 = 9.85
                         nextFire = Time.time + fireRate;
                         CmdBurst_Fire();
