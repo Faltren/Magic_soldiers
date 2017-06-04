@@ -295,12 +295,15 @@ public class Personnage : NetworkBehaviour {
     private void AnimPerso()
     {
 
-        if (BalleTir_offline.isSurchauffe)
+        if (isSurchauffe)
         {
             animator.SetBool("isShooting", true);
             animator.SetBool("isRunning", false);
             animator.SetBool("isWalking", false);
-
+            animator.SetBool("IsCoucou", false);
+            animator.SetBool("IsBienJoue", false);
+            animator.SetBool("IsGogo", false);
+            animator.SetBool("IsOk", false);
             //anim["surchauffe"].speed = 0.7f;
             //anim.Play("surchauffe");
         }
@@ -311,6 +314,10 @@ public class Personnage : NetworkBehaviour {
                 animator.SetBool("isShooting", false);
                 animator.SetBool("isRunning", true);
                 animator.SetBool("isWalking", false);
+                animator.SetBool("IsCoucou", false);
+                animator.SetBool("IsBienJoue", false);
+                animator.SetBool("IsGogo", false);
+                animator.SetBool("IsOk", false);
                 //anim["Walk"].speed = 4f;
             }
             else
@@ -318,14 +325,62 @@ public class Personnage : NetworkBehaviour {
                 animator.SetBool("isShooting", false);
                 animator.SetBool("isRunning", false);
                 animator.SetBool("isWalking", true);
+                animator.SetBool("IsCoucou", false);
+                animator.SetBool("IsBienJoue", false);
+                animator.SetBool("IsGogo", false);
+                animator.SetBool("IsOk", false);
                 //anim["Walk"].speed = 2f;
             }
+        }
+        else if (Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1))
+        {
+            animator.SetBool("isShooting", false);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("IsCoucou", true);
+            animator.SetBool("IsBienJoue", false);
+            animator.SetBool("IsGogo", false);
+            animator.SetBool("IsOk", false);
+        }
+        else if (Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2))
+        {
+            animator.SetBool("isShooting", false);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("IsCoucou", false);
+            animator.SetBool("IsBienJoue", true);
+            animator.SetBool("IsGogo", false);
+            animator.SetBool("IsOk", false);
+        }
+        else if (Input.GetKey(KeyCode.Alpha3) || Input.GetKey(KeyCode.Keypad3))
+        {
+            animator.SetBool("isShooting", false);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("IsCoucou", false);
+            animator.SetBool("IsBienJoue", false);
+            animator.SetBool("IsGogo", true);
+            animator.SetBool("IsOk", false);
+        }
+        else if (Input.GetKey(KeyCode.Alpha4) || Input.GetKey(KeyCode.Keypad4))
+        {
+            animator.SetBool("isShooting", false);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("IsCoucou", false);
+            animator.SetBool("IsBienJoue", false);
+            animator.SetBool("IsGogo", false);
+            animator.SetBool("IsOk", true);
         }
         else
         {
             animator.SetBool("isShooting", false);
             animator.SetBool("isRunning", false);
             animator.SetBool("isWalking", false);
+            animator.SetBool("IsCoucou", false);
+            animator.SetBool("IsBienJoue", false);
+            animator.SetBool("IsGogo", false);
+            animator.SetBool("IsOk", false);
             //anim.Play("Idle");
         }
 
