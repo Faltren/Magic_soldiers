@@ -84,8 +84,14 @@ public class Personnage : NetworkBehaviour {
 
     public GameObject quit;
 
-    public RawImage healthBar;
-    public RawImage shieldBar;
+    public Image healthBar;
+    public Image shieldBar;
+
+    public Image blood;
+    private Color colBlood;
+
+    //public RawImage healthBar;
+    //public RawImage shieldBar;
 
     public Image msg_img;
 
@@ -111,6 +117,10 @@ public class Personnage : NetworkBehaviour {
         door7 = GameObject.Find("door7");
 
         can = new Canvas_UI_Online(this, quit, text, text_msg, text_sec, text_infos, text_pause, healthBar, shieldBar, msg_img, GetComponent<Transform>(), door1, door2, door3, door4, door5, door6, door7);
+
+        colBlood = blood.color;
+        colBlood.a = 0;
+        blood.color = colBlood;
 
         animator = GetComponent<Animator>();
         run = false;
@@ -158,10 +168,30 @@ public class Personnage : NetworkBehaviour {
 
         if (isLocalPlayer)
         {
+            shieldBar.gameObject.SetActive(true);
+            healthBar.gameObject.SetActive(true);
             can.Display(life, shield);
+        }
+        else
+        {
+            shieldBar.gameObject.SetActive(false);
+            healthBar.gameObject.SetActive(false);
         }
 
         CheckDoors();
+
+        if(isLocalPlayer && life <= 0)
+        {
+            shield = 0;
+            life = 0;
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            quit.SetActive(true);
+
+            text_pause.text = "GAME OVER";
+        }
 
         if (!escaped && isLocalPlayer)
         {
@@ -392,7 +422,7 @@ public class Personnage : NetworkBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "enemy_atk")
+        if (collision.gameObject.tag == "enemy_atk" && isLocalPlayer)
         {
             Damage();
         }
@@ -508,7 +538,8 @@ public class Personnage : NetworkBehaviour {
 
     private void Damage()
     {
-        shieldCooldown = Time.time + 3;
+        shieldCooldown = Time.time +10;
+
         if(shield > 0)
         {
             shield -= 5;
@@ -520,11 +551,33 @@ public class Personnage : NetworkBehaviour {
         else
         {
             life -= 5;
+
+            colBlood.a += 0.025f;
+            blood.color = colBlood;
+
             if (life < 0)
             {
                 life = 0;
             }
         }
+
+        DisplayLife();
+    }
+
+    private void DisplayLife()
+    {
+        /*Placement des barres de vie/bouclier*/
+        healthBar.rectTransform.sizeDelta = new Vector2(life * 2.25f, 30); //225 = 100 => 1 = 2.25
+        shieldBar.rectTransform.sizeDelta = new Vector2(shield * 2.25f, 30);
+
+        healthBar.rectTransform.transform.position = new Vector2(life * 2.25f / 2 + 37, healthBar.rectTransform.transform.position.y);
+        shieldBar.rectTransform.transform.position = new Vector2(shield * 2.25f / 2 + 37, healthBar.rectTransform.transform.position.y - 55);
+        /*Fin du placement*/
+
+        //print(life + " life");
+        //print(shield + " shield");
+        //print(healthBar.rectTransform.transform.position);
+        //print(shieldBar.rectTransform.transform.position);
     }
 
     private void ShieldRegeneration()
@@ -532,7 +585,8 @@ public class Personnage : NetworkBehaviour {
         if (shield < 100)
         {
             shield++;
-        }
+            DisplayLife();
+        }        
     }
 
 }

@@ -26,8 +26,8 @@ public class Canvas_UI_Online : MonoBehaviour {
 
     private GameObject quit;
 
-    private RawImage healthBar;
-    private RawImage shieldBar;
+    private Image healthBar;
+    private Image shieldBar;
 
     private Image msg_img;
 
@@ -49,7 +49,10 @@ public class Canvas_UI_Online : MonoBehaviour {
     private bool isGobelinQuestDone;
     //private int isSending = 0;
 
-    public Canvas_UI_Online(Personnage perso, GameObject quit, Text text, Text text_msg, Text text_sec, Text text_infos, Text text_pause, RawImage healthBar, RawImage shieldBar, Image msg_img, Transform player, GameObject door1, GameObject door2, GameObject door3, GameObject door4, GameObject door5, GameObject door6, GameObject door7)
+    private int life;
+    private int shield;
+
+    public Canvas_UI_Online(Personnage perso, GameObject quit, Text text, Text text_msg, Text text_sec, Text text_infos, Text text_pause, Image healthBar, Image shieldBar, Image msg_img, Transform player, GameObject door1, GameObject door2, GameObject door3, GameObject door4, GameObject door5, GameObject door6, GameObject door7)
     {
         isGobelinActivated = false;
         isGobelinQuestDone = false;
@@ -91,19 +94,21 @@ public class Canvas_UI_Online : MonoBehaviour {
         objectifs = text.text;
         objectifsSecondaire = text_sec.text;
 
+        text.text = "";
+        text_sec.text = "";
+
         currentTime = 0;
         timeForNext = 3;
+
+        life = 100;
+        shield = 100;
     }
 
     public void Display(int life, int shield)
     {
-        /*Placement des barres de vie/bouclier*/
-        healthBar.rectTransform.sizeDelta = new Vector2(life * 2.25f, 30); //225 = 100 => 1 = 2.25
-        shieldBar.rectTransform.sizeDelta = new Vector2(shield * 2.25f, 30);
 
-        healthBar.rectTransform.transform.position = new Vector2(life * 2.25f / 2 + 37, healthBar.rectTransform.transform.position.y);
-        shieldBar.rectTransform.transform.position = new Vector2(shield * 2.25f / 2 + 37, healthBar.rectTransform.transform.position.y - 55);
-        /*Fin du placement*/
+        this.life = life;
+        this.shield = shield;
 
         /*Verification si il y a une pause*/
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -153,6 +158,7 @@ public class Canvas_UI_Online : MonoBehaviour {
         Texte_pause();
     }
 
+    
     #region textePause
     private void Texte_pause()
     {
