@@ -18,8 +18,8 @@ public class Personnage : NetworkBehaviour {
 
     public bool escaped;
 
-    public int personnageSpeedWalk;
-    public int personnageSpeedRun;
+    public static int personnageSpeedWalk = 10;
+    public static int personnageSpeedRun = 20;
     private int personnageSpeed;
     public int jumpSpeed;
     private bool isGrounded;
@@ -35,7 +35,8 @@ public class Personnage : NetworkBehaviour {
     public static int life;
     public static int attack;
     public static int shield;
-
+    
+    public static int damageTaken = 5;
     //temps avant la regen du shield
     private static float shieldCooldown = 0f;
 
@@ -59,7 +60,7 @@ public class Personnage : NetworkBehaviour {
     private Vector3 trans;
 
     public static bool isSurchauffe;
-    BalleTir blabla;
+    private BalleTir blabla;
     public GameObject balleCasting;
     private ParticleSystem shoot;
     public ParticleSystem surchauffe;
@@ -136,7 +137,7 @@ public class Personnage : NetworkBehaviour {
 
         life = 100;
         shield = 100;
-        attack = 5;
+        attack = 2;
 
         player = GetComponent<Rigidbody>();
         anim = GetComponent<Animation>();
@@ -148,7 +149,6 @@ public class Personnage : NetworkBehaviour {
         cam.transform.SetParent(Spine.transform);
 
         isGrounded = false;
-        attack = 5;
 
         isSurchauffe = false;
         shoot = GetComponentInChildren<ParticleSystem>();
@@ -218,7 +218,6 @@ public class Personnage : NetworkBehaviour {
                         nbTirs--;
                     }
 
-                    
                     surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * 9.85f, 28); //20 tirs = 197 => 1 = 9.85
                 }
                 isSurchauffe = false;
@@ -542,7 +541,7 @@ public class Personnage : NetworkBehaviour {
 
         if(shield > 0)
         {
-            shield -= 5;
+            shield -= damageTaken;
             if (shield < 0)
             {
                 shield = 0;
@@ -550,7 +549,7 @@ public class Personnage : NetworkBehaviour {
         }
         else
         {
-            life -= 5;
+            life -= damageTaken;
 
             colBlood.a += 0.025f;
             blood.color = colBlood;

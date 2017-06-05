@@ -1111,41 +1111,6 @@ public class Canvas_UI_Online : MonoBehaviour {
             }
 
 
-            if (!isMessageSent[8])
-            {
-                if (text_msg.text == "")
-                {
-                    currentTime = Time.time;
-                }
-
-                if (player.transform.position.z >= 386 && player.transform.position.z <= 402)
-                {
-                    if (player.transform.position.x >= 1018 && player.transform.position.x <= 1038)
-                    {
-                        if (currentTime + timeForNext * 3 < Time.time)
-                        {
-                            text_msg.text = "";
-                            isMessageSent[8] = true;
-                            isGobelinActivated = true;
-                            msg_img.gameObject.SetActive(false);
-                        }
-                        else if (currentTime + timeForNext * 2 < Time.time)
-                        {
-                            text_msg.text = "<color=grey><b>Vous</b> : <i>Vous croyez que je peux lui faire confiance ?</i></color>\n<b>Radio</b> : <i>Je ne sais pas trop, les gobelins sont connus pour leurs fourberies ... Aide le quand même, on ne sait jamais</i>";
-                        }
-                        else if (currentTime + timeForNext < Time.time)
-                        {
-                            text_msg.text = "<color=grey><b>Gobelin</b> : <i>Eh toi ! Ramene moi du KiBrille et je te donnerai quelque chose en échange!</i></color>\n<b>Vous</b> : <i>Vous croyez que je peux lui faire confiance ?</i>";
-                        }
-                        else
-                        {
-                            msg_img.gameObject.SetActive(true);
-                            text_msg.text = "<b>Gobelin</b> : <i>Eh toi ! Ramene moi du KiBrille et je te donnerai quelque chose en échange!</i>";
-                        }
-                    }
-                }
-            }
-
             if (!isMessageSent[9])
             {
                 if (text_msg.text == "")
@@ -1190,6 +1155,8 @@ public class Canvas_UI_Online : MonoBehaviour {
                     {
                         if (currentTime + timeForNext * 4 < Time.time)
                         {
+                            if(Personnage.attack <= 10)
+                                Personnage.attack += 1;
                             text_msg.text = "";
                             isMessageSent[10] = true;
                             msg_img.gameObject.SetActive(false);
