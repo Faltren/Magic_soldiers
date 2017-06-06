@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/Level1.unity
-=======
-- path: Assets/Scenes/Menu.unity
->>>>>>> refs/remotes/origin/master
   isLoaded: 1
   isActive: 1
