@@ -5,7 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 
-public class Canvas_UI_Online : MonoBehaviour {
+public class Canvas_UI_Online : MonoBehaviour
+{
+
+    public static string langue = Menu.langue;
 
     public GameObject door1;
     public GameObject door2;
@@ -49,6 +52,9 @@ public class Canvas_UI_Online : MonoBehaviour {
     private bool isGobelinQuestDone;
     //private int isSending = 0;
 
+    private int life;
+    private int shield;
+
     public Canvas_UI_Online(Personnage perso, GameObject quit, Text text, Text text_msg, Text text_sec, Text text_infos, Text text_pause, RawImage healthBar, RawImage shieldBar, Image msg_img, Transform player, GameObject door1, GameObject door2, GameObject door3, GameObject door4, GameObject door5, GameObject door6, GameObject door7)
     {
         isGobelinActivated = false;
@@ -67,7 +73,7 @@ public class Canvas_UI_Online : MonoBehaviour {
 
         //Level1
         levelName = "Level1";
-        isPrincipalFinished = new bool[] { false, false, false, false};
+        isPrincipalFinished = new bool[] { false, false, false, false };
         isSecondaryFinished = new bool[] { false, false };
         isMessageSent = new bool[] { false, false, false, false, false, false, false, false, false, false }; //10
 
@@ -91,19 +97,21 @@ public class Canvas_UI_Online : MonoBehaviour {
         objectifs = text.text;
         objectifsSecondaire = text_sec.text;
 
+        text.text = "";
+        text_sec.text = "";
+
         currentTime = 0;
         timeForNext = 3;
+
+        life = 100;
+        shield = 100;
     }
 
     public void Display(int life, int shield)
     {
-        /*Placement des barres de vie/bouclier*/
-        healthBar.rectTransform.sizeDelta = new Vector2(life * 2.25f, 30); //225 = 100 => 1 = 2.25
-        shieldBar.rectTransform.sizeDelta = new Vector2(shield * 2.25f, 30);
 
-        healthBar.rectTransform.transform.position = new Vector2(life * 2.25f / 2 + 37, healthBar.rectTransform.transform.position.y);
-        shieldBar.rectTransform.transform.position = new Vector2(shield * 2.25f / 2 + 37, healthBar.rectTransform.transform.position.y - 55);
-        /*Fin du placement*/
+        this.life = life;
+        this.shield = shield;
 
         /*Verification si il y a une pause*/
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -124,13 +132,27 @@ public class Canvas_UI_Online : MonoBehaviour {
                 perso.escaped = false;
                 quit.SetActive(false);
             }
-            
+
+        }
+
+        if (isPaused && !perso.escaped)
+        {
+            isPaused = false;
+        }
+        else if (!isPaused && perso.escaped)
+        {
+            isPaused = true;
         }
 
         if (!isPaused)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            quit.SetActive(false);
+        }
+        else
+        {
+            quit.SetActive(true);
         }
         /*Fin de la verif*/
 
@@ -147,11 +169,23 @@ public class Canvas_UI_Online : MonoBehaviour {
         }
         /*Fin affichage*/
 
-        Objectif();
-        ObjectifsSecondaires();
-        Message();
-        Texte_pause();
+        if (langue == "fr")
+        {
+            Objectif();
+            ObjectifsSecondaires();
+            Message();
+            Texte_pause();
+        }
+        else
+        {
+            Objectif_EN();
+            ObjectifsSecondaires_EN();
+            Message_EN();
+            Texte_Pause_EN();
+        }
+
     }
+
 
     #region textePause
     private void Texte_pause()
@@ -159,12 +193,25 @@ public class Canvas_UI_Online : MonoBehaviour {
         if (player.transform.position.z >= 43 && player.transform.position.z <= 113 && player.transform.position.x >= 413 && player.transform.position.x <= 454)
         {
             levelName = "Level2";
-            text_pause.text = "Fin du Niveau 1";   
+            text_pause.text = "Fin du Niveau 1";
+            isPrincipalFinished[3] = true;
+            isPrincipalFinished = new bool[] { false, false, false, false, false };
+            isSecondaryFinished = new bool[] { false };
+            isMessageSent = new bool[] { false, false, false, false, false, false, false, false, false, false, false }; //11
+            text.text = objectifs + " " + levelName + " ";
+            text_sec.text = objectifsSecondaire;
+            isGobelinActivated = false;
+            isGobelinQuestDone = false;
         }
         else
         {
             text_pause.text = "";
         }
+    }
+
+    private void Texte_Pause_EN()
+    {
+
     }
     #endregion
 
@@ -284,7 +331,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                     }
                 }
             }
-            else if(!isPrincipalFinished[2])
+            else if (!isPrincipalFinished[2])
             {
                 if (player.transform.position.z >= 198 && player.transform.position.z <= 245)
                 {
@@ -297,7 +344,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                     }
                 }
             }
-            else if(!isPrincipalFinished[3])
+            else if (!isPrincipalFinished[3])
             {
                 if (player.transform.position.z >= 78 && player.transform.position.z <= 173)
                 {
@@ -310,7 +357,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                     }
                 }
             }
-            else if(!isPrincipalFinished[4])
+            else if (!isPrincipalFinished[4])
             {
                 //fin
             }
@@ -321,6 +368,12 @@ public class Canvas_UI_Online : MonoBehaviour {
 
 
     }
+
+    private void Objectif_EN()
+    {
+
+    }
+
     #endregion
 
     #region Secondaires
@@ -392,7 +445,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                 else
                 {
                     text_sec.text = text_sec.text + "<size=14>\n\n<color=white>-Trouver du KiBrille</color></size>";
-                }               
+                }
             }
 
             /*portes level2*/
@@ -450,6 +503,11 @@ public class Canvas_UI_Online : MonoBehaviour {
 
     }
 
+    private void ObjectifsSecondaires_EN()
+    {
+
+    }
+
     #endregion
 
     #region Messages
@@ -485,7 +543,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                         else
                         {
                             msg_img.gameObject.SetActive(true);
-                            text_msg.text = "<b>Radio</b> : <i>Tu m'entends ?</i>";                            
+                            text_msg.text = "<b>Radio</b> : <i>Tu m'entends ?</i>";
                         }
                     }
                 }
@@ -530,7 +588,7 @@ public class Canvas_UI_Online : MonoBehaviour {
             }
 
             if (!isMessageSent[2])
-            { 
+            {
                 if (text_msg.text == "")
                 {
                     currentTime = Time.time;
@@ -659,7 +717,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                             }
                         }
 
-                        
+
                     }
                 }
             }
@@ -746,7 +804,7 @@ public class Canvas_UI_Online : MonoBehaviour {
                                 msg_img.gameObject.SetActive(true);
                                 text_msg.text = "<b>Radio</b> : <i>Il n'y a pas assez de batteries, trouve en d'autres</i>";
                             }
-                        }                        
+                        }
                     }
                 }
             }
@@ -1097,41 +1155,6 @@ public class Canvas_UI_Online : MonoBehaviour {
             }
 
 
-            if (!isMessageSent[8])
-            {
-                if (text_msg.text == "")
-                {
-                    currentTime = Time.time;
-                }
-
-                if (player.transform.position.z >= 386 && player.transform.position.z <= 402)
-                {
-                    if (player.transform.position.x >= 1018 && player.transform.position.x <= 1038)
-                    {
-                        if (currentTime + timeForNext * 3 < Time.time)
-                        {
-                            text_msg.text = "";
-                            isMessageSent[8] = true;
-                            isGobelinActivated = true;
-                            msg_img.gameObject.SetActive(false);
-                        }
-                        else if (currentTime + timeForNext * 2 < Time.time)
-                        {
-                            text_msg.text = "<color=grey><b>Vous</b> : <i>Vous croyez que je peux lui faire confiance ?</i></color>\n<b>Radio</b> : <i>Je ne sais pas trop, les gobelins sont connus pour leurs fourberies ... Aide le quand même, on ne sait jamais</i>";
-                        }
-                        else if (currentTime + timeForNext < Time.time)
-                        {
-                            text_msg.text = "<color=grey><b>Gobelin</b> : <i>Eh toi ! Ramene moi du KiBrille et je te donnerai quelque chose en échange!</i></color>\n<b>Vous</b> : <i>Vous croyez que je peux lui faire confiance ?</i>";
-                        }
-                        else
-                        {
-                            msg_img.gameObject.SetActive(true);
-                            text_msg.text = "<b>Gobelin</b> : <i>Eh toi ! Ramene moi du KiBrille et je te donnerai quelque chose en échange!</i>";
-                        }
-                    }
-                }
-            }
-
             if (!isMessageSent[9])
             {
                 if (text_msg.text == "")
@@ -1176,6 +1199,8 @@ public class Canvas_UI_Online : MonoBehaviour {
                     {
                         if (currentTime + timeForNext * 4 < Time.time)
                         {
+                            if (Personnage.attack <= 10)
+                                Personnage.attack += 1;
                             text_msg.text = "";
                             isMessageSent[10] = true;
                             msg_img.gameObject.SetActive(false);
@@ -1193,6 +1218,12 @@ public class Canvas_UI_Online : MonoBehaviour {
         }//fin level2
 
 
+
+    }
+
+
+    private void Message_EN()
+    {
 
     }
     #endregion
