@@ -262,8 +262,8 @@ Light:
   serializedVersion: 7
   m_Type: 2
   m_Color: {r: 1, g: 0.5882353, b: 0, a: 1}
-  m_Intensity: 8
-  m_Range: 200
+  m_Intensity: 1
+  m_Range: 33
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -10737,5 +10737,5 @@ MonoBehaviour:
   BaseFlame: {fileID: 100008}
   Etincelles: {fileID: 100004}
   Fumee: {fileID: 100010}
-  MaxLightIntensity: 8
-  IntensityLight: 7
+  MaxLightIntensity: 0.125
+  IntensityLight: 0.1
