@@ -7,6 +7,8 @@ using UnityEngine.Networking;
 
 public class Canvas_UI_Online : MonoBehaviour {
 
+    public static string langue = Menu.langue;
+
     public GameObject door1;
     public GameObject door2;
     public GameObject door3;
@@ -166,10 +168,21 @@ public class Canvas_UI_Online : MonoBehaviour {
         }
         /*Fin affichage*/
 
-        Objectif();
-        ObjectifsSecondaires();
-        Message();
-        Texte_pause();
+        if (langue == "fr")
+        {
+            Objectif();
+            ObjectifsSecondaires();
+            Message();
+            Texte_pause();
+        }
+        else
+        {
+            Objectif_EN();
+            ObjectifsSecondaires_EN();
+            Message_EN();
+            Texte_Pause_EN();
+        }
+        
     }
 
     
@@ -193,6 +206,11 @@ public class Canvas_UI_Online : MonoBehaviour {
         {
             text_pause.text = "";
         }
+    }
+
+    private void Texte_Pause_EN()
+    {
+
     }
     #endregion
 
@@ -349,6 +367,12 @@ public class Canvas_UI_Online : MonoBehaviour {
 
 
     }
+
+    private void Objectif_EN()
+    {
+
+    }
+
     #endregion
 
     #region Secondaires
@@ -475,6 +499,11 @@ public class Canvas_UI_Online : MonoBehaviour {
 
         }//fin level 2
 
+
+    }
+
+    private void ObjectifsSecondaires_EN()
+    {
 
     }
 
@@ -1188,6 +1217,12 @@ public class Canvas_UI_Online : MonoBehaviour {
         }//fin level2
 
 
+
+    }
+
+
+    private void Message_EN()
+    {
 
     }
     #endregion

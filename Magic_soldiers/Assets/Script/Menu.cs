@@ -26,6 +26,17 @@ public class Menu : MonoBehaviour {
     private Text bar_vol_text;
     public static int volume;
 
+    /*FR - EN*/
+    public Text tuto;
+    public Text jouer;
+    public Text Quitter;
+
+    public Text sensi_text;
+    public Text vol;
+    public Text langue_text;
+
+    public static string langue = "fr";
+
     void Start () {
 
         Up = false;
@@ -52,6 +63,26 @@ public class Menu : MonoBehaviour {
 	
 	
 	void Update () {
+
+        if (langue == "fr")
+        {
+            tuto.text = "Tutoriel";
+            jouer.text = "Jouer";
+            Quitter.text = "Quitter";
+            sensi_text.text = "sensibilite";
+            vol.text = "volume";
+            langue_text.text = "langue";
+        }
+        else
+        {
+            tuto.text = "Tutorial";
+            jouer.text = "Play";
+            Quitter.text = "Quit";
+            sensi_text.text = "sensibility";
+            vol.text = "Volume";
+            langue_text.text = "language";            
+        }
+
 
         Moves();
 
@@ -83,7 +114,10 @@ public class Menu : MonoBehaviour {
                     break;
 
                 case 1: //Jouer
-                    Application.LoadLevel("Lobby_netWork");
+                    if (langue == "fr")
+                        Application.LoadLevel("Lobby_netWork");
+                    else
+                        Application.LoadLevel("Lobby_netWork_EN");
                     break;
 
                 case 2: //Options
