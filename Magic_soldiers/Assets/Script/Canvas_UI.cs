@@ -40,7 +40,7 @@ public class Canvas_UI : MonoBehaviour {
 
     void Start()
     {
-        volume = Menu.volume;
+        volume = 1;
 
         /*text = GameObject.Find("Objectifs").GetComponent<Text>();
         text_msg = GameObject.Find("Messages").GetComponent<Text>();

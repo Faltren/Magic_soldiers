@@ -22,12 +22,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
-        name: _Cube
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - first:
         name: _DetailAlbedoMap
       second:
         m_Texture: {fileID: 0}
@@ -116,9 +110,6 @@ Material:
         name: _Parallax
       second: 0.02
     - first:
-        name: _Shininess
-      second: 0.078125
-    - first:
         name: _SmoothnessTextureChannel
       second: 0
     - first:
@@ -140,9 +131,6 @@ Material:
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
-    - first:
-        name: _ReflectColor
-      second: {r: 1, g: 1, b: 1, a: 0.5}
     - first:
         name: _SpecColor
       second: {r: 0.125, g: 0.1194853, b: 0.1194853, a: 1}

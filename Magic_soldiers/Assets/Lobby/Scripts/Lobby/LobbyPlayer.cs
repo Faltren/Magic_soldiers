@@ -234,12 +234,7 @@ namespace Prototype.NetworkLobby
         [ClientRpc]
         public void RpcUpdateCountdown(int countdown)
         {
-            string msg = "";
-            if (Menu.langue == "fr")
-                msg = "Le match demarre dans";
-            else
-                msg = "The game start in ";
-            LobbyManager.s_Singleton.countdownPanel.UIText.text = msg + countdown;
+            LobbyManager.s_Singleton.countdownPanel.UIText.text = "Le match demarre dans " + countdown;
             LobbyManager.s_Singleton.countdownPanel.gameObject.SetActive(countdown != 0);
         }
 

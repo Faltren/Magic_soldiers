@@ -98,8 +98,8 @@ namespace Prototype.NetworkLobby
 
         public void OnClickBackToMenu()
         {
-            SceneManager.LoadScene("Menu");
             Destroy(GameObject.Find("LobbyManager"));
+            SceneManager.LoadScene("Menu");
         }
         /* void onEndEditGameName(string text)
          {
