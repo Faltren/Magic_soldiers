@@ -17,7 +17,7 @@ public class QuitManager : NetworkBehaviour
 
     public void OnQuit()
     {
-       Destroy(GameObject.Find("LobbyManager"));
+        Destroy(GameObject.Find("LobbyManager"));
         SceneManager.LoadScene("Lobby_netWork");
         Network.Disconnect();
         NetworkClient.ShutdownAll();

@@ -7,6 +7,8 @@ using UnityEngine.Networking;
 
 public class Canvas_UI_Online : MonoBehaviour {
 
+    public static string langue = Menu.langue;
+
     public GameObject door1;
     public GameObject door2;
     public GameObject door3;
@@ -26,8 +28,8 @@ public class Canvas_UI_Online : MonoBehaviour {
 
     private GameObject quit;
 
-    private RawImage healthBar;
-    private RawImage shieldBar;
+    private Image healthBar;
+    private Image shieldBar;
 
     private Image msg_img;
 
@@ -49,7 +51,10 @@ public class Canvas_UI_Online : MonoBehaviour {
     private bool isGobelinQuestDone;
     //private int isSending = 0;
 
-    public Canvas_UI_Online(Personnage perso, GameObject quit, Text text, Text text_msg, Text text_sec, Text text_infos, Text text_pause, RawImage healthBar, RawImage shieldBar, Image msg_img, Transform player, GameObject door1, GameObject door2, GameObject door3, GameObject door4, GameObject door5, GameObject door6, GameObject door7)
+    private int life;
+    private int shield;
+
+    public Canvas_UI_Online(Personnage perso, GameObject quit, Text text, Text text_msg, Text text_sec, Text text_infos, Text text_pause, Image healthBar, Image shieldBar, Image msg_img, Transform player, GameObject door1, GameObject door2, GameObject door3, GameObject door4, GameObject door5, GameObject door6, GameObject door7)
     {
         isGobelinActivated = false;
         isGobelinQuestDone = false;
@@ -91,19 +96,21 @@ public class Canvas_UI_Online : MonoBehaviour {
         objectifs = text.text;
         objectifsSecondaire = text_sec.text;
 
+        text.text = "";
+        text_sec.text = "";
+
         currentTime = 0;
         timeForNext = 3;
+
+        life = 100;
+        shield = 100;
     }
 
     public void Display(int life, int shield)
     {
-        /*Placement des barres de vie/bouclier*/
-        healthBar.rectTransform.sizeDelta = new Vector2(life * 2.25f, 30); //225 = 100 => 1 = 2.25
-        shieldBar.rectTransform.sizeDelta = new Vector2(shield * 2.25f, 30);
 
-        healthBar.rectTransform.transform.position = new Vector2(life * 2.25f / 2 + 37, healthBar.rectTransform.transform.position.y);
-        shieldBar.rectTransform.transform.position = new Vector2(shield * 2.25f / 2 + 37, healthBar.rectTransform.transform.position.y - 55);
-        /*Fin du placement*/
+        this.life = life;
+        this.shield = shield;
 
         /*Verification si il y a une pause*/
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -127,10 +134,24 @@ public class Canvas_UI_Online : MonoBehaviour {
             
         }
 
+        if (isPaused && !perso.escaped)
+        {
+            isPaused = false;
+        }
+        else if(!isPaused && perso.escaped)
+        {
+            isPaused = true;
+        }
+
         if (!isPaused)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            quit.SetActive(false);
+        }
+        else
+        {
+            quit.SetActive(true);
         }
         /*Fin de la verif*/
 
@@ -147,12 +168,24 @@ public class Canvas_UI_Online : MonoBehaviour {
         }
         /*Fin affichage*/
 
-        Objectif();
-        ObjectifsSecondaires();
-        Message();
-        Texte_pause();
+        if (langue == "fr")
+        {
+            Objectif();
+            ObjectifsSecondaires();
+            Message();
+            Texte_pause();
+        }
+        else
+        {
+            Objectif_EN();
+            ObjectifsSecondaires_EN();
+            Message_EN();
+            Texte_Pause_EN();
+        }
+        
     }
 
+    
     #region textePause
     private void Texte_pause()
     {
@@ -173,6 +206,11 @@ public class Canvas_UI_Online : MonoBehaviour {
         {
             text_pause.text = "";
         }
+    }
+
+    private void Texte_Pause_EN()
+    {
+
     }
     #endregion
 
@@ -329,6 +367,12 @@ public class Canvas_UI_Online : MonoBehaviour {
 
 
     }
+
+    private void Objectif_EN()
+    {
+
+    }
+
     #endregion
 
     #region Secondaires
@@ -455,6 +499,11 @@ public class Canvas_UI_Online : MonoBehaviour {
 
         }//fin level 2
 
+
+    }
+
+    private void ObjectifsSecondaires_EN()
+    {
 
     }
 
@@ -1105,41 +1154,6 @@ public class Canvas_UI_Online : MonoBehaviour {
             }
 
 
-            if (!isMessageSent[8])
-            {
-                if (text_msg.text == "")
-                {
-                    currentTime = Time.time;
-                }
-
-                if (player.transform.position.z >= 386 && player.transform.position.z <= 402)
-                {
-                    if (player.transform.position.x >= 1018 && player.transform.position.x <= 1038)
-                    {
-                        if (currentTime + timeForNext * 3 < Time.time)
-                        {
-                            text_msg.text = "";
-                            isMessageSent[8] = true;
-                            isGobelinActivated = true;
-                            msg_img.gameObject.SetActive(false);
-                        }
-                        else if (currentTime + timeForNext * 2 < Time.time)
-                        {
-                            text_msg.text = "<color=grey><b>Vous</b> : <i>Vous croyez que je peux lui faire confiance ?</i></color>\n<b>Radio</b> : <i>Je ne sais pas trop, les gobelins sont connus pour leurs fourberies ... Aide le quand même, on ne sait jamais</i>";
-                        }
-                        else if (currentTime + timeForNext < Time.time)
-                        {
-                            text_msg.text = "<color=grey><b>Gobelin</b> : <i>Eh toi ! Ramene moi du KiBrille et je te donnerai quelque chose en échange!</i></color>\n<b>Vous</b> : <i>Vous croyez que je peux lui faire confiance ?</i>";
-                        }
-                        else
-                        {
-                            msg_img.gameObject.SetActive(true);
-                            text_msg.text = "<b>Gobelin</b> : <i>Eh toi ! Ramene moi du KiBrille et je te donnerai quelque chose en échange!</i>";
-                        }
-                    }
-                }
-            }
-
             if (!isMessageSent[9])
             {
                 if (text_msg.text == "")
@@ -1184,6 +1198,8 @@ public class Canvas_UI_Online : MonoBehaviour {
                     {
                         if (currentTime + timeForNext * 4 < Time.time)
                         {
+                            if(Personnage.attack <= 10)
+                                Personnage.attack += 1;
                             text_msg.text = "";
                             isMessageSent[10] = true;
                             msg_img.gameObject.SetActive(false);
@@ -1201,6 +1217,12 @@ public class Canvas_UI_Online : MonoBehaviour {
         }//fin level2
 
 
+
+    }
+
+
+    private void Message_EN()
+    {
 
     }
     #endregion

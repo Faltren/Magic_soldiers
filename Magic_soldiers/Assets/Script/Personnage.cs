@@ -8,6 +8,10 @@ public class Personnage : NetworkBehaviour {
 
     #region Attributes
 
+    private float alpha;
+    public static float alphamax = 0f;
+    private bool bloodUp;
+
     private GameObject door1;
     private GameObject door2;
     private GameObject door3;
@@ -18,8 +22,8 @@ public class Personnage : NetworkBehaviour {
 
     public bool escaped;
 
-    public int personnageSpeedWalk;
-    public int personnageSpeedRun;
+    public static int personnageSpeedWalk = 10;
+    public static int personnageSpeedRun = 20;
     private int personnageSpeed;
     public int jumpSpeed;
     private bool isGrounded;
@@ -35,7 +39,8 @@ public class Personnage : NetworkBehaviour {
     public static int life;
     public static int attack;
     public static int shield;
-
+    
+    public static int damageTaken = 5;
     //temps avant la regen du shield
     private static float shieldCooldown = 0f;
 
@@ -56,10 +61,12 @@ public class Personnage : NetworkBehaviour {
     private int i; //name Compteur
     private int nbTirs;
 
+    public static int nbTirsMax = 20;
+
     private Vector3 trans;
 
     public static bool isSurchauffe;
-    BalleTir blabla;
+    private BalleTir blabla;
     public GameObject balleCasting;
     private ParticleSystem shoot;
     public ParticleSystem surchauffe;
@@ -84,8 +91,14 @@ public class Personnage : NetworkBehaviour {
 
     public GameObject quit;
 
-    public RawImage healthBar;
-    public RawImage shieldBar;
+    public Image healthBar;
+    public Image shieldBar;
+
+    public Image blood;
+    private Color colBlood;
+
+    //public RawImage healthBar;
+    //public RawImage shieldBar;
 
     public Image msg_img;
 
@@ -100,6 +113,8 @@ public class Personnage : NetworkBehaviour {
 
     void Start () {
 
+        AudioListener.volume = Menu.volume;
+
         door1 = GameObject.Find("door1");
         door2 = GameObject.Find("door2");
         door3 = GameObject.Find("door3");
@@ -109,6 +124,13 @@ public class Personnage : NetworkBehaviour {
         door7 = GameObject.Find("door7");
 
         can = new Canvas_UI_Online(this, quit, text, text_msg, text_sec, text_infos, text_pause, healthBar, shieldBar, msg_img, GetComponent<Transform>(), door1, door2, door3, door4, door5, door6, door7);
+
+        alpha = 0;
+        colBlood = blood.color;
+        colBlood.a = alpha;
+        blood.color = colBlood;
+
+        bloodUp = false;
 
         animator = GetComponent<Animator>();
         run = false;
@@ -124,7 +146,7 @@ public class Personnage : NetworkBehaviour {
 
         life = 100;
         shield = 100;
-        attack = 5;
+        attack = 2;
 
         player = GetComponent<Rigidbody>();
         anim = GetComponent<Animation>();
@@ -136,13 +158,12 @@ public class Personnage : NetworkBehaviour {
         cam.transform.SetParent(Spine.transform);
 
         isGrounded = false;
-        attack = 5;
 
         isSurchauffe = false;
         shoot = GetComponentInChildren<ParticleSystem>();
         nbTirs = 0;
 
-        surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * 9.85f, 28); //20 tirs = 197 => 1 = 9.85
+        surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * (197f / nbTirsMax), 28); //20 tirs = 197 => 1 = 9.85
 
         Shoot = new Vector3(0, 0, 1);
 
@@ -156,10 +177,34 @@ public class Personnage : NetworkBehaviour {
 
         if (isLocalPlayer)
         {
+            shieldBar.gameObject.SetActive(true);
+            healthBar.gameObject.SetActive(true);
+            BloodPrint();
             can.Display(life, shield);
+        }
+        else
+        {
+            shieldBar.gameObject.SetActive(false);
+            healthBar.gameObject.SetActive(false);
         }
 
         CheckDoors();
+
+        if(isLocalPlayer && life <= 0)
+        {
+            shield = 0;
+            life = 0;
+            alpha = 0;
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            quit.SetActive(true);
+            escaped = true;
+            
+
+            text_pause.text = "GAME OVER";
+        }
 
         if (!escaped && isLocalPlayer)
         {
@@ -186,8 +231,7 @@ public class Personnage : NetworkBehaviour {
                         nbTirs--;
                     }
 
-                    
-                    surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * 9.85f, 28); //20 tirs = 197 => 1 = 9.85
+                    surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * (197f / nbTirsMax), 28); //20 tirs = 197 => 1 = 9.85
                 }
                 isSurchauffe = false;
                 
@@ -205,12 +249,11 @@ public class Personnage : NetworkBehaviour {
                 }
                 else if (Input.GetKey(KeyCode.Mouse1))
                 {
-                    if (nbTirs < 20)
+                    if (nbTirs < nbTirsMax)
                     {
                         fireRate = 0.1f;
                         nbTirs++;
-                        print(nbTirs);
-                        surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * 9.85f, 28); //20 tirs = 197 => 1 = 9.85
+                        surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * (197f / nbTirsMax), 28); //20 tirs = 197 => 1 = 9.85
                         nextFire = Time.time + fireRate;
                         CmdBurst_Fire();
                     }
@@ -294,12 +337,15 @@ public class Personnage : NetworkBehaviour {
     private void AnimPerso()
     {
 
-        if (BalleTir_offline.isSurchauffe)
+        if (isSurchauffe)
         {
             animator.SetBool("isShooting", true);
             animator.SetBool("isRunning", false);
             animator.SetBool("isWalking", false);
-
+            animator.SetBool("IsCoucou", false);
+            animator.SetBool("IsBienJoue", false);
+            animator.SetBool("IsGogo", false);
+            animator.SetBool("IsOk", false);
             //anim["surchauffe"].speed = 0.7f;
             //anim.Play("surchauffe");
         }
@@ -310,6 +356,10 @@ public class Personnage : NetworkBehaviour {
                 animator.SetBool("isShooting", false);
                 animator.SetBool("isRunning", true);
                 animator.SetBool("isWalking", false);
+                animator.SetBool("IsCoucou", false);
+                animator.SetBool("IsBienJoue", false);
+                animator.SetBool("IsGogo", false);
+                animator.SetBool("IsOk", false);
                 //anim["Walk"].speed = 4f;
             }
             else
@@ -317,14 +367,62 @@ public class Personnage : NetworkBehaviour {
                 animator.SetBool("isShooting", false);
                 animator.SetBool("isRunning", false);
                 animator.SetBool("isWalking", true);
+                animator.SetBool("IsCoucou", false);
+                animator.SetBool("IsBienJoue", false);
+                animator.SetBool("IsGogo", false);
+                animator.SetBool("IsOk", false);
                 //anim["Walk"].speed = 2f;
             }
+        }
+        else if (Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1))
+        {
+            animator.SetBool("isShooting", false);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("IsCoucou", true);
+            animator.SetBool("IsBienJoue", false);
+            animator.SetBool("IsGogo", false);
+            animator.SetBool("IsOk", false);
+        }
+        else if (Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2))
+        {
+            animator.SetBool("isShooting", false);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("IsCoucou", false);
+            animator.SetBool("IsBienJoue", true);
+            animator.SetBool("IsGogo", false);
+            animator.SetBool("IsOk", false);
+        }
+        else if (Input.GetKey(KeyCode.Alpha3) || Input.GetKey(KeyCode.Keypad3))
+        {
+            animator.SetBool("isShooting", false);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("IsCoucou", false);
+            animator.SetBool("IsBienJoue", false);
+            animator.SetBool("IsGogo", true);
+            animator.SetBool("IsOk", false);
+        }
+        else if (Input.GetKey(KeyCode.Alpha4) || Input.GetKey(KeyCode.Keypad4))
+        {
+            animator.SetBool("isShooting", false);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("IsCoucou", false);
+            animator.SetBool("IsBienJoue", false);
+            animator.SetBool("IsGogo", false);
+            animator.SetBool("IsOk", true);
         }
         else
         {
             animator.SetBool("isShooting", false);
             animator.SetBool("isRunning", false);
             animator.SetBool("isWalking", false);
+            animator.SetBool("IsCoucou", false);
+            animator.SetBool("IsBienJoue", false);
+            animator.SetBool("IsGogo", false);
+            animator.SetBool("IsOk", false);
             //anim.Play("Idle");
         }
 
@@ -336,7 +434,7 @@ public class Personnage : NetworkBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "enemy_atk")
+        if (collision.gameObject.tag == "enemy_atk" && isLocalPlayer)
         {
             Damage();
         }
@@ -452,10 +550,11 @@ public class Personnage : NetworkBehaviour {
 
     private void Damage()
     {
-        shieldCooldown = Time.time + 3;
+        shieldCooldown = Time.time +10;
+
         if(shield > 0)
         {
-            shield -= 5;
+            shield -= damageTaken;
             if (shield < 0)
             {
                 shield = 0;
@@ -463,12 +562,35 @@ public class Personnage : NetworkBehaviour {
         }
         else
         {
-            life -= 5;
+            life -= damageTaken;
+
+            alphamax += 0.025f;
+            //colBlood.a += 0.025f;
+            //blood.color = colBlood;
+
             if (life < 0)
             {
                 life = 0;
             }
         }
+
+        DisplayLife();
+    }
+
+    private void DisplayLife()
+    {
+        /*Placement des barres de vie/bouclier*/
+        healthBar.rectTransform.sizeDelta = new Vector2(life * 2.25f, 30); //225 = 100 => 1 = 2.25
+        shieldBar.rectTransform.sizeDelta = new Vector2(shield * 2.25f, 30);
+
+        healthBar.rectTransform.transform.position = new Vector2(life * 2.25f / 2 + 37, healthBar.rectTransform.transform.position.y);
+        shieldBar.rectTransform.transform.position = new Vector2(shield * 2.25f / 2 + 37, healthBar.rectTransform.transform.position.y - 55);
+        /*Fin du placement*/
+
+        //print(life + " life");
+        //print(shield + " shield");
+        //print(healthBar.rectTransform.transform.position);
+        //print(shieldBar.rectTransform.transform.position);
     }
 
     private void ShieldRegeneration()
@@ -476,11 +598,51 @@ public class Personnage : NetworkBehaviour {
         if (shield < 100)
         {
             shield++;
+            DisplayLife();
+        }        
+    }
+
+    private void BloodPrint()
+    {
+        if (bloodUp)
+        {
+            if (alpha >= alphamax)
+            {
+                alpha = alphamax;
+                bloodUp = false;
+                colBlood.a = alpha;
+                blood.color = colBlood;
+            }
+            else
+            {
+                alpha += 0.01f;
+                if (alpha >= alphamax)
+                    alpha = alphamax;
+                colBlood.a = alpha;
+                blood.color = colBlood;
+            }
+        }
+        else
+        {
+            if (alpha <= 0f)
+            {
+                alpha = 0;
+                bloodUp = true;
+                colBlood.a = alpha;
+                blood.color = colBlood;
+            }            
+            else
+            {
+                alpha -= 0.01f;
+                if (alpha < 0)
+                    alpha = 0f;
+                colBlood.a = alpha;
+                blood.color = colBlood;
+            }
         }
     }
 
 }
-
 
 
 //private Vector3 directionMove = Vector3.zero;
