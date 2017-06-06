@@ -8,6 +8,10 @@ public class Personnage : NetworkBehaviour {
 
     #region Attributes
 
+    private float alpha;
+    public static float alphamax = 0f;
+    private bool bloodUp;
+
     private GameObject door1;
     private GameObject door2;
     private GameObject door3;
@@ -56,6 +60,8 @@ public class Personnage : NetworkBehaviour {
     public static float nextFire = 0.0f;
     private int i; //name Compteur
     private int nbTirs;
+
+    public static int nbTirsMax = 20;
 
     private Vector3 trans;
 
@@ -119,9 +125,12 @@ public class Personnage : NetworkBehaviour {
 
         can = new Canvas_UI_Online(this, quit, text, text_msg, text_sec, text_infos, text_pause, healthBar, shieldBar, msg_img, GetComponent<Transform>(), door1, door2, door3, door4, door5, door6, door7);
 
+        alpha = 0;
         colBlood = blood.color;
-        colBlood.a = 0;
+        colBlood.a = alpha;
         blood.color = colBlood;
+
+        bloodUp = false;
 
         animator = GetComponent<Animator>();
         run = false;
@@ -154,7 +163,7 @@ public class Personnage : NetworkBehaviour {
         shoot = GetComponentInChildren<ParticleSystem>();
         nbTirs = 0;
 
-        surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * 9.85f, 28); //20 tirs = 197 => 1 = 9.85
+        surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * (197f / nbTirsMax), 28); //20 tirs = 197 => 1 = 9.85
 
         Shoot = new Vector3(0, 0, 1);
 
@@ -170,6 +179,7 @@ public class Personnage : NetworkBehaviour {
         {
             shieldBar.gameObject.SetActive(true);
             healthBar.gameObject.SetActive(true);
+            BloodPrint();
             can.Display(life, shield);
         }
         else
@@ -184,11 +194,14 @@ public class Personnage : NetworkBehaviour {
         {
             shield = 0;
             life = 0;
+            alpha = 0;
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
             quit.SetActive(true);
+            escaped = true;
+            
 
             text_pause.text = "GAME OVER";
         }
@@ -218,7 +231,7 @@ public class Personnage : NetworkBehaviour {
                         nbTirs--;
                     }
 
-                    surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * 9.85f, 28); //20 tirs = 197 => 1 = 9.85
+                    surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * (197f / nbTirsMax), 28); //20 tirs = 197 => 1 = 9.85
                 }
                 isSurchauffe = false;
                 
@@ -236,11 +249,11 @@ public class Personnage : NetworkBehaviour {
                 }
                 else if (Input.GetKey(KeyCode.Mouse1))
                 {
-                    if (nbTirs < 20)
+                    if (nbTirs < nbTirsMax)
                     {
                         fireRate = 0.1f;
                         nbTirs++;
-                        surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * 9.85f, 28); //20 tirs = 197 => 1 = 9.85
+                        surchauffe_img.rectTransform.sizeDelta = new Vector2(nbTirs * (197f / nbTirsMax), 28); //20 tirs = 197 => 1 = 9.85
                         nextFire = Time.time + fireRate;
                         CmdBurst_Fire();
                     }
@@ -551,8 +564,9 @@ public class Personnage : NetworkBehaviour {
         {
             life -= damageTaken;
 
-            colBlood.a += 0.025f;
-            blood.color = colBlood;
+            alphamax += 0.025f;
+            //colBlood.a += 0.025f;
+            //blood.color = colBlood;
 
             if (life < 0)
             {
@@ -588,8 +602,47 @@ public class Personnage : NetworkBehaviour {
         }        
     }
 
-}
+    private void BloodPrint()
+    {
+        if (bloodUp)
+        {
+            if (alpha >= alphamax)
+            {
+                alpha = alphamax;
+                bloodUp = false;
+                colBlood.a = alpha;
+                blood.color = colBlood;
+            }
+            else
+            {
+                alpha += 0.01f;
+                if (alpha >= alphamax)
+                    alpha = alphamax;
+                colBlood.a = alpha;
+                blood.color = colBlood;
+            }
+        }
+        else
+        {
+            if (alpha <= 0f)
+            {
+                alpha = 0;
+                bloodUp = true;
+                colBlood.a = alpha;
+                blood.color = colBlood;
+            }            
+            else
+            {
+                alpha -= 0.01f;
+                if (alpha < 0)
+                    alpha = 0f;
+                colBlood.a = alpha;
+                blood.color = colBlood;
+            }
+        }
+    }
 
+}
 
 
 //private Vector3 directionMove = Vector3.zero;

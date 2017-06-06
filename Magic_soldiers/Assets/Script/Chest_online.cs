@@ -75,7 +75,7 @@ public class Chest_online : NetworkBehaviour {
     {
         Personnage.life = 100;
 
-        int n = Random.Range(0, 1);
+        int n = Random.Range(0, 3);
 
         //attack / vitesse
 
@@ -83,13 +83,19 @@ public class Chest_online : NetworkBehaviour {
         {
             case 0:
                 if (Personnage.attack <= 10)
-                    Personnage.attack += 10;                          
+                    Personnage.attack += 1;                          
                 break;
             case 1:
                 if (Personnage.personnageSpeedWalk <= 15)
                 {
-                    Personnage.personnageSpeedRun += 10;
-                    Personnage.personnageSpeedWalk += 10;
+                    Personnage.personnageSpeedRun += 1;
+                    Personnage.personnageSpeedWalk += 1;
+                }
+                break;
+            case 2:
+                if (Personnage.nbTirsMax <= 30)
+                {
+                    Personnage.nbTirsMax += 1;
                 }
                 break;
 

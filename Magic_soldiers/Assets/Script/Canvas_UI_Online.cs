@@ -132,10 +132,24 @@ public class Canvas_UI_Online : MonoBehaviour {
             
         }
 
+        if (isPaused && !perso.escaped)
+        {
+            isPaused = false;
+        }
+        else if(!isPaused && perso.escaped)
+        {
+            isPaused = true;
+        }
+
         if (!isPaused)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            quit.SetActive(false);
+        }
+        else
+        {
+            quit.SetActive(true);
         }
         /*Fin de la verif*/
 
