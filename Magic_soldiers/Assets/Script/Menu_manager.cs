@@ -11,4 +11,17 @@ public class Menu_manager : MonoBehaviour {
         Personnage_offline.sensibility = Menu.sensi;
         Personnage.sensibility = Menu.sensi;
     }
+
+    public void OnCLickFR()
+    {
+        Canvas_UI_Online.langue = "fr";
+        Menu.langue = "fr";
+    }
+
+    public void OnclickEN()
+    {
+        Canvas_UI_Online.langue = "en";
+        Menu.langue = "en";
+    }
+
 }
