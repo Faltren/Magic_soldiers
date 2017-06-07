@@ -14,11 +14,11 @@ public class Torchelight : MonoBehaviour {
 
 	void Start ()
     {
-        float r = 0f;
+        float r = 255f;
         float g = 150f;
-        float b = 255f;
+        float b = 0f;
         float a = 255f;
-        IntensityLight = 0.1f;
+        IntensityLight = 0.01f;
 
         TorchLight.GetComponent<Light>().color = new Color(r, g, b, a);
         TorchLight.GetComponent<Light>().range = 33;
@@ -33,8 +33,8 @@ public class Torchelight : MonoBehaviour {
 
 	void Update ()
     {
-        IntensityLight = 0.1f;
-        MaxLightIntensity = 0.125f;
+        IntensityLight = 0.01f;
+        MaxLightIntensity = 0.005f;
 
         TorchLight.GetComponent<Light>().intensity = Mathf.Lerp(IntensityLight, MaxLightIntensity, Mathf.Cos(Time.time * 20));
         TorchLight.GetComponent<Light>().range = 33;
