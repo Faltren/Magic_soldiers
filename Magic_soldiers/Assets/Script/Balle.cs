@@ -7,7 +7,7 @@ public class Balle : MonoBehaviour {
     private Rigidbody balle;
     private Object balleObj;
 
-    private int max = 1500;
+    private int max = 4000;
 
     public static bool IsDestroyed = false;
 

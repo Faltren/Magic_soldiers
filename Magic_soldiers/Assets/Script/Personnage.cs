@@ -20,6 +20,15 @@ public class Personnage : NetworkBehaviour
     private GameObject door5;
     private GameObject door6;
     private GameObject door7;
+    private GameObject door8;
+    private GameObject door9;
+    private GameObject door10;
+    private GameObject door11;
+    private GameObject door12;
+    private GameObject door13;
+    private GameObject door14;
+    private GameObject door15;
+
 
     public bool escaped;
 
@@ -124,8 +133,17 @@ public class Personnage : NetworkBehaviour
         door5 = GameObject.Find("door5");
         door6 = GameObject.Find("door6");
         door7 = GameObject.Find("door7");
+        door8 = GameObject.Find("door8");
+        door9 = GameObject.Find("door9");
+        door10 = GameObject.Find("door10");
+        door11 = GameObject.Find("door11");
+        door12 = GameObject.Find("door12");
+        door13 = GameObject.Find("door13");
+        door14 = GameObject.Find("door14");
+        door15 = GameObject.Find("door15");
 
-        can = new Canvas_UI_Online(this, quit, text, text_msg, text_sec, text_infos, text_pause, healthBar, shieldBar, msg_img, GetComponent<Transform>(), door1, door2, door3, door4, door5, door6, door7);
+
+        can = new Canvas_UI_Online(this, quit, text, text_msg, text_sec, text_infos, text_pause, healthBar, shieldBar, msg_img, GetComponent<Transform>(), door1, door2, door3, door4, door5, door6, door7, door8, door9, door10, door11, door12, door13, door14, door15);
 
         alpha = 0;
         colBlood = blood.color;
@@ -548,6 +566,46 @@ public class Personnage : NetworkBehaviour
         {
             door7 = GameObject.Find("door7");
             can.door7 = door7;
+        }
+        if (door8 == null || can.door8 == null)
+        {
+            door8 = GameObject.Find("door8");
+            can.door7 = door7;
+        }
+        if (door9 == null || can.door9 == null)
+        {
+            door9 = GameObject.Find("door9");
+            can.door9 = door9;
+        }
+        if (door10 == null || can.door10 == null)
+        {
+            door10 = GameObject.Find("door10");
+            can.door10 = door10;
+        }
+        if (door11 == null || can.door11 == null)
+        {
+            door11 = GameObject.Find("door11");
+            can.door11 = door11;
+        }
+        if (door12 == null || can.door12 == null)
+        {
+            door12 = GameObject.Find("door12");
+            can.door12 = door12;
+        }
+        if (door13 == null || can.door13 == null)
+        {
+            door13 = GameObject.Find("door13");
+            can.door13 = door13;
+        }
+        if (door14 == null || can.door14 == null)
+        {
+            door14 = GameObject.Find("door14");
+            can.door14 = door14;
+        }
+        if (door15 == null || can.door15 == null)
+        {
+            door15 = GameObject.Find("door15");
+            can.door15 = door15;
         }
     }
 
