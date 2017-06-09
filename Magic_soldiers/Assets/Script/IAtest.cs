@@ -342,6 +342,11 @@ public class IAtest : NetworkBehaviour {
                 life -= Personnage.attack;
             }
 
+            if (life < 0)
+            {
+                life = 0;
+            }
+
             LifeDisplay();
             Destroy(col.gameObject);
         }

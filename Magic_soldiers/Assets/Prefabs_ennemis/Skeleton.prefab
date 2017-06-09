@@ -1124,7 +1124,7 @@ MonoBehaviour:
   modif1: 5
   modif2: 5
   hasPattern: 1
-  DetectRadius: 20
+  DetectRadius: 30
   attackRange: 10
   isRanged: 0
   weapon: {fileID: 0}
