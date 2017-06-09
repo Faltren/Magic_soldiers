@@ -192,6 +192,7 @@ public class Canvas_UI_Online : MonoBehaviour
             ObjectifsSecondaires();
             Message();
             Texte_pause();
+            TP();
         }
         else
         {
@@ -199,10 +200,56 @@ public class Canvas_UI_Online : MonoBehaviour
             ObjectifsSecondaires_EN();
             Message_EN();
             Texte_Pause_EN();
+            TP();
         }
 
     }
 
+    private void TP()
+    {
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.L))
+        {
+            perso.transform.position = new Vector3(427, 5, 80);
+            text_msg.text = "";
+            msg_img.gameObject.SetActive(false);
+        }
+        if (Input.GetKey(KeyCode.B) && Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.K))
+        {
+            perso.transform.position = new Vector3(1139, 5, 212);
+            text_msg.text = "";
+            msg_img.gameObject.SetActive(false);
+        }
+        if (Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.F))
+        {
+            perso.transform.position = new Vector3(1532, 5, 489);
+            text_msg.text = "";
+            msg_img.gameObject.SetActive(false);
+        }
+        if (Input.GetKey(KeyCode.L) && Input.GetKey(KeyCode.H) && Input.GetKey(KeyCode.J))
+        {
+            perso.transform.position = new Vector3(1558, 5, 984);
+            text_msg.text = "";
+            msg_img.gameObject.SetActive(false);
+        }
+        if (Input.GetKey(KeyCode.Y) && Input.GetKey(KeyCode.U) && Input.GetKey(KeyCode.I))
+        {
+            perso.transform.position = new Vector3(1988, 5, 1079);
+            text_msg.text = "";
+            msg_img.gameObject.SetActive(false);
+        }
+        if (Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.P) && Input.GetKey(KeyCode.H))
+        {
+            perso.transform.position = new Vector3(2446, 5, 1402);
+            text_msg.text = "";
+            msg_img.gameObject.SetActive(false);
+        }
+        if (Input.GetKey(KeyCode.O) && Input.GetKey(KeyCode.R) && Input.GetKey(KeyCode.T))
+        {
+            perso.transform.position = new Vector3(2978, 5, 1069);
+            text_msg.text = "";
+            msg_img.gameObject.SetActive(false);
+        }
+    }
 
     #region textePause
     private void Texte_pause()
@@ -258,7 +305,7 @@ public class Canvas_UI_Online : MonoBehaviour
             levelName = "Level5";
             text_pause.text = "Fin du Niveau 4";
 
-            isPrincipalFinished = new bool[] { false, false, false, false };
+            isPrincipalFinished = new bool[] { false, false, false, false, false };
             isSecondaryFinished = new bool[] { false };
 
             isMessageSent = new bool[] { false, false, false, false, false, false, false, false, false }; //11
@@ -303,7 +350,7 @@ public class Canvas_UI_Online : MonoBehaviour
             levelName = "Level8";
             text_pause.text = "Fin du Niveau 7";
 
-            isPrincipalFinished = new bool[] { false };
+            isPrincipalFinished = new bool[] { false, false };
             isSecondaryFinished = new bool[] { };
 
             isMessageSent = new bool[] { false, false };
@@ -322,7 +369,118 @@ public class Canvas_UI_Online : MonoBehaviour
     private void Texte_Pause_EN()
     {
 
-    }
+        if (player.transform.position.z >= 43 && player.transform.position.z <= 113 && player.transform.position.x >= 413 && player.transform.position.x <= 454) //passage vers level2
+        {
+            levelName = "Level2";
+            text_pause.text = "End of level 1 (AEL)";
+
+            isPrincipalFinished = new bool[] { false, false, false, false, false };
+            isSecondaryFinished = new bool[] { false };
+            isMessageSent = new bool[] { false, false, false, false, false, false, false, false, false, false, false }; //11
+
+            text.text = objectifs + " " + levelName + " ";
+            text_sec.text = objectifsSecondaire;
+
+            isGobelinActivated = false;
+            isGobelinQuestDone = false;
+        }
+        else if (player.transform.position.z >= 199 && player.transform.position.z <= 230 && player.transform.position.x >= 1129 && player.transform.position.x <= 1158)//passage vers level3
+        {
+            levelName = "Level3";
+            text_pause.text = "End of level 2 (BCK)";
+
+            isPrincipalFinished = new bool[] { false, false, false, false };
+            isSecondaryFinished = new bool[] { false, false };
+            isMessageSent = new bool[] { false, false, false, false, false, false, false, false }; //8
+
+            text.text = objectifs + " " + levelName + " ";
+            text_sec.text = objectifsSecondaire;
+
+            isGobelinActivated = false;
+            isGobelinQuestDone = false;
+
+        }
+        else if (player.transform.position.z >= 479 && player.transform.position.z <= 506 && player.transform.position.x >= 1512 && player.transform.position.x <= 1554)//passage vers level4
+        {
+            levelName = "Level4";
+            text_pause.text = "End of level 3 (CDF)";
+
+            isPrincipalFinished = new bool[] { false, false, false };
+            isSecondaryFinished = new bool[] { false };
+
+            isMessageSent = new bool[] { false, false, false, false, false, false, false, false }; //8
+            text.text = objectifs + " " + levelName + " ";
+
+            text_sec.text = objectifsSecondaire;
+            isGobelinActivated = false;
+            isGobelinQuestDone = false;
+        }
+        else if (player.transform.position.z >= 964 && player.transform.position.z <= 990 && player.transform.position.x >= 1543 && player.transform.position.x <= 1580)//passage vers level5
+        {
+            levelName = "Level5";
+            text_pause.text = "End of level 4 (LHJ)";
+
+            isPrincipalFinished = new bool[] { false, false, false, false, false };
+            isSecondaryFinished = new bool[] { false };
+
+            isMessageSent = new bool[] { false, false, false, false, false, false, false, false, false }; //11
+            text.text = objectifs + " " + levelName + " ";
+
+            text_sec.text = objectifsSecondaire;
+            isGobelinActivated = false;
+            isGobelinQuestDone = false;
+        }
+        else if (player.transform.position.z >= 1053 && player.transform.position.z <= 1099 && player.transform.position.x >= 1966 && player.transform.position.x <= 1997)//passage vers level6
+        {
+            levelName = "Level6";
+            text_pause.text = "End of level 5 (YUI)";
+
+            isPrincipalFinished = new bool[] { false, false, false };
+            isSecondaryFinished = new bool[] { false, false, false };
+
+            isMessageSent = new bool[] { false, false, false, false, false, false, false }; //7
+            text.text = objectifs + " " + levelName + " ";
+
+            text_sec.text = objectifsSecondaire;
+            isGobelinActivated = false;
+            isGobelinQuestDone = false;
+        }
+        else if (player.transform.position.z >= 1376 && player.transform.position.z <= 1436 && player.transform.position.x >= 2431 && player.transform.position.x <= 2480)//passage vers level7
+        {
+            levelName = "Level7";
+            text_pause.text = "End of level 6 (QPH)";
+
+            isPrincipalFinished = new bool[] { false, false };
+            isSecondaryFinished = new bool[] { false };
+
+            isMessageSent = new bool[] { false };
+            text.text = objectifs + " " + levelName + " ";
+
+            text_sec.text = objectifsSecondaire;
+            isGobelinActivated = false;
+            isGobelinQuestDone = false;
+        }
+        else if (player.transform.position.z >= 1041 && player.transform.position.z <= 1093 && player.transform.position.x >= 2964 && player.transform.position.x <= 2997)//passage vers level8
+        {
+            levelName = "Level8";
+            text_pause.text = "End of level 7 (ORT)";
+
+            isPrincipalFinished = new bool[] { false, false };
+            isSecondaryFinished = new bool[] { };
+
+            isMessageSent = new bool[] { false, false };
+            text.text = objectifs + " " + levelName + " ";
+
+            text_sec.text = objectifsSecondaire;
+            isGobelinActivated = false;
+            isGobelinQuestDone = false;
+        }
+        else
+        {
+            text_pause.text = "";
+        }
+          
+    } 
     #endregion
 
     #region Objectifs
@@ -598,7 +756,7 @@ public class Canvas_UI_Online : MonoBehaviour
                 isPrincipalFinished[2] = true;
                 levelName = "Level5";
 
-                isPrincipalFinished = new bool[] { false, false, false, false };
+                isPrincipalFinished = new bool[] { false, false, false, false, false };
                 isSecondaryFinished = new bool[] { false };
 
                 isMessageSent = new bool[] { false, false, false, false, false, false, false, false, false }; //11
@@ -648,7 +806,6 @@ public class Canvas_UI_Online : MonoBehaviour
                     }
                 }
             }
-
             else if (!isPrincipalFinished[2])
             {
                 if (player.transform.position.z >= 1172 && player.transform.position.z <= 1203)
@@ -662,16 +819,26 @@ public class Canvas_UI_Online : MonoBehaviour
                     }
                 }
             }
-
             else if (!isPrincipalFinished[3])
             {
-                isPrincipalFinished[3] = true;
+                if (player.transform.position.z >= 1053 && player.transform.position.z <= 1099)
+                {
+                    if (player.transform.position.x >= 1966 && player.transform.position.x <= 1997)
+                    {
+                        isPrincipalFinished[3] = true;
+                    }
+                }
+            } 
+            
+            else if (!isPrincipalFinished[4])
+            {
+                isPrincipalFinished[4] = true;
                 levelName = "Level6";
 
                 isPrincipalFinished = new bool[] { false, false, false };
                 isSecondaryFinished = new bool[] { false, false, false };
 
-                isMessageSent = new bool[] { false, false, false, false, false, false, false}; //7
+                isMessageSent = new bool[] { false, false, false, false, false, false, false }; //7
                 text.text = objectifs + " " + levelName + " ";
 
                 text_sec.text = objectifsSecondaire;
@@ -760,7 +927,7 @@ public class Canvas_UI_Online : MonoBehaviour
                 isPrincipalFinished[1] = true;
                 levelName = "Level8";
 
-                isPrincipalFinished = new bool[] { false };
+                isPrincipalFinished = new bool[] { false, false };
                 isSecondaryFinished = new bool[] { };
 
                 isMessageSent = new bool[] { false, false }; 
@@ -817,6 +984,500 @@ public class Canvas_UI_Online : MonoBehaviour
 
     private void Objectif_EN()
     {
+
+        #region level1
+        if (levelName == "Level1")
+        {
+            if (!isPrincipalFinished[0])
+            {
+                if (text.text != objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-See the vehicles</color></size>")
+                {
+                    text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-See the vehicles</color></size>";
+                    text.lineSpacing = 0.8f;
+                }
+
+                if (player.transform.position.z >= 54 && player.transform.position.z <= 130)
+                {
+                    if (player.transform.position.x >= 135 && player.transform.position.x <= 180)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-See if there is survivors</color></size>" + "<size=14>\n\n<color=white>-Search for an exit</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[0] = true;
+                    }
+                }
+            }
+
+            else if (!isPrincipalFinished[1])
+            {
+                if (player.transform.position.z >= 57 && player.transform.position.z <= 122)
+                {
+                    if (player.transform.position.x >= 367 && player.transform.position.x <= 430)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Search for an exit</color></size>" + "<size=14>\n\n<color=white>-Find battery to open the door</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[1] = true;
+                    }
+                }
+            }
+
+            else if (!isPrincipalFinished[2])
+            {
+                if (player.transform.position.z >= 147 && player.transform.position.z <= 197)
+                {
+                    if (player.transform.position.x >= 108 && player.transform.position.x <= 186)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Find battery to open the door</color></size>" + "<size=14>\n\n<color=white>-Go back to the door</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        if (perso.FonctionNulleQuiRetrouneBool(door1, 10))
+                        {
+                            isPrincipalFinished[2] = true;
+                        }
+                        else
+                        {
+                            perso.CmdOpen_door(door1, 10);
+                        }
+
+                    }
+                }
+            }
+            else if (!isPrincipalFinished[3])
+            {
+                if (player.transform.position.z >= 43 && player.transform.position.z <= 113)
+                {
+                    if (player.transform.position.x >= 413 && player.transform.position.x <= 454)
+                    {
+                        isPrincipalFinished[3] = true;
+                        levelName = "Level2";
+                        isPrincipalFinished = new bool[] { false, false, false, false, false };
+                        isSecondaryFinished = new bool[] { false };
+                        isMessageSent = new bool[] { false, false, false, false, false, false, false, false, false, false, false }; //11
+                        text.text = objectifs + " " + levelName + " ";
+                        text_sec.text = objectifsSecondaire;
+                        isGobelinActivated = false;
+                        isGobelinQuestDone = false;
+                    }
+                }
+            }
+
+        }//fin level1
+        #endregion
+
+        #region level2
+        if (levelName == "Level2")
+        {
+            if (!isPrincipalFinished[0])
+            {
+                if (text.text != objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Move forward in the dungeon</color></size>")
+                {
+                    text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Move forward in the dungeon</color></size>";
+                    text.lineSpacing = 0.8f;
+                }
+
+                if (player.transform.position.z >= 368 && player.transform.position.z <= 477)
+                {
+                    if (player.transform.position.x >= 600 && player.transform.position.x <= 739)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Move forward in the dungeon</color></size>" + "<size=14>\n\n<color=white>-Kill all skeletons</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[0] = true;
+                    }
+                }
+
+            }
+            else if (!isPrincipalFinished[1])
+            {
+                if (player.transform.position.z >= 320 && player.transform.position.z <= 352)
+                {
+                    if (player.transform.position.x >= 738 && player.transform.position.x <= 759)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Kill all skeletons</color></size>" + "<size=14>\n\n<color=white>-Explore the area</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[1] = true;
+                    }
+                }
+            }
+            else if (!isPrincipalFinished[2])
+            {
+                if (player.transform.position.z >= 198 && player.transform.position.z <= 245)
+                {
+                    if (player.transform.position.x >= 1086 && player.transform.position.x <= 1129)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Explore the area</color></size>" + "<size=14>\n\n<color=white>-Find a way to open the door</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[2] = true;
+                    }
+                }
+            }
+            else if (!isPrincipalFinished[3])
+            {
+                if (player.transform.position.z >= 78 && player.transform.position.z <= 173)
+                {
+                    if (player.transform.position.x >= 886 && player.transform.position.x <= 927)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Find a way to open the door</color></size>" + "<size=14>\n\n<color=white>-Go back to the door</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[3] = true;
+                    }
+                }
+            }
+            else if (!isPrincipalFinished[4])
+            {
+                isPrincipalFinished[4] = true;
+                levelName = "Level3";
+
+                isPrincipalFinished = new bool[] { false, false, false, false };
+                isSecondaryFinished = new bool[] { false, false };
+
+                isMessageSent = new bool[] { false, false, false, false, false, false, false, false }; //8
+
+                text.text = objectifs + " " + levelName + " ";
+                text_sec.text = objectifsSecondaire;
+
+                isGobelinActivated = false;
+                isGobelinQuestDone = false;
+            }
+
+
+        }//fin level2
+        #endregion
+
+        #region level3
+        if (levelName == "Level3")
+        {
+            if (!isPrincipalFinished[0])
+            {
+                if (text.text != objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Move forward in the dungeon</color></size>")
+                {
+                    text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Move forward in the dungeon</color></size>";
+                    text.lineSpacing = 0.8f;
+                }
+
+                if (player.transform.position.z >= 446 && player.transform.position.z <= 480)
+                {
+                    if (player.transform.position.x >= 1493 && player.transform.position.x <= 1552)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Move forward in the dungeon</color></size>" + "<size=14>\n\n<color=white>-Find battery</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[0] = true;
+                    }
+                }
+
+            }
+            else if (!isPrincipalFinished[1])
+            {
+                if (player.transform.position.z >= 42 && player.transform.position.z <= 64)
+                {
+                    if (player.transform.position.x >= 1530 && player.transform.position.x <= 1560)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Find battery</color></size>" + "<size=14>\n\n<color=white>-Go back to the exit</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[1] = true;
+                    }
+                }
+            }
+            else if (!isPrincipalFinished[2])
+            {
+                if (player.transform.position.z >= 446 && player.transform.position.z <= 480)
+                {
+                    if (player.transform.position.x >= 1493 && player.transform.position.x <= 1552)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Go back to the exit</color></size>" + "<size=14>\n\n<color=white>-Move forward in the dungeon</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[2] = true;
+                    }
+                }
+            }
+            else if (!isPrincipalFinished[3])
+            {
+                isPrincipalFinished[3] = true;
+                levelName = "Level4";
+
+                isPrincipalFinished = new bool[] { false, false, false };
+                isSecondaryFinished = new bool[] { false };
+
+                isMessageSent = new bool[] { false, false, false, false, false, false, false, false }; //8
+                text.text = objectifs + " " + levelName + " ";
+
+                text_sec.text = objectifsSecondaire;
+                isGobelinActivated = false;
+                isGobelinQuestDone = false;
+            }
+
+        }//fin level3
+        #endregion
+
+        #region level4
+        if (levelName == "Level4")
+        {
+            if (!isPrincipalFinished[0])
+            {
+                if (text.text != objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Move forward in the dungeon</color></size>")
+                {
+                    text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Move forward in the dungeon</color></size>";
+                    text.lineSpacing = 0.8f;
+                }
+
+                if (player.transform.position.z >= 730 && player.transform.position.z <= 944)
+                {
+                    if (player.transform.position.x >= 1414 && player.transform.position.x <= 1626)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Move forward in the dungeon</color></size>" + "<size=14>\n\n<color=white>-Kill the mom</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[0] = true;
+                    }
+                }
+
+            }
+            else if (!isPrincipalFinished[1])
+            {
+                if (player.transform.position.z >= 964 && player.transform.position.z <= 998)
+                {
+                    if (player.transform.position.x >= 1546 && player.transform.position.x <= 1582)
+                    {
+                        isPrincipalFinished[1] = true;
+                    }
+                }
+            }
+
+            else if (!isPrincipalFinished[2])
+            {
+                isPrincipalFinished[2] = true;
+                levelName = "Level5";
+
+                isPrincipalFinished = new bool[] { false, false, false, false, false };
+                isSecondaryFinished = new bool[] { false };
+
+                isMessageSent = new bool[] { false, false, false, false, false, false, false, false, false }; //11
+                text.text = objectifs + " " + levelName + " ";
+
+                text_sec.text = objectifsSecondaire;
+                isGobelinActivated = false;
+                isGobelinQuestDone = false;
+            }
+
+        }//fin level4
+        #endregion
+
+        #region level5
+        if (levelName == "Level5")
+        {
+            if (!isPrincipalFinished[0])
+            {
+                if (text.text != objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-</color>Go out of the labyrinth</size>")
+                {
+                    text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Go out of the labyrinth</color></size>";
+                    text.lineSpacing = 0.8f;
+                }
+
+                if (player.transform.position.z >= 1284 && player.transform.position.z <= 1352)
+                {
+                    if (player.transform.position.x >= 1686 && player.transform.position.x <= 1700)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Go out of the labyrinth</color></size>" + "<size=14>\n\n<color=white>-Find a battery</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[0] = true;
+                    }
+                }
+
+            }
+            else if (!isPrincipalFinished[1])
+            {
+                if (player.transform.position.z >= 1315 && player.transform.position.z <= 1338)
+                {
+                    if (player.transform.position.x >= 1617 && player.transform.position.x <= 1638)
+                    {
+                        isPrincipalFinished[1] = true;
+
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Find a battery</color></size>" + "<size=14>\n\n<color=white>-Find a way to go out</color></size>";
+                        text.lineSpacing = 0.8f;
+                    }
+                }
+            }
+            else if (!isPrincipalFinished[2])
+            {
+                if (player.transform.position.z >= 1172 && player.transform.position.z <= 1203)
+                {
+                    if (player.transform.position.x >= 1810 && player.transform.position.x <= 1839)
+                    {
+                        isPrincipalFinished[2] = true;
+
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Find a way to go out</color></size>" + "<size=14>\n\n<color=white>-Follow this path</color></size>";
+                        text.lineSpacing = 0.8f;
+                    }
+                }
+            }
+            else if (!isPrincipalFinished[3])
+            {
+                if (player.transform.position.z >= 1053 && player.transform.position.z <= 1099)
+                {
+                    if (player.transform.position.x >= 1966 && player.transform.position.x <= 1997)
+                    {
+                        isPrincipalFinished[3] = true;
+                    }
+                }
+            }
+
+            else if (!isPrincipalFinished[4])
+            {
+                isPrincipalFinished[4] = true;
+                levelName = "Level6";
+
+                isPrincipalFinished = new bool[] { false, false, false };
+                isSecondaryFinished = new bool[] { false, false, false };
+
+                isMessageSent = new bool[] { false, false, false, false, false, false, false }; //7
+                text.text = objectifs + " " + levelName + " ";
+
+                text_sec.text = objectifsSecondaire;
+                isGobelinActivated = false;
+                isGobelinQuestDone = false;
+            }
+
+        }//fin level5
+        #endregion
+
+        #region level6
+        if (levelName == "Level6")
+        {
+            if (!isPrincipalFinished[0])
+            {
+                if (text.text != objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Find an exit</color></size>")
+                {
+                    text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Find an exit</color></size>";
+                    text.lineSpacing = 0.8f;
+                }
+
+                if (player.transform.position.z >= 1197 && player.transform.position.z <= 1223)
+                {
+                    if (player.transform.position.x >= 2032 && player.transform.position.x <= 2075)
+                    {
+                        text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=red>-Find an exit</color></size>" + "<size=14>\n\n<color=white>-Survive</color></size>";
+                        text.lineSpacing = 0.8f;
+
+                        isPrincipalFinished[0] = true;
+                    }
+                }
+
+            }
+            else if (!isPrincipalFinished[1])
+            {
+                if (player.transform.position.z >= 1366 && player.transform.position.z <= 1436)
+                {
+                    if (player.transform.position.x >= 2430 && player.transform.position.x <= 2579)
+                    {
+                        isPrincipalFinished[1] = true;
+                    }
+                }
+            }
+
+            else if (!isPrincipalFinished[2])
+            {
+                isPrincipalFinished[2] = true;
+                levelName = "Level7";
+
+                isPrincipalFinished = new bool[] { false, false };
+                isSecondaryFinished = new bool[] { false };
+
+                isMessageSent = new bool[] { false };
+                text.text = objectifs + " " + levelName + " ";
+
+                text_sec.text = objectifsSecondaire;
+                isGobelinActivated = false;
+                isGobelinQuestDone = false;
+            }
+
+        }//fin level6
+        #endregion
+
+        #region level7
+        if (levelName == "Level7")
+        {
+            if (!isPrincipalFinished[0])
+            {
+                if (text.text != objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Run away</color></size>")
+                {
+                    text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Run away</color></size>";
+                    text.lineSpacing = 0.8f;
+                }
+
+                if (player.transform.position.z >= 1041 && player.transform.position.z <= 1097)
+                {
+                    if (player.transform.position.x >= 2947 && player.transform.position.x <= 2969)
+                    {
+                        isPrincipalFinished[0] = true;
+                    }
+                }
+
+            }
+            else if (!isPrincipalFinished[1])
+            {
+                isPrincipalFinished[1] = true;
+                levelName = "Level8";
+
+                isPrincipalFinished = new bool[] { false, false };
+                isSecondaryFinished = new bool[] { };
+
+                isMessageSent = new bool[] { false, false };
+                text.text = objectifs + " " + levelName + " ";
+
+                text_sec.text = objectifsSecondaire;
+                isGobelinActivated = false;
+                isGobelinQuestDone = false;
+            }
+
+        }//fin level7
+        #endregion
+
+        #region level8
+        if (levelName == "Level8")
+        {
+            if (!isPrincipalFinished[0])
+            {
+                if (text.text != objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Kill the father</color></size>")
+                {
+                    text.text = objectifs + " " + levelName + " " + "<size=14>\n\n<color=white>-Kill the father</color></size>";
+                    text.lineSpacing = 0.8f;
+                }
+
+                if (player.transform.position.z >= 792 && player.transform.position.z <= 814)
+                {
+                    if (player.transform.position.x >= 3429 && player.transform.position.x <= 3468)
+                    {
+                        isPrincipalFinished[0] = true;
+                    }
+                }
+
+            }
+            else if (!isPrincipalFinished[1])
+            {
+                isPrincipalFinished[1] = true;
+                levelName = "Fin";
+
+                isPrincipalFinished = new bool[] { false };
+                isSecondaryFinished = new bool[] { };
+
+                isMessageSent = new bool[] { false, false }; //11
+                text.text = objectifs + " " + levelName + " ";
+
+                text_sec.text = objectifsSecondaire;
+                isGobelinActivated = false;
+                isGobelinQuestDone = false;
+            }
+
+        }//fin level8
+        #endregion
 
     }
 
@@ -972,7 +1633,7 @@ public class Canvas_UI_Online : MonoBehaviour
 
             if (!isSecondaryFinished[1])
             {
-                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=white>-Trouver un coffre</color></size>";
+                text_sec.text = text_sec.text + "<size=14>\n\n<color=white>-Trouver un coffre</color></size>";
 
                 if (player.transform.position.z >= 177 && player.transform.position.z <= 197)
                 {
@@ -984,18 +1645,17 @@ public class Canvas_UI_Online : MonoBehaviour
             }
             else
             {
-                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=red>-Trouver un coffre</color></size>";
+                text_sec.text = text_sec.text + "<size=14>\n\n<color=red>-Trouver un coffre</color></size>";
             }
-
-
             if (isGobelinActivated)
             {
-                if (isGobelinQuestDone && isMessageSent[10])
+                if (isGobelinQuestDone && isMessageSent[5])
                 {
                     text_sec.text = text_sec.text + "<size=14>\n\n<color=red>-Trouver des armes</color></size>";
                 }
                 else
                 {
+                    print("lel");
                     text_sec.text = text_sec.text + "<size=14>\n\n<color=white>-Trouver des armes</color></size>";
                 }
             }
@@ -1074,9 +1734,9 @@ public class Canvas_UI_Online : MonoBehaviour
                 }
             }
 
-            if (player.transform.position.z >= 338 && player.transform.position.z <= 358)
+            if (player.transform.position.z >= 651 && player.transform.position.z <= 687)
             {
-                if (player.transform.position.x >= 1303 && player.transform.position.x <= 1328)
+                if (player.transform.position.x >= 1624 && player.transform.position.x <= 1683)
                 {
                     if (!perso.FonctionNulleQuiRetrouneBool(door10, 10))
                     {
@@ -1176,7 +1836,7 @@ public class Canvas_UI_Online : MonoBehaviour
 
             if (!isSecondaryFinished[1])
             {
-                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=white>-Trouver un objet à ramener à un gobelin</color></size>";
+                text_sec.text = text_sec.text + "<size=14>\n\n<color=white>-Trouver un objet à ramener à un gobelin</color></size>";
 
                 if (player.transform.position.z >= 1246 && player.transform.position.z <= 1261)
                 {
@@ -1188,12 +1848,12 @@ public class Canvas_UI_Online : MonoBehaviour
             }
             else
             {
-                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=red>-Trouver un objet à ramener à un gobelin</color></size>";
+                text_sec.text = text_sec.text + "<size=14>\n\n<color=red>-Trouver un objet à ramener à un gobelin</color></size>";
             }
 
             if (!isSecondaryFinished[2])
             {
-                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=white>-Trouver un objet à ramener à un gobelin</color></size>";
+                text_sec.text = text_sec.text + "<size=14>\n\n<color=white>-Trouver un objet à ramener à un gobelin</color></size>";
 
                 if (player.transform.position.z >= 1240 && player.transform.position.z <= 1253)
                 {
@@ -1205,7 +1865,7 @@ public class Canvas_UI_Online : MonoBehaviour
             }
             else
             {
-                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=red>-Trouver un objet à ramener à un gobelin</color></size>";
+                text_sec.text = text_sec.text + "<size=14>\n\n<color=red>-Trouver un objet à ramener à un gobelin</color></size>";
             }
 
             /*portes level6*/
@@ -1228,7 +1888,404 @@ public class Canvas_UI_Online : MonoBehaviour
 
     private void ObjectifsSecondaires_EN()
     {
+        #region level1
+        if (levelName == "Level1")
+        {
+            if (!isSecondaryFinished[0])
+            {
+                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=white>-Find crystals</color></size>";
 
+                if (player.transform.position.z >= 48 && player.transform.position.z <= 112)
+                {
+                    if (player.transform.position.x >= 249 && player.transform.position.x <= 290)
+                    {
+                        isSecondaryFinished[0] = true;
+                    }
+                }
+            }
+            else
+            {
+                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=red>-Find crystals</color></size>";
+            }
+
+            if (!isSecondaryFinished[1])
+            {
+                text_sec.text = text_sec.text + "<size=14>\n\n<color=white>-Find the gold chest</color></size>";
+
+                if (player.transform.position.z >= 350 && player.transform.position.z <= 355)
+                {
+                    if (player.transform.position.x >= 246 && player.transform.position.x <= 250)
+                    {
+                        isSecondaryFinished[1] = true;
+                    }
+                }
+            }
+            else
+            {
+                text_sec.text = text_sec.text + "<size=14>\n\n<color=red>-Find the gold chest</color></size>";
+            }
+
+        }//fin level 1
+        #endregion
+
+        #region level2
+        if (levelName == "Level2")
+        {
+            if (!isSecondaryFinished[0])
+            {
+                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=white>-Find their statue</color></size>";
+
+                if (player.transform.position.z >= 262 && player.transform.position.z <= 333)
+                {
+                    if (player.transform.position.x >= 535 && player.transform.position.x <= 581)
+                    {
+                        isSecondaryFinished[0] = true;
+                    }
+                }
+            }
+            else
+            {
+                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=red>-Find their statue</color></size>";
+            }
+
+            if (isGobelinActivated)
+            {
+                if (isGobelinQuestDone && isMessageSent[10])
+                {
+                    text_sec.text = text_sec.text + "<size=14>\n\n<color=red>-Find some shining</color></size>";
+                }
+                else
+                {
+                    text_sec.text = text_sec.text + "<size=14>\n\n<color=white>-Find some shining</color></size>";
+                }
+            }
+
+            /*portes level2*/
+            if (player.transform.position.z >= 116 && player.transform.position.z <= 147)
+            {
+                if (player.transform.position.x >= 752 && player.transform.position.x <= 794)
+                {
+                    if (!perso.FonctionNulleQuiRetrouneBool(door2, 10))
+                    {
+                        perso.CmdOpen_door(door2, 10);
+                    }
+                    if (!perso.FonctionNulleQuiRetrouneBool(door3, 10))
+                    {
+                        perso.CmdOpen_door(door3, 10);
+                    }
+
+                }
+            }
+
+            if (player.transform.position.z >= 78 && player.transform.position.z <= 173)
+            {
+                if (player.transform.position.x >= 886 && player.transform.position.x <= 927)
+                {
+                    if (!perso.FonctionNulleQuiRetrouneBool(door5, 10))
+                    {
+                        perso.CmdOpen_door(door5, 10);
+                    }
+
+                }
+            }
+
+            if (player.transform.position.z >= 250 && player.transform.position.z <= 280)
+            {
+                if (player.transform.position.x >= 1143 && player.transform.position.x <= 1197)
+                {
+                    if (!perso.FonctionNulleQuiRetrouneBool(door4, 10))
+                    {
+                        perso.CmdOpen_door(door4, 10);
+                    }
+                    if (!perso.FonctionNulleQuiRetrouneBool(door7, 10))
+                    {
+                        perso.CmdOpen_door(door7, 10);
+                    }
+                    if (!perso.FonctionNulleQuiRetrouneBool(door6, 10))
+                    {
+                        perso.CmdOpen_door(door6, 10);
+                    }
+
+                }
+            }
+            /*fin portes level2*/
+
+        }//fin level 2
+        #endregion
+
+        #region level3
+        if (levelName == "Level3")
+        {
+            if (!isSecondaryFinished[0])
+            {
+                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=white>-Find soldiers</color></size>";
+
+                if (player.transform.position.z >= 377 && player.transform.position.z <= 451)
+                {
+                    if (player.transform.position.x >= 1325 && player.transform.position.x <= 1392)
+                    {
+                        isSecondaryFinished[0] = true;
+                    }
+                }
+            }
+            else
+            {
+                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=red>-Find soldiers</color></size>";
+            }
+
+            if (!isSecondaryFinished[1])
+            {
+                text_sec.text = text_sec.text + "<size=14>\n\n<color=white>-Find a chest</color></size>";
+
+                if (player.transform.position.z >= 177 && player.transform.position.z <= 197)
+                {
+                    if (player.transform.position.x >= 1419 && player.transform.position.x <= 1429)
+                    {
+                        isSecondaryFinished[1] = true;
+                    }
+                }
+            }
+            else
+            {
+                text_sec.text = text_sec.text + "<size=14>\n\n<color=red>-Find a chest</color></size>";
+            }
+            if (isGobelinActivated)
+            {
+                if (isGobelinQuestDone && isMessageSent[5])
+                {
+                    text_sec.text = text_sec.text + "<size=14>\n\n<color=red>-Find weapons</color></size>";
+                }
+                else
+                {
+                    print("lel");
+                    text_sec.text = text_sec.text + "<size=14>\n\n<color=white>-Find weapons</color></size>";
+                }
+            }
+
+            /*portes level3*/
+            if (player.transform.position.z >= 42 && player.transform.position.z <= 64)
+            {
+                if (player.transform.position.x >= 1530 && player.transform.position.x <= 1560)
+                {
+                    if (!perso.FonctionNulleQuiRetrouneBool(door9, 10))
+                    {
+                        perso.CmdOpen_door(door9, 10);
+                    }
+
+                }
+            }
+
+            if (player.transform.position.z >= 338 && player.transform.position.z <= 358)
+            {
+                if (player.transform.position.x >= 1303 && player.transform.position.x <= 1328)
+                {
+                    if (!perso.FonctionNulleQuiRetrouneBool(door8, 10))
+                    {
+                        perso.CmdOpen_door(door8, 10);
+                    }
+
+                }
+            }
+            /*fin portes level3*/
+
+        }//fin level 3
+        #endregion
+
+        #region level4
+        if (levelName == "Level4")
+        {
+            if (!isSecondaryFinished[0])
+            {
+                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=white>-Find an Altar</color></size>";
+
+                if (player.transform.position.z >= 574 && player.transform.position.z <= 616)
+                {
+                    if (player.transform.position.x >= 1285 && player.transform.position.x <= 1400)
+                    {
+                        isSecondaryFinished[0] = true;
+                    }
+                }
+            }
+            else
+            {
+                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=red>-Find an Altar</color></size>";
+            }
+
+            if (isGobelinActivated)
+            {
+                if (isGobelinQuestDone && isMessageSent[7])
+                {
+                    text_sec.text = text_sec.text + "<size=14>\n\n<color=red>-Reach the chest</color></size>";
+                }
+                else
+                {
+                    text_sec.text = text_sec.text + "<size=14>\n\n<color=white>-Reach the chest</color></size>";
+                }
+            }
+
+            /*portes level4*/
+            if (player.transform.position.z >= 900 && player.transform.position.z <= 934)
+            {
+                if (player.transform.position.x >= 1643 && player.transform.position.x <= 1662)
+                {
+                    if (!perso.FonctionNulleQuiRetrouneBool(door11, 10))
+                    {
+                        perso.CmdOpen_door(door11, 10);
+                    }
+
+                }
+            }
+
+            if (player.transform.position.z >= 651 && player.transform.position.z <= 687)
+            {
+                if (player.transform.position.x >= 1624 && player.transform.position.x <= 1683)
+                {
+                    if (!perso.FonctionNulleQuiRetrouneBool(door10, 10))
+                    {
+                        perso.CmdOpen_door(door10, 10);
+                    }
+
+                }
+            }
+            /*fin portes level4*/
+
+        }//fin level 4
+        #endregion
+
+        #region level5
+        if (levelName == "Level5")
+        {
+            if (!isSecondaryFinished[0])
+            {
+                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=white>-Find their food reserve</color></size>";
+
+                if (player.transform.position.z >= 1046 && player.transform.position.z <= 1156)
+                {
+                    if (player.transform.position.x >= 1721 && player.transform.position.x <= 1865)
+                    {
+                        isSecondaryFinished[0] = true;
+                    }
+                }
+            }
+            else
+            {
+                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=red>-Find their food reserve</color></size>";
+            }
+
+            if (isGobelinActivated)
+            {
+                if (isGobelinQuestDone && isMessageSent[7])
+                {
+                    text_sec.text = text_sec.text + "<size=14>\n\n<color=red>-Find some shining</color></size>";
+                }
+                else
+                {
+                    text_sec.text = text_sec.text + "<size=14>\n\n<color=white>-Find some shining</color></size>";
+                }
+            }
+
+            /*portes level5*/
+            if (player.transform.position.z >= 1315 && player.transform.position.z <= 1338)
+            {
+                if (player.transform.position.x >= 1617 && player.transform.position.x <= 1638)
+                {
+                    if (!perso.FonctionNulleQuiRetrouneBool(door12, 10))
+                    {
+                        perso.CmdOpen_door(door12, 10);
+                    }
+
+                }
+            }
+
+            if (player.transform.position.z >= 1425 && player.transform.position.z <= 1449)
+            {
+                if (player.transform.position.x >= 1909 && player.transform.position.x <= 1925)
+                {
+                    if (!perso.FonctionNulleQuiRetrouneBool(door14, 10))
+                    {
+                        perso.CmdOpen_door(door14, 10);
+                    }
+                    if (!perso.FonctionNulleQuiRetrouneBool(door13, 10))
+                    {
+                        perso.CmdOpen_door(door13, 10);
+                    }
+                }
+            }
+            /*fin portes level5*/
+
+        }//fin level 5
+        #endregion
+
+        #region level6
+        if (levelName == "Level6")
+        {
+            if (!isSecondaryFinished[0])
+            {
+                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=white>-Find an object to give to a goblin</color></size>";
+
+                if (player.transform.position.z >= 1114 && player.transform.position.z <= 1140)
+                {
+                    if (player.transform.position.x >= 2242 && player.transform.position.x <= 2259)
+                    {
+                        isSecondaryFinished[0] = true;
+                    }
+                }
+            }
+            else
+            {
+                text_sec.text = objectifsSecondaire + "<size=14>\n\n<color=red>-Find an object to give to a goblin</color></size>";
+            }
+
+            if (!isSecondaryFinished[1])
+            {
+                text_sec.text = text_sec.text + "<size=14>\n\n<color=white>-Find an object to give to a goblin</color></size>";
+
+                if (player.transform.position.z >= 1246 && player.transform.position.z <= 1261)
+                {
+                    if (player.transform.position.x >= 2395 && player.transform.position.x <= 2408)
+                    {
+                        isSecondaryFinished[1] = true;
+                    }
+                }
+            }
+            else
+            {
+                text_sec.text = text_sec.text + "<size=14>\n\n<color=red>-Find an object to give to a goblin</color></size>";
+            }
+
+            if (!isSecondaryFinished[2])
+            {
+                text_sec.text = text_sec.text + "<size=14>\n\n<color=white>-Find an object to give to a goblin</color></size>";
+
+                if (player.transform.position.z >= 1240 && player.transform.position.z <= 1253)
+                {
+                    if (player.transform.position.x >= 2253 && player.transform.position.x <= 2269)
+                    {
+                        isSecondaryFinished[2] = true;
+                    }
+                }
+            }
+            else
+            {
+                text_sec.text = text_sec.text + "<size=14>\n\n<color=red>-Find an object to give to a goblin</color></size>";
+            }
+
+            /*portes level6*/
+            if (player.transform.position.z >= 1042 && player.transform.position.z <= 1063)
+            {
+                if (player.transform.position.x >= 2214 && player.transform.position.x <= 2247)
+                {
+                    if (!perso.FonctionNulleQuiRetrouneBool(door15, 10))
+                    {
+                        perso.CmdOpen_door(door15, 10);
+                    }
+
+                }
+            }
+            /*fin portes level6*/
+
+        }//fin level 6
+        #endregion
     }
 
     #endregion
@@ -2045,9 +3102,9 @@ public class Canvas_UI_Online : MonoBehaviour
                     currentTime = Time.time;
                 }
 
-                if (player.transform.position.z >= 262 && player.transform.position.z <= 333)
+                if (player.transform.position.z >= 377 && player.transform.position.z <= 451)
                 {
-                    if (player.transform.position.x >= 535 && player.transform.position.x <= 581)
+                    if (player.transform.position.x >= 1325 && player.transform.position.x <= 1392)
                     {
                         if (currentTime + timeForNext < Time.time)
                         {
@@ -2083,7 +3140,7 @@ public class Canvas_UI_Online : MonoBehaviour
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
-                            text_msg.text = "<color=grey><b>Vous</b> : <i>Je crois que j'ai trouvé un autre avant-poste</i></color>\n<b>Radio</b> : <i>Chercher aux alentours pour voir si vous ne trouvez pas quelque chose d'intéressant.</i>";
+                            text_msg.text = "<color=grey><b>Vous</b> : <i>Je crois que j'ai trouvé un autre avant-poste</i></color>\n<b>Radio</b> : <i>Cherches aux alentours pour voir si vous ne trouvez pas quelque chose d'intéressant.</i>";
                         }
                         else
                         {
@@ -2113,7 +3170,7 @@ public class Canvas_UI_Online : MonoBehaviour
                             isGobelinActivated = true;
                             msg_img.gameObject.SetActive(false);
                         }
-                        else if (currentTime + timeForNext * 2 < Time.time)
+                        else if (currentTime + timeForNext < Time.time)
                         {
                             text_msg.text = "<color=grey><b>Gobelin</b> : <i>Soldat ! Tu dois avoir des armes toi ... Donne moi une arme s'il te plait... pour me défendre</i></color>\n<b>Vous</b> : <i>Je ne suis pas rassuré a l'idée de lui donner une arme ...</i>";
                         }
@@ -2134,9 +3191,9 @@ public class Canvas_UI_Online : MonoBehaviour
                     currentTime = Time.time;
                 }
 
-                if (player.transform.position.z >= 272 && player.transform.position.z <= 290)
+                if (player.transform.position.z >= 71 && player.transform.position.z <= 109)
                 {
-                    if (player.transform.position.x >= 906 && player.transform.position.x <= 922)
+                    if (player.transform.position.x >= 1662 && player.transform.position.x <= 1697)
                     {
                         if (currentTime + timeForNext < Time.time)
                         {
@@ -2165,10 +3222,11 @@ public class Canvas_UI_Online : MonoBehaviour
                 {
                     if (player.transform.position.x >= 1596 && player.transform.position.x <= 1624)
                     {
-                        if (currentTime + timeForNext * 4 < Time.time)
+                        if (currentTime + timeForNext < Time.time)
                         {
                             if (Personnage.attack <= 10)
                                 Personnage.life -= 20;
+                            perso.DisplayLife();
                             text_msg.text = "";
                             isMessageSent[7] = true;
                             msg_img.gameObject.SetActive(false);
@@ -2238,7 +3296,7 @@ public class Canvas_UI_Online : MonoBehaviour
                         }
                         else if (currentTime + timeForNext * 2 < Time.time)
                         {
-                            text_msg.text = "<color=grey><b>Radio</b> : <i>C'est ma mère ... tue la !</i></color>\n<b>Radio</b> : <i>Votre quoi ?! Il faudra qu'on ai une discussion vous et moi !</i>";
+                            text_msg.text = "<color=grey><b>Radio</b> : <i>C'est ma mère ... tue la !</i></color>\n<b>Vous</b> : <i>Votre quoi ?! Il faudra qu'on ai une discussion vous et moi !</i>";
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
@@ -2351,7 +3409,7 @@ public class Canvas_UI_Online : MonoBehaviour
                 {
                     if (player.transform.position.x >= 1322 && player.transform.position.x <= 1339)
                     {
-                        if (currentTime + timeForNext * 3 < Time.time)
+                        if (currentTime + timeForNext < Time.time)
                         {
                             text_msg.text = "";
                             isMessageSent[5] = true;
@@ -2402,11 +3460,11 @@ public class Canvas_UI_Online : MonoBehaviour
                     currentTime = Time.time;
                 }
 
-                if (player.transform.position.z >= 416 && player.transform.position.z <= 443)
+                if (player.transform.position.z >= 791 && player.transform.position.z <= 807)
                 {
-                    if (player.transform.position.x >= 1596 && player.transform.position.x <= 1624)
+                    if (player.transform.position.x >= 1322 && player.transform.position.x <= 1339)
                     {
-                        if (currentTime + timeForNext * 4 < Time.time)
+                        if (currentTime + timeForNext < Time.time)
                         {
                             if (Personnage.personnageSpeedWalk <= 15)
                             {
@@ -2675,11 +3733,11 @@ public class Canvas_UI_Online : MonoBehaviour
                     currentTime = Time.time;
                 }
 
-                if (player.transform.position.z >= 416 && player.transform.position.z <= 443)
+                if (player.transform.position.z >= 1380 && player.transform.position.z <= 1403)
                 {
-                    if (player.transform.position.x >= 1596 && player.transform.position.x <= 1624)
+                    if (player.transform.position.x >= 1836 && player.transform.position.x <= 1863)
                     {
-                        if (currentTime + timeForNext * 4 < Time.time)
+                        if (currentTime + timeForNext < Time.time)
                         {
                             if (Personnage.attack <= 10)
                                 Personnage.attack += 1;
@@ -2996,7 +4054,1762 @@ public class Canvas_UI_Online : MonoBehaviour
 
     private void Message_EN()
     {
+        #region level1
+        if (levelName == "Level1")
+        {
+            if (!isMessageSent[0])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
 
+                if (player.transform.position.z >= 85 && player.transform.position.z <= 110)
+                {
+                    if (player.transform.position.x >= 100 && player.transform.position.x <= 121)
+                    {
+                        if (currentTime + timeForNext * 3 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[0] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>Yes, is the base ok ?</i></color>\n<b>Radio</b> : <i>It is tough here, go fast !</i>";
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Radio</b> : <i>Can you here me ?</i></color>\n<b>You</b> : <i>Yes, is the base ok ?</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Radio</b> : <i>Can you here me ?</i>";
+                        }
+                    }
+                }
+
+            }
+
+
+
+            if (!isMessageSent[1])
+            {
+
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 54 && player.transform.position.z <= 130)
+                {
+                    if (player.transform.position.x >= 135 && player.transform.position.x <= 180)
+                    {
+                        if (currentTime + timeForNext * 3 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[1] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Radio</b> : <i>Do you think that you are the first coming here ? We had a base here -- it ended badly.</i></color>\n<b>You</b> : <i>I didn't know, sorry</i>";
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>Why is there som vehicles here ?!</i></color>\n<b>Radio</b> : <i>Do you think that you are the first coming here ? We had a base here -- it ended badly.</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>Why is there som vehicles here ?!</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[2])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 57 && player.transform.position.z <= 122)
+                {
+                    if (player.transform.position.x >= 367 && player.transform.position.x <= 430)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[2] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>The door is closed</i></color>\n<b>Radio</b> : <i>There must be battery over here to open it. Find it.</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>The door is closed</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[3])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 147 && player.transform.position.z <= 197)
+                {
+                    if (player.transform.position.x >= 108 && player.transform.position.x <= 186)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[3] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>I found the battery</i></color>\n<b>Radio</b> : <i>Ok I activated the door, go back to it.</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I found the battery</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[4] && isMessageSent[2])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 65 && player.transform.position.z <= 110)
+                {
+                    if (player.transform.position.x >= 423 && player.transform.position.x <= 464)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[4] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>Ok, I'm there</i></color>\n<b>Radio</b> : <i>Perfect, continue to the exit</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>Ok, I'm there</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[5])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 352 && player.transform.position.z <= 368)
+                {
+                    if (player.transform.position.x >= 229 && player.transform.position.x <= 251)
+                    {
+                        if (isMessageSent[2])
+                        {
+                            if (currentTime + timeForNext < Time.time)
+                            {
+                                text_msg.text = "";
+                                isMessageSent[5] = true;
+                                msg_img.gameObject.SetActive(false);
+                            }
+                            else
+                            {
+                                msg_img.gameObject.SetActive(true);
+                                text_msg.text = "<b>Radio</b> : <i>Those battery are damaged</i>";
+                            }
+                        }
+                        else
+                        {
+                            if (currentTime + timeForNext < Time.time)
+                            {
+                                text_msg.text = "";
+                                isMessageSent[5] = true;
+                                msg_img.gameObject.SetActive(false);
+                            }
+                            else
+                            {
+                                msg_img.gameObject.SetActive(true);
+                                text_msg.text = "<b>Radio</b> : <i>Those battery are really old</i>";
+                            }
+                        }
+
+
+                    }
+                }
+            }
+
+            if (!isMessageSent[6])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 169 && player.transform.position.z <= 184)
+                {
+                    if (player.transform.position.x >= 275 && player.transform.position.x <= 301)
+                    {
+                        if (isMessageSent[2])
+                        {
+                            if (currentTime + timeForNext < Time.time)
+                            {
+                                text_msg.text = "";
+                                isMessageSent[6] = true;
+                                msg_img.gameObject.SetActive(false);
+                            }
+                            else
+                            {
+                                msg_img.gameObject.SetActive(true);
+                                text_msg.text = "<b>Radio</b> : <i>Those battery are damaged</i>";
+                            }
+                        }
+                        else
+                        {
+                            if (currentTime + timeForNext < Time.time)
+                            {
+                                text_msg.text = "";
+                                isMessageSent[6] = true;
+                                msg_img.gameObject.SetActive(false);
+                            }
+                            else
+                            {
+                                msg_img.gameObject.SetActive(true);
+                                text_msg.text = "<b>Radio</b> : <i>Those battery are really old</i>";
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[7])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 238 && player.transform.position.z <= 261)
+                {
+                    if (player.transform.position.x >= 246 && player.transform.position.x <= 280)
+                    {
+
+                        if (isMessageSent[3])
+                        {
+                            if (currentTime + timeForNext < Time.time)
+                            {
+                                text_msg.text = "";
+                                isMessageSent[7] = true;
+                                msg_img.gameObject.SetActive(false);
+                            }
+                            else
+                            {
+                                msg_img.gameObject.SetActive(true);
+                                text_msg.text = "<b>Radio</b> : <i>We don't need more battery, go back to the exit</i>";
+                            }
+                        }
+                        else
+                        {
+                            if (currentTime + timeForNext < Time.time)
+                            {
+                                text_msg.text = "";
+                                isMessageSent[7] = true;
+                                msg_img.gameObject.SetActive(false);
+                            }
+                            else
+                            {
+                                msg_img.gameObject.SetActive(true);
+                                text_msg.text = "<b>Radio</b> : <i>There isn't enough battery, find other battery</i>";
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[8])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 173 && player.transform.position.z <= 216)
+                {
+                    if (player.transform.position.x >= 346 && player.transform.position.x <= 376)
+                    {
+                        if (currentTime + timeForNext * 3 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[8] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Radio</b> : <i>It's their god</i></color>\n<b>You</b> : <i>I should not stay here</i>";
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>What is that thing ?!</i></color>\n<b>Radio</b> : <i>It's their god</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>What is that thing ?!</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[9])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 345 && player.transform.position.z <= 400)
+                {
+                    if (player.transform.position.x >= 297 && player.transform.position.x <= 402)
+                    {
+                        if (currentTime + timeForNext * 3 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[9] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext * 3 < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>Where are our soldiers ? I don't even see body</i></color>\n<b>Radio</b> : <i>I don't know, stay focus</i>";
+                        }
+                        else if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Radio</b> : <i>No, that isn't</i></color>\n<b>You</b> : <i>Where are our soldiers ? I don't even see body</i>";
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>Is that the base you were talking about ?</i></color>\n<b>Radio</b> : <i>No, that isn't</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>Is that the base you were talking about ?</i>";
+                        }
+                    }
+                }
+            }
+        }//fin level1
+        #endregion
+
+        #region level2
+        if (levelName == "Level2")
+        {
+            if (!isMessageSent[0]) //mangeoire
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 110 && player.transform.position.z <= 188)
+                {
+                    if (player.transform.position.x >= 548 && player.transform.position.x <= 625)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[0] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>What is this madness ?!</i></color>\n<b>Radio</b> : <i>We found a part of our men</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>What is this madness ?!</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[1]) //batterie 1
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 116 && player.transform.position.z <= 147)
+                {
+                    if (player.transform.position.x >= 752 && player.transform.position.x <= 794)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[1] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>I found battery</i></color>\n<b>Radio</b> : <i>Ok, I'm trying to activate them</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I found battery</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[2]) //batteries 3
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 250 && player.transform.position.z <= 280)
+                {
+                    if (player.transform.position.x >= 1143 && player.transform.position.x <= 1197)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[2] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>I found battery</i></color>\n<b>Radio</b> : <i>Ok, I'm trying to activate them</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I found battery</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[3]) //statue
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 262 && player.transform.position.z <= 333)
+                {
+                    if (player.transform.position.x >= 535 && player.transform.position.x <= 581)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[3] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I found another statue</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[4]) //squelette
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 368 && player.transform.position.z <= 477)
+                {
+                    if (player.transform.position.x >= 600 && player.transform.position.x <= 739)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[4] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>Shit, there are lot of skeletons!</i></color>\n<b>Radio</b> : <i>Kill them and move!</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>Shit, there are lot of skeletons!</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[5]) //porte finale
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 198 && player.transform.position.z <= 245)
+                {
+                    if (player.transform.position.x >= 1086 && player.transform.position.x <= 1129)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[5] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>This door is closed</i></color>\n<b>Radio</b> : <i>Find a battery to open it</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>This door is closed</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[6]) //batteries 2
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 74 && player.transform.position.z <= 133)
+                {
+                    if (player.transform.position.x >= 891 && player.transform.position.x <= 922)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[6] = true;
+                            isPrincipalFinished[1] = true;
+                            isPrincipalFinished[2] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>I think that those battery can open the door</i></color>\n<b>Radio</b> : <i>Yes, the door is opened</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I think that those battery can open the door</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[7]) //C'est grand...
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 320 && player.transform.position.z <= 352)
+                {
+                    if (player.transform.position.x >= 738 && player.transform.position.x <= 759)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[7] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>Wow, this mine should be good place to shoot a fantastic movie</i>";
+                        }
+                    }
+                }
+            }
+
+            /*Gobelin*/
+            if (!isMessageSent[8])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 386 && player.transform.position.z <= 402)
+                {
+                    if (player.transform.position.x >= 1018 && player.transform.position.x <= 1038)
+                    {
+                        if (currentTime + timeForNext * 4 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[8] = true;
+                            isGobelinActivated = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext * 3 < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>Do you think that I can trust him?</i></color>\n<b>Radio</b> : <i>I don't know, help him and we will see.</i>";
+                        }
+                        else if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Goblin</b> : <i>Bring me some shining and I will give you something!</i></color>\n<b>You</b> : <i>Do you think that I can trust him?</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Goblin</b> : <i>Oh you ! Bring me some shining and I will give you something!</i>";
+                        }
+                    }
+                }
+            }
+
+
+            if (!isMessageSent[9])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 272 && player.transform.position.z <= 290)
+                {
+                    if (player.transform.position.x >= 906 && player.transform.position.x <= 922)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[9] = true;
+                            isGobelinQuestDone = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>Is that shining ?</i></color>\n<b>Radio</b> : <i>I think</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>Is that shining ?</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[10] && isGobelinQuestDone)
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 386 && player.transform.position.z <= 402)
+                {
+                    if (player.transform.position.x >= 1018 && player.transform.position.x <= 1038)
+                    {
+                        if (currentTime + timeForNext * 4 < Time.time)
+                        {
+                            if (Personnage.attack <= 10)
+                                Personnage.attack += 1;
+                            text_msg.text = "";
+                            isMessageSent[10] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Goblin</b> : <i>Thank you! Take it, you will shoot stronger with that. Now go away!</i>";
+                        }
+                    }
+                }
+            }
+            /*Gobelin*/
+
+        }//fin level2
+
+        #endregion
+
+        #region level3
+        if (levelName == "Level3")
+        {
+            if (!isMessageSent[0]) //porte
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 446 && player.transform.position.z <= 480)
+                {
+                    if (player.transform.position.x >= 1493 && player.transform.position.x <= 1552)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[0] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>This door is closed!</i></color>\n<b>Radio</b> : <i>find a battery to open it</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>This door is closed!</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[1]) //generateur 1
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 42 && player.transform.position.z <= 64)
+                {
+                    if (player.transform.position.x >= 1530 && player.transform.position.x <= 1560)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[1] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>I found battery</i></color>\n<b>Radio</b> : <i>Ok, I'm trying to activate them</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I found battery</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[2]) //generateur 2
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 338 && player.transform.position.z <= 358)
+                {
+                    if (player.transform.position.x >= 1303 && player.transform.position.x <= 1328)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[2] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>I found battery</i></color>\n<b>Radio</b> : <i>Ok, I'm trying to activate them</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I found battery</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[3]) //autel
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 377 && player.transform.position.z <= 451)
+                {
+                    if (player.transform.position.x >= 1325 && player.transform.position.x <= 1392)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[3] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>Crap! I hope that they didn't suffer</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[4]) //camp
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 64 && player.transform.position.z <= 135)
+                {
+                    if (player.transform.position.x >= 1621 && player.transform.position.x <= 1698)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[4] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>I found another base</i></color>\n<b>Radio</b> : <i>Search around to see if there is something to take.</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I found another base</i>";
+                        }
+                    }
+                }
+            }
+
+            /*Gobelin*/
+            if (!isMessageSent[5])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 416 && player.transform.position.z <= 443)
+                {
+                    if (player.transform.position.x >= 1596 && player.transform.position.x <= 1624)
+                    {
+                        if (currentTime + timeForNext * 3 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[5] = true;
+                            isGobelinActivated = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Goblin</b> : <i>Soldier! Please give me a weapon to defend myself</i></color>\n<b>You</b> : <i>I don't really want to give him a weapon--</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Goblin</b> : <i>Soldier! Please give me a weapon to defend myself</i>";
+                        }
+                    }
+                }
+            }
+
+
+            if (!isMessageSent[6])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 71 && player.transform.position.z <= 109)
+                {
+                    if (player.transform.position.x >= 1662 && player.transform.position.x <= 1697)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[6] = true;
+                            isGobelinQuestDone = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I should bring it to the goblin</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[7] && isGobelinQuestDone)
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 416 && player.transform.position.z <= 443)
+                {
+                    if (player.transform.position.x >= 1596 && player.transform.position.x <= 1624)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            if (Personnage.attack <= 10)
+                                Personnage.life -= 20;
+                            perso.DisplayLife();
+                            text_msg.text = "";
+                            isMessageSent[7] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Goblin</b> : <i>Thank you, now DIE !</i>";
+                        }
+                    }
+                }
+            }
+            /*Gobelin*/
+
+        }//fin level3
+        #endregion
+
+        #region level4
+        if (levelName == "Level4")
+        {
+            if (!isMessageSent[0]) //entrée
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 479 && player.transform.position.z <= 519)
+                {
+                    if (player.transform.position.x >= 1510 && player.transform.position.x <= 1549)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[0] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>You didn't gave me your name</i></color>\n<b>Radio</b> : <i>My name is Eldarion, that's all you want to know</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>You didn't gave me your name</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[1]) //boss
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 730 && player.transform.position.z <= 944)
+                {
+                    if (player.transform.position.x >= 1414 && player.transform.position.x <= 1626)
+                    {
+                        if (currentTime + timeForNext * 3 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[1] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Radio</b> : <i>It's my mother, kill her!</i></color>\n<b>You</b> : <i>Your what?! We will must discuss after that!</i>";
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>What is that thing?!</i></color>\n<b>Radio</b> : <i>It's my mother, kill her!</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>What is that thing?!</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[2]) //autel
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 574 && player.transform.position.z <= 616)
+                {
+                    if (player.transform.position.x >= 1285 && player.transform.position.x <= 1400)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[2] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Vous</b> : <i>I found another statue</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[3]) //generateur 1
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 900 && player.transform.position.z <= 934)
+                {
+                    if (player.transform.position.x >= 1643 && player.transform.position.x <= 1662)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[3] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>I found battery</i></color>\n<b>Radio</b> : <i>Ok, I'm trying to activate them</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I found battery</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[4]) //generateur 2
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 651 && player.transform.position.z <= 687)
+                {
+                    if (player.transform.position.x >= 1624 && player.transform.position.x <= 1683)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[4] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>I found battery</i></color>\n<b>Radio</b> : <i>Ok, I'm trying to activate them</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I found battery</i>";
+                        }
+                    }
+                }
+            }
+
+            /*Gobelin*/
+            if (!isMessageSent[5])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 791 && player.transform.position.z <= 807)
+                {
+                    if (player.transform.position.x >= 1322 && player.transform.position.x <= 1339)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[5] = true;
+                            isGobelinActivated = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Goblin</b> : <i>Man! I can't reach the chest over there. Reach it for me and I will give you something</i>";
+                        }
+                    }
+                }
+            }
+
+
+            if (!isMessageSent[6])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 663 && player.transform.position.z <= 667)
+                {
+                    if (player.transform.position.x >= 1296 && player.transform.position.x <= 1300)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[6] = true;
+                            isGobelinQuestDone = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>That wasn't easy</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[7] && isGobelinQuestDone)
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 791 && player.transform.position.z <= 807)
+                {
+                    if (player.transform.position.x >= 1322 && player.transform.position.x <= 1339)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            if (Personnage.personnageSpeedWalk <= 15)
+                            {
+                                Personnage.personnageSpeedRun += 1;
+                                Personnage.personnageSpeedWalk += 1;
+                            }
+                            text_msg.text = "";
+                            isMessageSent[7] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Goblin</b> : <i>Good job, take that, you will walk faster</i>";
+                        }
+                    }
+                }
+            }
+            /*Gobelin*/
+
+        }//fin level4
+        #endregion
+
+        #region level5
+        if (levelName == "Level5")
+        {
+            if (!isMessageSent[0]) //entrée
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 964 && player.transform.position.z <= 998)
+                {
+                    if (player.transform.position.x >= 1546 && player.transform.position.x <= 1582)
+                    {
+                        if (currentTime + timeForNext * 5 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[0] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext * 4 < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>Just tell me if our base is fine or not !</i></color>\n<b>Radio</b> : <i>Yes it is</i>";
+                        }
+                        else if (currentTime + timeForNext * 3 < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Radio</b> : <i>But I'm on your side</i></color>\n<b>You</b> : <i>Just tell me if our base is fine or not !</i>";
+                        }
+                        else if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Radio</b> : <i>I am one of those monster</i></color>\n<b>Radio</b> : <i>But I'm on your side</i>";
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>Who are you?!</i></color>\n<b>Radio</b> : <i>I am one of those monster</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>Who are you?!</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[1]) //porte
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 1284 && player.transform.position.z <= 1352)
+                {
+                    if (player.transform.position.x >= 1686 && player.transform.position.x <= 1700)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[1] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>Again a closed door -- I will find a battery</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[2]) //generateur 1
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 1315 && player.transform.position.z <= 1338)
+                {
+                    if (player.transform.position.x >= 1617 && player.transform.position.x <= 1638)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[2] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>I found battery</i></color>\n<b>Radio</b> : <i>Ok, I'm trying to activate them</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I found battery</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[3]) //generateur 2
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 1425 && player.transform.position.z <= 1449)
+                {
+                    if (player.transform.position.x >= 1909 && player.transform.position.x <= 1925)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[3] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>I found battery</i></color>\n<b>Radio</b> : <i>Ok, I'm trying to activate them</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I found battery</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[4]) //chemin
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 1172 && player.transform.position.z <= 1203)
+                {
+                    if (player.transform.position.x >= 1810 && player.transform.position.x <= 1839)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[4] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I should follow this path</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[5]) //nourriture
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+                if (player.transform.position.z >= 1046 && player.transform.position.z <= 1156)
+                {
+                    if (player.transform.position.x >= 1721 && player.transform.position.x <= 1865)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[5] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>Oh my god -- that should be their fodd reserve. I don't really want to know what's inside </i>";
+                        }
+                    }
+                }
+            }
+
+            /*Gobelin*/
+            if (!isMessageSent[6])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 1380 && player.transform.position.z <= 1403)
+                {
+                    if (player.transform.position.x >= 1836 && player.transform.position.x <= 1863)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[6] = true;
+                            isGobelinActivated = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Goblin</b> : <i>Psst. Do you remeber me? I'm still looking for shining please</i>";
+                        }
+                    }
+                }
+            }
+
+
+            if (!isMessageSent[7])
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 1275 && player.transform.position.z <= 1298)
+                {
+                    if (player.transform.position.x >= 1540 && player.transform.position.x <= 1562)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[7] = true;
+                            isGobelinQuestDone = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I should give it to the goblin</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[8] && isGobelinQuestDone)
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 1380 && player.transform.position.z <= 1403)
+                {
+                    if (player.transform.position.x >= 1836 && player.transform.position.x <= 1863)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            if (Personnage.attack <= 10)
+                                Personnage.attack += 1;
+                            text_msg.text = "";
+                            isMessageSent[8] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Goblin</b> : <i>Thank you, take it, you will shoot stronger!</i>";
+                        }
+                    }
+                }
+            }
+            /*Gobelin*/
+
+        }//fin level5
+        #endregion
+
+        #region level6
+        if (levelName == "Level6")
+        {
+            if (!isMessageSent[0]) //entrée
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 1050 && player.transform.position.z <= 1100)
+                {
+                    if (player.transform.position.x >= 1975 && player.transform.position.x <= 2010)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[0] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Radio</b> : <i>I'm sorry to have lied to you</i></color>\n<b>You</b> : <i>Do monsters have feelings?</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Radio</b> : <i>I'm sorry to have lied to you</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[1]) //village monstre
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 1197 && player.transform.position.z <= 1223)
+                {
+                    if (player.transform.position.x >= 2032 && player.transform.position.x <= 2075)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[1] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>Holy shit, I must not do some noise here</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[2]) //village gobelin
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 1147 && player.transform.position.z <= 1203)
+                {
+                    if (player.transform.position.x >= 2274 && player.transform.position.x <= 2314)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[2] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>A goblin village--</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[3]) //generateur
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 1042 && player.transform.position.z <= 1063)
+                {
+                    if (player.transform.position.x >= 2214 && player.transform.position.x <= 2247)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[3] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>You</b> : <i>I found battery</i></color>\n<b>Radio</b> : <i>Ok, I'm trying to activate them</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>You</b> : <i>I found battery</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[4] && isSecondaryFinished[0]) //gobelin 1
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 1144 && player.transform.position.z <= 1153)
+                {
+                    if (player.transform.position.x >= 2350 && player.transform.position.x <= 2359)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[4] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Goblin</b> : <i>Thank you for giving it to me</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[5] && isSecondaryFinished[1]) //gobelin 2
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 1091 && player.transform.position.z <= 1102)
+                {
+                    if (player.transform.position.x >= 2294 && player.transform.position.x <= 2302)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[5] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Goblin</b> : <i>Thank you for giving it to me</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[6] && isSecondaryFinished[2]) //gobelin 3
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 1077 && player.transform.position.z <= 1085)
+                {
+                    if (player.transform.position.x >= 2354 && player.transform.position.x <= 2364)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[6] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Goblin</b> : <i>Thank you for giving it to me</i>";
+                        }
+                    }
+                }
+            }
+
+
+
+        }//fin level6
+        #endregion
+
+        #region level7
+        if (levelName == "Level7")
+        {
+            if (!isMessageSent[0]) //entrée
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 1366 && player.transform.position.z <= 1436)
+                {
+                    if (player.transform.position.x >= 2430 && player.transform.position.x <= 2579)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[0] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Radio</b> : <i>RUN! Don't stop!</i>";
+                        }
+                    }
+                }
+            }
+
+        }//fin level7
+        #endregion
+
+        #region level8
+        if (levelName == "Level8")
+        {
+            if (!isMessageSent[0]) //sortie
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 713 && player.transform.position.z <= 782)
+                {
+                    if (player.transform.position.x >= 3316 && player.transform.position.x <= 3338)
+                    {
+                        if (currentTime + timeForNext * 2 < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[0] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "<color=grey><b>Radio</b> : <i>Sorry for all of that and thank you. Goodbye</i></color>\n<b>You</b> : <i>Goodbye--</i>";
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Radio</b> : <i>Sorry for all of that and thank you. Goodbye</i>";
+                        }
+                    }
+                }
+            }
+
+            if (!isMessageSent[1]) //soldats (FIN)
+            {
+                if (text_msg.text == "")
+                {
+                    currentTime = Time.time;
+                }
+
+                if (player.transform.position.z >= 792 && player.transform.position.z <= 814)
+                {
+                    if (player.transform.position.x >= 3429 && player.transform.position.x <= 3468)
+                    {
+                        if (currentTime + timeForNext < Time.time)
+                        {
+                            text_msg.text = "";
+                            isMessageSent[1] = true;
+                            msg_img.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            msg_img.gameObject.SetActive(true);
+                            text_msg.text = "<b>Commanding officer</b> : <i>We were warned that you were in, we didn't think that we would see you again. Good job!</i>";
+                        }
+                    }
+                }
+            }
+
+        }//fin level8
+        #endregion
     }
     #endregion
 

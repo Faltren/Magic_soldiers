@@ -570,7 +570,7 @@ public class Personnage : NetworkBehaviour
         if (door8 == null || can.door8 == null)
         {
             door8 = GameObject.Find("door8");
-            can.door7 = door7;
+            can.door8 = door8;
         }
         if (door9 == null || can.door9 == null)
         {
@@ -638,7 +638,7 @@ public class Personnage : NetworkBehaviour
         DisplayLife();
     }
 
-    private void DisplayLife()
+    public void DisplayLife()
     {
         /*Placement des barres de vie/bouclier*/
         healthBar.rectTransform.sizeDelta = new Vector2(life * 2.25f, 30); //225 = 100 => 1 = 2.25
