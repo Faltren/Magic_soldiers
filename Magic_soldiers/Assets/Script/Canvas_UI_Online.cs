@@ -44,7 +44,7 @@ public class Canvas_UI_Online : MonoBehaviour
 
     private bool isPaused;
 
-    private string levelName;
+    public static string levelName = "Level1";
 
     private string objectifs;
     private string objectifsSecondaire;
@@ -207,15 +207,108 @@ public class Canvas_UI_Online : MonoBehaviour
     #region textePause
     private void Texte_pause()
     {
-        if (player.transform.position.z >= 43 && player.transform.position.z <= 113 && player.transform.position.x >= 413 && player.transform.position.x <= 454)
+        if (player.transform.position.z >= 43 && player.transform.position.z <= 113 && player.transform.position.x >= 413 && player.transform.position.x <= 454) //passage vers level2
         {
             levelName = "Level2";
             text_pause.text = "Fin du Niveau 1";
-            isPrincipalFinished[3] = true;
+
             isPrincipalFinished = new bool[] { false, false, false, false, false };
             isSecondaryFinished = new bool[] { false };
             isMessageSent = new bool[] { false, false, false, false, false, false, false, false, false, false, false }; //11
+
             text.text = objectifs + " " + levelName + " ";
+            text_sec.text = objectifsSecondaire;
+
+            isGobelinActivated = false;
+            isGobelinQuestDone = false;
+        }
+        else if(player.transform.position.z >= 199 && player.transform.position.z <= 230 && player.transform.position.x >= 1129 && player.transform.position.x <= 1158)//passage vers level3
+        {
+            levelName = "Level3";
+            text_pause.text = "Fin du Niveau 2";
+
+            isPrincipalFinished = new bool[] { false, false, false, false };
+            isSecondaryFinished = new bool[] { false, false };
+            isMessageSent = new bool[] { false, false, false, false, false, false, false, false }; //8
+
+            text.text = objectifs + " " + levelName + " ";
+            text_sec.text = objectifsSecondaire;
+
+            isGobelinActivated = false;
+            isGobelinQuestDone = false;
+        
+        }
+        else if (player.transform.position.z >= 479 && player.transform.position.z <= 506 && player.transform.position.x >= 1512 && player.transform.position.x <= 1554)//passage vers level4
+        {
+            levelName = "Level4";
+            text_pause.text = "Fin du Niveau 3";
+
+            isPrincipalFinished = new bool[] { false, false, false };
+            isSecondaryFinished = new bool[] { false };
+
+            isMessageSent = new bool[] { false, false, false, false, false, false, false, false }; //8
+            text.text = objectifs + " " + levelName + " ";
+
+            text_sec.text = objectifsSecondaire;
+            isGobelinActivated = false;
+            isGobelinQuestDone = false;
+        }
+        else if (player.transform.position.z >= 964 && player.transform.position.z <= 990 && player.transform.position.x >= 1543 && player.transform.position.x <= 1580)//passage vers level5
+        {
+            levelName = "Level5";
+            text_pause.text = "Fin du Niveau 4";
+
+            isPrincipalFinished = new bool[] { false, false, false, false };
+            isSecondaryFinished = new bool[] { false };
+
+            isMessageSent = new bool[] { false, false, false, false, false, false, false, false, false }; //11
+            text.text = objectifs + " " + levelName + " ";
+
+            text_sec.text = objectifsSecondaire;
+            isGobelinActivated = false;
+            isGobelinQuestDone = false;
+        }
+        else if (player.transform.position.z >= 1053 && player.transform.position.z <= 1099 && player.transform.position.x >= 1966 && player.transform.position.x <= 1997)//passage vers level6
+        {
+            levelName = "Level6";
+            text_pause.text = "Fin du Niveau 5";
+
+            isPrincipalFinished = new bool[] { false, false, false };
+            isSecondaryFinished = new bool[] { false, false, false };
+
+            isMessageSent = new bool[] { false, false, false, false, false, false, false }; //7
+            text.text = objectifs + " " + levelName + " ";
+
+            text_sec.text = objectifsSecondaire;
+            isGobelinActivated = false;
+            isGobelinQuestDone = false;
+        }
+        else if (player.transform.position.z >= 1376 && player.transform.position.z <= 1436 && player.transform.position.x >= 2431 && player.transform.position.x <= 2480)//passage vers level7
+        {
+            levelName = "Level7";
+            text_pause.text = "Fin du Niveau 6";
+
+            isPrincipalFinished = new bool[] { false, false };
+            isSecondaryFinished = new bool[] { false };
+
+            isMessageSent = new bool[] { false };
+            text.text = objectifs + " " + levelName + " ";
+
+            text_sec.text = objectifsSecondaire;
+            isGobelinActivated = false;
+            isGobelinQuestDone = false;
+        }
+        else if (player.transform.position.z >= 1041 && player.transform.position.z <= 1093 && player.transform.position.x >= 2964 && player.transform.position.x <= 2997)//passage vers level8
+        {
+            levelName = "Level8";
+            text_pause.text = "Fin du Niveau 7";
+
+            isPrincipalFinished = new bool[] { false };
+            isSecondaryFinished = new bool[] { };
+
+            isMessageSent = new bool[] { false, false };
+            text.text = objectifs + " " + levelName + " ";
+
             text_sec.text = objectifsSecondaire;
             isGobelinActivated = false;
             isGobelinQuestDone = false;
