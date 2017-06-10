@@ -87,7 +87,7 @@ public class Boss1 : NetworkBehaviour {
         if (life > 0)
         {
             lifeBar.transform.LookAt(new Vector3(players[0].transform.position.x, players[0].transform.position.y, players[0].transform.position.z));
-            if (!attackTriggered)
+            if (attackTriggered)
             {
                 if (players.Length > 1)
                 {
@@ -102,7 +102,6 @@ public class Boss1 : NetworkBehaviour {
                     attackedPlayer = players[rand.Next(0, players.Length)];
 
                     attackNb = rand.Next(1, 3);
-                    print(attackNb);
                 }
                 Attack(attackNb);
             }
@@ -137,6 +136,9 @@ public class Boss1 : NetworkBehaviour {
 
     private void Attack(int n)
     {
+        int damage = Personnage.damageTaken;
+        Personnage.damageTaken += 20;
+
         posX = this.transform.position.x;
         posZ = this.transform.position.z;
         posY = this.transform.position.y;
@@ -176,7 +178,6 @@ public class Boss1 : NetworkBehaviour {
                 transition = "Shoot";
                 if (shootCooldown < Time.time)
                 {
-                    print("shoot");
                     transition = "Shoot";
                     this.transform.LookAt(new Vector3(xPlayer, this.transform.position.y, zPlayer));
                     shootCooldown = Time.time + 0.5f;
@@ -190,6 +191,9 @@ public class Boss1 : NetworkBehaviour {
                 fired = 0;
             }
         }
+
+        Personnage.damageTaken = damage;
+        print(Personnage.damageTaken);
     }
 
     private void Animation()
@@ -282,7 +286,7 @@ public class Boss1 : NetworkBehaviour {
             Vector3 enemyVect = new Vector3(posX, posY + 1, posZ);
 
             if (!attackTriggered)
-            {
+            {               
                 attackTriggered = ((xPlayer - (posX)) * (xPlayer - (posX)) + (zPlayer - (posZ)) * (zPlayer - (posZ)) <= detectRadius * detectRadius);
 
                 if (attackTriggered)

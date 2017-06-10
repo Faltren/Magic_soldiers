@@ -257,7 +257,7 @@ public class Canvas_UI_Online : MonoBehaviour
         if (player.transform.position.z >= 43 && player.transform.position.z <= 113 && player.transform.position.x >= 413 && player.transform.position.x <= 454) //passage vers level2
         {
             levelName = "Level2";
-            text_pause.text = "Fin du Niveau 1";
+            text_pause.text = "Fin du Niveau 1 (AEL)";
 
             isPrincipalFinished = new bool[] { false, false, false, false, false };
             isSecondaryFinished = new bool[] { false };
@@ -272,7 +272,7 @@ public class Canvas_UI_Online : MonoBehaviour
         else if(player.transform.position.z >= 199 && player.transform.position.z <= 230 && player.transform.position.x >= 1129 && player.transform.position.x <= 1158)//passage vers level3
         {
             levelName = "Level3";
-            text_pause.text = "Fin du Niveau 2";
+            text_pause.text = "Fin du Niveau 2 (BCK)";
 
             isPrincipalFinished = new bool[] { false, false, false, false };
             isSecondaryFinished = new bool[] { false, false };
@@ -288,7 +288,7 @@ public class Canvas_UI_Online : MonoBehaviour
         else if (player.transform.position.z >= 479 && player.transform.position.z <= 506 && player.transform.position.x >= 1512 && player.transform.position.x <= 1554)//passage vers level4
         {
             levelName = "Level4";
-            text_pause.text = "Fin du Niveau 3";
+            text_pause.text = "Fin du Niveau 3 (CDF)";
 
             isPrincipalFinished = new bool[] { false, false, false };
             isSecondaryFinished = new bool[] { false };
@@ -303,7 +303,9 @@ public class Canvas_UI_Online : MonoBehaviour
         else if (player.transform.position.z >= 964 && player.transform.position.z <= 990 && player.transform.position.x >= 1543 && player.transform.position.x <= 1580)//passage vers level5
         {
             levelName = "Level5";
-            text_pause.text = "Fin du Niveau 4";
+            text_pause.text = "Fin du Niveau 4 (LHJ)";
+
+            Personnage.damageTaken = 5;
 
             isPrincipalFinished = new bool[] { false, false, false, false, false };
             isSecondaryFinished = new bool[] { false };
@@ -318,7 +320,7 @@ public class Canvas_UI_Online : MonoBehaviour
         else if (player.transform.position.z >= 1053 && player.transform.position.z <= 1099 && player.transform.position.x >= 1966 && player.transform.position.x <= 1997)//passage vers level6
         {
             levelName = "Level6";
-            text_pause.text = "Fin du Niveau 5";
+            text_pause.text = "Fin du Niveau 5 (YUI)";
 
             isPrincipalFinished = new bool[] { false, false, false };
             isSecondaryFinished = new bool[] { false, false, false };
@@ -333,7 +335,7 @@ public class Canvas_UI_Online : MonoBehaviour
         else if (player.transform.position.z >= 1376 && player.transform.position.z <= 1436 && player.transform.position.x >= 2431 && player.transform.position.x <= 2480)//passage vers level7
         {
             levelName = "Level7";
-            text_pause.text = "Fin du Niveau 6";
+            text_pause.text = "Fin du Niveau 6 (QPH)";
 
             isPrincipalFinished = new bool[] { false, false };
             isSecondaryFinished = new bool[] { false };
@@ -348,7 +350,7 @@ public class Canvas_UI_Online : MonoBehaviour
         else if (player.transform.position.z >= 1041 && player.transform.position.z <= 1093 && player.transform.position.x >= 2964 && player.transform.position.x <= 2997)//passage vers level8
         {
             levelName = "Level8";
-            text_pause.text = "Fin du Niveau 7";
+            text_pause.text = "Fin du Niveau 7 (ORT)";
 
             isPrincipalFinished = new bool[] { false, false };
             isSecondaryFinished = new bool[] { };
@@ -419,6 +421,8 @@ public class Canvas_UI_Online : MonoBehaviour
         {
             levelName = "Level5";
             text_pause.text = "End of level 4 (LHJ)";
+
+            Personnage.damageTaken = 5;
 
             isPrincipalFinished = new bool[] { false, false, false, false, false };
             isSecondaryFinished = new bool[] { false };
@@ -2609,11 +2613,11 @@ public class Canvas_UI_Online : MonoBehaviour
                         }
                         else if (currentTime + timeForNext * 2 < Time.time)
                         {
-                            text_msg.text = "<color=grey><b>Radio</b> : <i>C'est leurs dieu</i></color>\n<b>Vous</b> : <i>Mieux vaut ne pas rester là...</i>";
+                            text_msg.text = "<color=grey><b>Radio</b> : <i>C'est leur dieu</i></color>\n<b>Vous</b> : <i>Mieux vaut ne pas rester là...</i>";
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
-                            text_msg.text = "<color=grey><b>Vous</b> : <i>C'est quoi ce trucs ?!</i></color>\n<b>Radio</b> : <i>C'est leurs dieu</i>";
+                            text_msg.text = "<color=grey><b>Vous</b> : <i>C'est quoi ce trucs ?!</i></color>\n<b>Radio</b> : <i>C'est leur dieu</i>";
                         }
                         else
                         {
@@ -2686,12 +2690,12 @@ public class Canvas_UI_Online : MonoBehaviour
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
-                            text_msg.text = "<color=grey><b>Vous</b> : <i>Putin de merde ... c'est quoi ce délire ?!</i></color>\n<b>Radio</b> : <i>Je crois qu'on a retrouvé une partie de nos hommes</i>";
+                            text_msg.text = "<color=grey><b>Vous</b> : <i>Punaise ... c'est quoi ce délire ?!</i></color>\n<b>Radio</b> : <i>Je crois qu'on a retrouvé une partie de nos hommes</i>";
                         }
                         else
                         {
                             msg_img.gameObject.SetActive(true);
-                            text_msg.text = "<b>Vous</b> : <i>Putin de merde ... c'est quoi ce délire ?!</i>";
+                            text_msg.text = "<b>Vous</b> : <i>Punaise ... c'est quoi ce délire ?!</i>";
                         }
                     }
                 }
@@ -3331,7 +3335,7 @@ public class Canvas_UI_Online : MonoBehaviour
                         else
                         {
                             msg_img.gameObject.SetActive(true);
-                            text_msg.text = "<b>Vous</b> : <i>J'ai encore trouvé une de leurs statue ...</i>";
+                            text_msg.text = "<b>Vous</b> : <i>J'ai encore trouvé une de leur statue ...</i>";
                         }
                     }
                 }
@@ -4118,7 +4122,7 @@ public class Canvas_UI_Online : MonoBehaviour
                         }
                         else if (currentTime + timeForNext < Time.time)
                         {
-                            text_msg.text = "<color=grey><b>You</b> : <i>Why is there som vehicles here ?!</i></color>\n<b>Radio</b> : <i>Do you think that you are the first coming here ? We had a base here -- it ended badly.</i>";
+                            text_msg.text = "<color=grey><b>You</b> : <i>Why is there some vehicles here ?!</i></color>\n<b>Radio</b> : <i>Do you think that you are the first coming here ? We had a base here -- it ended badly.</i>";
                         }
                         else
                         {

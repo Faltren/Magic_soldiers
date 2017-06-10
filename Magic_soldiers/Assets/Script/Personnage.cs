@@ -50,7 +50,7 @@ public class Personnage : NetworkBehaviour
     public static int attack;
     public static int shield;
 
-    public static int damageTaken = 5;
+    public static int damageTaken = 50;
     //temps avant la regen du shield
     private static float shieldCooldown = 0f;
 
@@ -71,7 +71,7 @@ public class Personnage : NetworkBehaviour
     private int i; //name Compteur
     private int nbTirs;
 
-    public static int nbTirsMax = 20;
+    public static int nbTirsMax = 10;
 
     private Vector3 trans;
 
@@ -114,6 +114,9 @@ public class Personnage : NetworkBehaviour
 
     //Layer (pour la detection)
     private static int layer = 8;
+
+    //changeLife
+    private int OldLife;
 
     #endregion
 
@@ -167,6 +170,8 @@ public class Personnage : NetworkBehaviour
         life = 100;
         shield = 100;
         attack = 2;
+
+        OldLife = life;
 
         player = GetComponent<Rigidbody>();
         anim = GetComponent<Animation>();
@@ -237,6 +242,12 @@ public class Personnage : NetworkBehaviour
 
             Moves();
             AnimPerso();
+
+            if (OldLife != life)
+            {
+                OldLife = life;
+                DisplayLife();
+            }
 
             if (Time.time > shieldCooldown)
             {

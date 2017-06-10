@@ -104,7 +104,6 @@ public class Boss2 : NetworkBehaviour {
             {
                 if (targetCooldown < Time.time)
                 {
-                    print("test");
                     tPlayer = players[target];
                     targetCooldown = Time.time + 8;
                     target++;
@@ -202,7 +201,7 @@ public class Boss2 : NetworkBehaviour {
             life -= (Personnage_offline.attack);
             if (life == oldLife)
             {
-                life -= (Personnage.attack);
+                life -= 1 + (Personnage.attack % 2);
             }
 
             if (life < 0)

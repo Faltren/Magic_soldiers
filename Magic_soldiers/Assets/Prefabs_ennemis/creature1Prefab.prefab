@@ -2375,7 +2375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 30
   speed: 4
-  detectRadius: 200
+  detectRadius: 150
   attackRange: 50
   weapon: {fileID: 1619748523165064}
   BulletPos: {fileID: 4040319486540742}

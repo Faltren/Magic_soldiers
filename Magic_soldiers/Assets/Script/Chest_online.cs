@@ -54,7 +54,10 @@ public class Chest_online : NetworkBehaviour
             {
                 open = true;
                 if (HasCoin)
+                {
                     Bonus();
+                }
+                    
             }
 
             if (open)
