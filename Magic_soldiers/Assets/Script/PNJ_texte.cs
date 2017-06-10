@@ -17,6 +17,7 @@ public class PNJ_texte : MonoBehaviour {
     private float posZ;
 
     public string message;
+    public string message_en;
     private float DetectRadius;
     private bool find;
 
@@ -44,22 +45,47 @@ public class PNJ_texte : MonoBehaviour {
             target = new Vector3(Personnage_offline.player.transform.position.x, this.transform.position.y, Personnage_offline.player.transform.position.z);
             can.transform.LookAt(target);
 
-            if (!needInteract)
+            if (Menu.langue == "fr")
             {
-                PNJtext.text = message;
-            }
-            else
-            {
-                if (Input.GetKey(KeyCode.E))
+
+                if (!needInteract)
                 {
                     PNJtext.text = message;
                 }
                 else
                 {
-                    PNJtext.text = "Appuyez sur E pour interagir";
+                    if (Input.GetKey(KeyCode.E))
+                    {
+                        PNJtext.text = message;
+                    }
+                    else
+                    {
+                        PNJtext.text = "Appuyez sur E pour interagir";
+                    }
+
                 }
-                    
             }
+            else
+            {
+
+                if (!needInteract)
+                {
+                    PNJtext.text = message_en;
+                }
+                else
+                {
+                    if (Input.GetKey(KeyCode.E))
+                    {
+                        PNJtext.text = message_en;
+                    }
+                    else
+                    {
+                        PNJtext.text = "Press E to interact";
+                    }
+
+                }
+            }
+
 
         }
         else

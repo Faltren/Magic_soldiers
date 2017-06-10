@@ -155,9 +155,8 @@ public class Canvas_UI : MonoBehaviour {
 
     private void Messages(int nbMsg)
     {
-        //if (EditorSceneManager.GetActiveScene().name == "Tuto")
-        //{
-            
+        if (Menu.langue == "fr")
+        {
             switch (nbMsg)
             {
                 case 0:
@@ -169,7 +168,7 @@ public class Canvas_UI : MonoBehaviour {
                     else if (currentTime + next_msg * 3 < Time.time)
                     {
                         text_msg.text = "<color=grey><b>Radio</b> : <i>Salut le nouveau ! Je suis chargé de t'aider durant toute cette journée ! Alors tu vas suivre mes ordres et tout se passera bien.</i></color>\n<b>Radio</b> : <i>Tu vois les cibles dehors ? Tire leur dessus !</i>";
-                        
+
                     }
                     else if (currentTime + next_msg * 2 <= Time.time)
                     {
@@ -179,10 +178,10 @@ public class Canvas_UI : MonoBehaviour {
                     {
                         text_msg.text = "<color=grey><b>Radio</b> : <i>Merde ... comment ça marche ce machin ?! Tu m'entends ?</i></color>\n<b>Vous</b> : <i>Euh bonjour...</i>";
                     }
-                    else if(currentTime < Time.time)
+                    else if (currentTime < Time.time)
                     {
                         text_msg.text = "<b>Radio</b> : <i>Merde ... comment ça marche ce machin ?! Tu m'entends ?</i>";
-                    }                     
+                    }
                     break;
 
                 case 1:
@@ -322,7 +321,175 @@ public class Canvas_UI : MonoBehaviour {
                 default:
                     text_msg.text = "";
                     break;
-           // }
+            }
+        }
+        else
+        {
+            switch (nbMsg)
+            {
+                case 0:
+                    if (currentTime + next_msg * 4 < Time.time)
+                    {
+                        text_msg.text = "";
+                        isMsgSaid[0] = true;
+                    }
+                    else if (currentTime + next_msg * 3 < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Radio</b> : <i>Hello soldier! I will be your commanding officer during this day!</i></color>\n<b>Radio</b> : <i>Shoot the target outside</i>";
+
+                    }
+                    else if (currentTime + next_msg * 2 <= Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>You</b> : <i>Hello</i></color>\n<b>Radio</b> : <i>Hello soldier! I will be your commanding officer during this day!</i>";
+                    }
+                    else if (currentTime + next_msg <= Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Radio</b> : <i>Shit-- How does that works? Can you hear me?</i></color>\n<b>You</b> : <i>Hello</i>";
+                    }
+                    else if (currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>Radio</b> : <i>Shit-- How does that works? Can you hear me?</i>";
+                    }
+                    break;
+
+                case 1:
+                    if (currentTime + next_msg < Time.time)
+                    {
+                        text_msg.text = "";
+                        isMsgSaid[1] = true;
+                    }
+                    else if (currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>Radio</b> : <i>Good. Try to brust now</i>";
+                    }
+                    break;
+
+                case 2:
+                    if (currentTime + next_msg * 2 < Time.time)
+                    {
+                        text_msg.text = "";
+                        isMsgSaid[2] = true;
+                    }
+                    else if (currentTime + next_msg < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Radio</b> : <i>Don't keep this burst too much time.</i></color>\n<b>Radio</b> : <i>I don't have any news of our workers in the mine. Go there and tell me the news</i>";
+                    }
+                    else if (currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>Radio</b> : <i>Don't keep this burst too much time.</i>";
+                    }
+                    break;
+
+
+                case 3:
+                    if (currentTime + next_msg * 2 < Time.time)
+                    {
+                        text_msg.text = "";
+                        isMsgSaid[3] = true;
+                    }
+                    else if (currentTime + next_msg < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Radio</b> : <i>Perfect, everything is ok.</i></color>\n<b>Radio</b> : <i>Let's see what you got. Go to the sooting and show me your skills.</i>";
+                    }
+                    else if (currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>Radio</b> : <i>Perfect, everything is ok.</i>";
+                    }
+                    break;
+
+                case 4:
+                    if (currentTime + next_msg * 2 + 2 < Time.time)
+                    {
+                        text_msg.text = "";
+                        isMsgSaid[4] = true;
+                    }
+                    else if (currentTime + next_msg + 2 < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Radio</b> : <i>Not bad</i></color>\n<b>Radio</b> : <i>I've got a first mission for you. We lost the contact with some men outside. Go there and find them.</i>";
+                    }
+                    else if (currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>Radio</b> : <i>Not bad</i>";
+                    }
+                    break;
+
+                case 5:
+                    if (currentTime + next_msg * 5 - 1 < Time.time)
+                    {
+                        text_msg.text = "";
+                        isMsgSaid[5] = true;
+                    }
+                    else if (currentTime + next_msg * 4 - 1 < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>You</b> : <i>But--</i></color>\n<b>Radio</b> : <i>That's an order!</i>";
+                    }
+                    else if (currentTime + next_msg * 3 - 1 < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Radio</b> : <i>No! Go get some help at our principal military base!</i></color>\n<b>You</b> : <i>But--</i>";
+                    }
+                    else if (currentTime + next_msg * 2 < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>You</b> : <i>Calm down, I'm coming!</i></color>\n<b>Radio</b> : <i>No! Go get some help at our principal military base!</i>";
+                    }
+                    else if (currentTime + next_msg < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Radio</b> : <i>Shit! We are under attack! Our battery are explodings</i></color>\n<b>You</b> : <i>Calm down, I'm coming!</i>";
+                    }
+                    else if (currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>Radio</b> : <i>Shit! We are under attack! Our battery are explodings</i>";
+                    }
+                    break;
+
+
+                case 101:
+                    if (currentTime + next_msg * 2 < Time.time)
+                    {
+                        text_msg.text = "";
+                        objectifsSecondaires[0] = true;
+                        isMsgSaid[6] = true;
+                        objectifsSecondaires[0] = true;
+                    }
+                    else if (currentTime + next_msg < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>You</b> : <i>I see some tire tracks over here.</i></color>\n<b>Radio</b> : <i>Follow them and tell me where they go</i>";
+                    }
+                    else if (currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>You</b> : <i>I see some tire tracks over here.</i>";
+                    }
+                    break;
+
+                case 102:
+                    if (currentTime + next_msg * 4 < Time.time)
+                    {
+                        text_msg.text = "";
+                        objectifsSecondaires[1] = true;
+                        isMsgSaid[7] = true;
+                        objectifsSecondaires[1] = true;
+                    }
+                    else if (currentTime + next_msg * 3 < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>You</b> : <i>They are dead.</i></color>\n<b>Radio</b> : <i>They will be avenged. Continue your mission!</i>";
+                    }
+                    else if (currentTime + next_msg * 2 < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>Radio</b> : <i>Perfect, tell them to come back!</i></color>\n<b>You</b> : <i>They are dead.</i>";
+                    }
+                    else if (currentTime + next_msg < Time.time)
+                    {
+                        text_msg.text = "<color=grey><b>You</b> : <i>I found the group</i></color>\n<b>Radio</b> : <i>Perfect, tell them to come back!</i>";
+                    }
+                    else if (currentTime < Time.time)
+                    {
+                        text_msg.text = "<b>You</b> : <i>I found the group</i>";
+                    }
+                    break;
+
+                default:
+                    text_msg.text = "";
+                    break;
+            }
         }
     }
 
@@ -441,6 +608,8 @@ public class Canvas_UI : MonoBehaviour {
         //if (EditorSceneManager.GetActiveScene().name == "Tuto")
         //{
 
+        if (Menu.langue == "fr")
+        {
             switch (compteur)
             {
                 case 0:
@@ -522,6 +691,124 @@ public class Canvas_UI : MonoBehaviour {
             {
                 text_sec.text = "";
             }
+        }
+        else
+        {
+            switch (compteur)
+            {
+                case 0:
+                    text.text = original + "<size=11>\n\n\n<color=white>- Move</color></size>";
+                    text.lineSpacing = 0.8f;
+                    break;
+
+                case 1:
+                    text.text = original + "<size=11>\n\n\n<color=red>- Move</color></size>" + "<size=11><color=white>\n\n- Look around you</color></size>";
+                    text.lineSpacing = 0.8f;
+                    break;
+
+                case 2:
+                    text.text = original + "<size=11>\n\n<color=red>- Look around you</color></size>" + "<size=11><color=white>\n\n- Find the chest and open it</color></size>";
+                    text.lineSpacing = 0.8f;
+                    break;
+
+                case 3:
+                    text.text = original + "<size=11>\n\n<color=red>- Find the chest and open it</color></size>" + "<size=11><color=white>\n\n- Shoot the target</color></size>";
+                    text.lineSpacing = 0.8f;
+                    break;
+
+                case 4:
+                    text.text = original + "<size=11>\n\n<color=red>- Shoot the target</color></size>" + "<size=11><color=white>\n\n- Try to burst on the target</color></size>";
+                    text.lineSpacing = 0.8f;
+                    break;
+
+                case 5:
+                    text.text = original + "<size=11>\n\n<color=red>- Try to burst on the target</color></size>" + "<size=11><color=white>\n\n- Go to the mine to get news</color></size>";
+                    text.lineSpacing = 0.8f;
+                    break;
+
+                case 6:
+                    text.text = original + "<size=11>\n\n<color=red>- Go to the mine to get news</color></size>" + "<size=11><color=white>\n\n- Go to the shooting range</color></size>";
+                    text.lineSpacing = 0.8f;
+                    break;
+
+                case 7:
+                    text.text = original + "<size=11><color=red>\n\n- Go to the shooting range</color></size>" + "<size=11><color=white>\n\n- Go patrol around the base</color></size>";
+                    text.lineSpacing = 0.8f;
+                    break;
+
+                case 8:
+                    text.text = original + "<size=11><color=red>\n\n- Go patrol around the base</color></size>" + "<size=11><color=white>\n\n- Run away</color></size>";
+                    text.lineSpacing = 0.8f;
+                    break;
+
+                default:
+                    text.text = "";
+                    text_sec.text = "";
+                    text_msg.text = "";
+                    text_infos.text = "";
+                    break;
+
+            }
+
+            if (Menu.langue == "fr")
+            {
+                //objectifs secondaires
+                if (compteur >= 7)
+                {
+                    if (!objectifsSecondaires[0])
+                    {
+                        text_sec.text = originalSec + "<size=10><color=white>\n\n- Trouver les soldats perdus</color>\n\n- <color=white>Trouver le deuxième coffre secret</color></size>";
+                    }
+                    else if (!objectifsSecondaires[1])
+                    {
+                        text_sec.text = originalSec + "<size=10><color=white>\n\n- Suivre les traces de pneus\n\n- Trouver le deuxième coffre secret</color></size>";
+                    }
+                    else if (!objectifsSecondaires[2])
+                    {
+                        text_sec.text = originalSec + "<size=10><color=red>\n\n- Suivre les traces de pneus</color>\n\n- Trouver le deuxième coffre secret</size>";
+                    }
+                    else
+                    {
+                        text_sec.text = originalSec + "<size=10><color=red>\n\n- Suivre les traces de pneus\n\n- Trouver le deuxième coffre secret</color></size>";
+                    }
+                }
+                else
+                {
+                    text_sec.text = "";
+                }
+            }
+            else
+            {
+                //objectifs secondaires
+                if (compteur >= 7)
+                {
+                    if (!objectifsSecondaires[0])
+                    {
+                        text_sec.text = originalSec + "<size=10><color=white>\n\n- Find the lost soldiers</color>\n\n- <color=white>Find the second chest</color></size>";
+                    }
+                    else if (!objectifsSecondaires[1])
+                    {
+                        text_sec.text = originalSec + "<size=10><color=white>\n\n- Follow the tire tracks\n\n- Find the second chest</color></size>";
+                    }
+                    else if (!objectifsSecondaires[2])
+                    {
+                        text_sec.text = originalSec + "<size=10><color=red>\n\n- Follow the tire tracks</color>\n\n- Find the second chest</size>";
+                    }
+                    else
+                    {
+                        text_sec.text = originalSec + "<size=10><color=red>\n\n- Follow the tire tracks\n\n- Find the second chest</color></size>";
+                    }
+                }
+                else
+                {
+                    text_sec.text = "";
+                }
+            }
+
+            
+        }
+
+            
             
         //}
 
@@ -537,6 +824,8 @@ public class Canvas_UI : MonoBehaviour {
                 compteur++;
             }
 
+        if (Menu.langue == "fr")
+        {
             switch (compteur)
             {
                 case 0:
@@ -561,9 +850,9 @@ public class Canvas_UI : MonoBehaviour {
                             {
                                 objectifs[compteur] = true;
                             }
-                        }  
+                        }
                     }
-                        
+
                     break;
 
                 case 3:
@@ -573,8 +862,8 @@ public class Canvas_UI : MonoBehaviour {
                     break;
 
                 case 4:
-                    
-                    if(Input.GetKey(KeyCode.Mouse1))
+
+                    if (Input.GetKey(KeyCode.Mouse1))
                         text_infos.text = "";
                     else
                         text_infos.text = "<b><i>Faites un Clique Droit pour tirer en rafale</i></b>";
@@ -617,9 +906,92 @@ public class Canvas_UI : MonoBehaviour {
 
                 default:
                     break;
-
-
             }
+        }
+        else
+        {
+            switch (compteur)
+            {
+                case 0:
+                    text_infos.text = "<b><i>Press W A S D to move and Tab To show the objective</i></b>";
+                    if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+                        objectifs[compteur] = true;
+                    break;
+
+                case 1:
+                    text_infos.text = "<b><i>Move your mouse to look around you</i></b>";
+                    if (Input.GetAxisRaw("Mouse X") != 0f || Input.GetAxisRaw("Mouse Y") != 0f)
+                        objectifs[compteur] = true;
+                    break;
+
+                case 2:
+                    text_infos.text = "<b><i>You can interact by pressing E</i></b>";
+                    if (Personnage_offline.player.transform.position.x > -46 && Personnage_offline.player.transform.position.x < -42)
+                    {
+                        if (Personnage_offline.player.transform.position.z > 94 && Personnage_offline.player.transform.position.z < 98)
+                        {
+                            if (Input.GetKey(KeyCode.E))
+                            {
+                                objectifs[compteur] = true;
+                            }
+                        }
+                    }
+
+                    break;
+
+                case 3:
+                    text_infos.text = "<b><i>Left click to shoot</i></b>";
+                    if (Input.GetKey(KeyCode.Mouse0))
+                        objectifs[compteur] = true;
+                    break;
+
+                case 4:
+
+                    if (Input.GetKey(KeyCode.Mouse1))
+                        text_infos.text = "";
+                    else
+                        text_infos.text = "<b><i>Right click to burst</i></b>";
+                    if (BalleTir_offline.isSurchauffe)
+                        objectifs[compteur] = true;
+                    break;
+
+                case 5:
+                    if (Input.GetKey(KeyCode.LeftShift))
+                        text_infos.text = "";
+                    else
+                        text_infos.text = "<b><i>Press Left Maj to Sprint</i></b>";
+
+                    if (Personnage_offline.player.transform.position.z > -19 && Personnage_offline.player.transform.position.z < 15)
+                    {
+                        if (Personnage_offline.player.transform.position.x < -111 && Personnage_offline.player.transform.position.x > -117)
+                        {
+                            objectifs[compteur] = true;
+                        }
+                    }
+                    break;
+
+                case 6:
+                    text_infos.text = "";
+                    if (entrainActivate.IsActivated)
+                        Tuto6 = true;
+                    if (Tuto6 && !entrainActivate.IsActivated)
+                        objectifs[compteur] = true;
+                    break;
+
+                case 7:
+                    if (Personnage_offline.player.transform.position.z > -100 && Personnage_offline.player.transform.position.z < -25)
+                        if (Personnage_offline.player.transform.position.x > 395 && Personnage_offline.player.transform.position.x < 427)
+                            objectifs[compteur] = true;
+                    break;
+
+                case 8: 
+                    break;
+
+
+                default:
+                    break;
+            }
+        }
        // }
     }
 
