@@ -50,7 +50,7 @@ public class Personnage : NetworkBehaviour
     public static int attack;
     public static int shield;
 
-    public static int damageTaken = 50;
+    public static int damageTaken = 5;
     //temps avant la regen du shield
     private static float shieldCooldown = 0f;
 
